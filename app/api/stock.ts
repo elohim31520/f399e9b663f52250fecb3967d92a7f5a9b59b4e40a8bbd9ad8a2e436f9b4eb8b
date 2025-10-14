@@ -2,10 +2,9 @@ import { httpClient } from '../modules/service'
 import type { ResponseData, Company } from '../types/api'
 
 class StockApi {
-	// 獲取公司列表改到前端的 /public ，因為雲端有出站費用很貴！
-	// async getStockSymbols(): Promise<ResponseData<Company[]>> {
-	// 	return httpClient.request<Company[]>({ method: 'GET', endpoint: '/stock/symbols' })
-	// }
+	async getCompanySymbols(): Promise<ResponseData<Company[]>> {
+		return httpClient.request<Company[]>({ method: 'GET', endpoint: '/stock/symbols', useKV: true })
+	}
 
 	// async getAllCompanies(): Promise<ResponseData<Company[]>> {
 	// 	return httpClient.request<Company[]>({ method: 'GET', endpoint: '/stock/symbols' })

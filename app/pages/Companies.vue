@@ -15,8 +15,7 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, onMounted } from 'vue'
-	import { stockApi } from '../api/stock'
+	import { ref } from 'vue'
 	import type { Company } from '../types/api'
 	import { useRouter } from 'vue-router'
 
@@ -26,15 +25,12 @@
 		name: 'companies',
 	})
 
-	const companies = ref<Company[]>([])
+	const { data: companies } = await useAsyncData<Company[]>(
+		'company-symbols',
+		() => $fetch<Company[]>('/api/company')
+	)
 
 	const handleClick = (symbol: string) => {
 		router.push(`/company-metrics/${symbol}`)
 	}
-
-	onMounted(async () => {
-		const response = await fetch('/symbols.json')
-		const data = await response.json()
-		companies.value = data
-	})
 </script>
