@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { balancesApi } from '../api/balances'
-import { isAuthenticated } from '@/modules/auth'
 
 type UsdInfo = {
 	balance: number
@@ -16,7 +15,8 @@ export const useBalanceStore = defineStore('balance', {
 	},
 	actions: {
 		async fetchMyBalance() {
-			if (!isAuthenticated()) return
+			const { isAuthenticated } = useAuth()
+			if (!isAuthenticated.value) return
 			try {
 				const res = await balancesApi.getMyBalances()
 				const usdData = _get(res, 'data')

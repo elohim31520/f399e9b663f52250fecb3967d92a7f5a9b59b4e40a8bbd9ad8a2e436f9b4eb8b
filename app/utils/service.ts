@@ -3,7 +3,7 @@ import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosErr
 import { showNotify } from 'vant'
 import { API_CONFIG } from '../config/api'
 import type { ResponseData, FailResponseData, RequestParams } from '../types/api'
-import { getCookie } from 'h3'
+import Cookies from 'js-cookie'
 import { useUserStore } from '@/stores/user'
 
 const getHeaders = (): Record<string, string> => {
@@ -11,7 +11,7 @@ const getHeaders = (): Record<string, string> => {
 		'Content-Type': 'application/json',
 	}
 
-	const token = getCookie('user_token')
+	const token = Cookies.get('user_token')
 	if (token) {
 		headers['Authorization'] = `Bearer ${token}`
 	}

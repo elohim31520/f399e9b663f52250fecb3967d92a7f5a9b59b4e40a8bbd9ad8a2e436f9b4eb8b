@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { portfolioApi } from '../api/portfolio'
-import { isAuthenticated } from '@/modules/auth'
 import type { PortfolioItem } from '@/types/portfolio'
 
 export const usePortfolioStore = defineStore('portfolio', {
@@ -13,7 +12,8 @@ export const usePortfolioStore = defineStore('portfolio', {
 	actions: {
 		async fetchMyPortfolio() {
 			try {
-				if (!isAuthenticated()) return
+				const { isAuthenticated } = useAuth()
+				if (!isAuthenticated.value) return
 				const res = await portfolioApi.getMyPortfolio()
 				if (_isArray(_get(res, 'data'))) {
 					this.portfolioData = _get(res, 'data')

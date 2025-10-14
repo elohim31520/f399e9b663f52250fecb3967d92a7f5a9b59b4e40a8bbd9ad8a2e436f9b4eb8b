@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { isAuthenticated, removeToken, setToken } from '@/modules/auth'
 import { useStorage } from '@vueuse/core'
 
 export const useUserStore = defineStore('user', () => {
-	console.log('登入狀態', isAuthenticated())
-	const isLogin = ref(isAuthenticated())
+	const { isAuthenticated, setToken, clearAuth } = useAuth()
+	const isLogin = ref(!!isAuthenticated.value)
+	console.log('登入狀態', isLogin.value)
+
 	const username = useStorage('username', '')
 	const userPicture = useStorage('g_user_picture', '')
 	const googleUserName = useStorage('g_user_name', '')
@@ -18,8 +19,7 @@ export const useUserStore = defineStore('user', () => {
 	})
 
 	function checkLoginStatus() {
-		console.log('登入狀態', isAuthenticated())
-		isLogin.value = isAuthenticated()
+		isLogin.value = isAuthenticated.value
 	}
 
 	function login(token: string) {
@@ -37,12 +37,11 @@ export const useUserStore = defineStore('user', () => {
 	}
 
 	function logout() {
-		removeToken()
+		clearAuth()
 		isLogin.value = false
 		username.value = ''
 		userPicture.value = ''
 		googleUserName.value = ''
-		// useStorage handles removing the item from localStorage
 	}
 
 	return {
