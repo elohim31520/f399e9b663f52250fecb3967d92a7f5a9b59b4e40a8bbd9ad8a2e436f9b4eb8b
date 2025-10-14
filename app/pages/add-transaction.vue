@@ -90,7 +90,7 @@
 	import { ref } from 'vue'
 	import type { FormInstance } from 'vant'
 	import { transactionApi } from '../api/transaction'
-	import emitter from '@/modules/emitter'
+	import emitter from '~/utils/emitter'
 	import { useRouter } from 'vue-router'
 	import { useI18n } from 'vue-i18n'
 	import { useUserStore } from '@/stores/user'

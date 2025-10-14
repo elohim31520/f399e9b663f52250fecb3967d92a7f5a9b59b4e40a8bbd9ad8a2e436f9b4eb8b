@@ -39,7 +39,6 @@
 </template>
 
 <script setup lang="ts">
-	import { removeToken } from '@/modules/auth'
 	import { useUIStore } from '@/stores/ui'
 	import { useRouter } from 'vue-router'
 	import { useUserStore } from '@/stores/user'

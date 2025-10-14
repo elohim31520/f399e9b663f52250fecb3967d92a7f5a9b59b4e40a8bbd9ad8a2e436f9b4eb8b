@@ -16,7 +16,7 @@
 	import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
 	import VChart from 'vue-echarts'
 	import { stockApi } from '../api/stock'
-	import { formatNumber } from '@/modules/util'
+	import { formatNumber } from '~/utils/util'
 	import { useI18n } from 'vue-i18n'
 
 	const { t } = useI18n()

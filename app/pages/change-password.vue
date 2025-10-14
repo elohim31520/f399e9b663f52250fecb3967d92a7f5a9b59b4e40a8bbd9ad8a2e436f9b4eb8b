@@ -45,7 +45,6 @@
 	import { useRouter } from 'vue-router'
 	import { changePassword } from '../api/user'
 	import { showToast } from 'vant'
-	import { removeToken } from '../modules/auth'
 	import { useI18n } from 'vue-i18n'
 
 	const { t } = useI18n()

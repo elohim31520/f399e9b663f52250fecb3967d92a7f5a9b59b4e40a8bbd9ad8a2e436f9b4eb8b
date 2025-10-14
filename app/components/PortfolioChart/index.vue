@@ -14,7 +14,7 @@
 	import VChart from 'vue-echarts'
 	import type { EChartsOption } from 'echarts'
 	import { usePortfolioStore } from '@/stores/portfolio'
-	import { formatNumber } from '@/modules/util'
+	import { formatNumber } from '~/utils/util'
 
 	const portfolioStore = usePortfolioStore()
 

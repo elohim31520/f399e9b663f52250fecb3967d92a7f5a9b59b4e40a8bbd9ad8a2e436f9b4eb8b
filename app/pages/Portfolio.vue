@@ -93,7 +93,7 @@
 	import { ref, onMounted, watch, onActivated } from 'vue'
 	import { usePortfolioStore } from '@/stores/portfolio'
 	import { portfolioApi } from '@/api/portfolio'
-	import { formatNumber } from '@/modules/util'
+	import { formatNumber } from '~/utils/util'
 	import type { PortfolioItem } from '@/types/portfolio'
 	import { useI18n } from 'vue-i18n'
 	import { useUserStore } from '@/stores/user'

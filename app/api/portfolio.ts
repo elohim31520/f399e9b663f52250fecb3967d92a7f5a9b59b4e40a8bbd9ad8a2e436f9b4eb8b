@@ -1,4 +1,4 @@
-import { httpClient } from '../modules/service'
+import { httpClient } from '../utils/service'
 import type { ResponseData } from '../types/api'
 
 /**
