@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { balancesApi } from '../api/balances'
 
 type UsdInfo = {
 	balance: number
@@ -18,7 +17,8 @@ export const useBalanceStore = defineStore('balance', {
 			const { isAuthenticated } = useAuth()
 			if (!isAuthenticated.value) return
 			try {
-				const res = await balancesApi.getMyBalances()
+				const { $api } = useNuxtApp()
+				const res = await $api.balances.getMyBalances()
 				const usdData = _get(res, 'data')
 				if (usdData) {
 					this.usdInfo = usdData

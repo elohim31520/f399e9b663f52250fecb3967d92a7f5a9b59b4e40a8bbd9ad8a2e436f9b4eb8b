@@ -71,7 +71,7 @@
 	const { t } = useI18n()
 
 	definePageMeta({
-		middleware: "auth",
+		middleware: 'auth',
 	})
 
 	defineOptions({

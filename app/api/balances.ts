@@ -1,27 +1,30 @@
-import { httpClient } from '../utils/service'
 import type { ResponseData } from '../types/api'
 
-class BalancesApi {
+export class BalancesApi {
+	private httpRequest: any
+
+	constructor(httpRequest: any) {
+		this.httpRequest = httpRequest
+	}
+
 	/**
 	 * 取得我的餘額
 	 */
 	async getMyBalances(): Promise<ResponseData<any>> {
-		return httpClient.request<any>({ method: 'GET', endpoint: '/balances' })
+		return this.httpRequest({ method: 'GET', endpoint: '/balances' })
 	}
 
 	/**
 	 * 更新我的餘額
 	 */
 	async updateMyBalances(params: any): Promise<ResponseData<any>> {
-		return httpClient.request<any>({ method: 'PUT', endpoint: '/balances', params })
+		return this.httpRequest({ method: 'PUT', endpoint: '/balances', params })
 	}
 
 	/**
 	 * 新增我的餘額
 	 */
 	async createMyBalances(params: any): Promise<ResponseData<any>> {
-		return httpClient.request<any>({ method: 'POST', endpoint: '/balances', params })
+		return this.httpRequest({ method: 'POST', endpoint: '/balances', params })
 	}
 }
-
-export const balancesApi = new BalancesApi()

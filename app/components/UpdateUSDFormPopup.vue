@@ -37,12 +37,12 @@
 <script setup lang="ts">
 	import { ref, watch, computed } from 'vue'
 	import type { FormInstance } from 'vant'
-	import { balancesApi } from '@/api/balances'
 	import { useBalanceStore } from '@/stores/balance'
 	import { useI18n } from 'vue-i18n'
 
 	const { t } = useI18n()
 	const balanceStore = useBalanceStore()
+	const { $api } = useNuxtApp()
 
 	interface BalanceForm {
 		balance: string
@@ -92,9 +92,9 @@
 				balance: Number(form.value.balance),
 			}
 			if (isUpdateMode.value) {
-				await balancesApi.updateMyBalances(payload)
+				await $api.balances.updateMyBalances(payload)
 			} else {
-				await balancesApi.createMyBalances(payload)
+				await $api.balances.createMyBalances(payload)
 			}
 			showToast({
 				type: 'success',
