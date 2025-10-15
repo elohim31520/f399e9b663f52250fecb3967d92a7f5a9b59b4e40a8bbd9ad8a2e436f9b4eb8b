@@ -64,7 +64,7 @@
 		if (res.success) {
 			storedUsername.value = values.username
 			showToast(t('login.login_success'))
-			router.push('/')
+			navigateTo('/')
 		}
 	}
 
@@ -77,7 +77,7 @@
 			const res = await loginWithGoogle(credential)
 			if (res.success) {
 				showToast(t('login.google_login_success'))
-				router.push('/')
+				navigateTo('/')
 			} else {
 				handleGoogleLoginError()
 			}

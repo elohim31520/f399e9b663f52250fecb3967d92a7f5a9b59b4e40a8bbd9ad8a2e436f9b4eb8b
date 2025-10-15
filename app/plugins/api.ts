@@ -1,6 +1,5 @@
 import { showNotify } from 'vant'
 import type { ResponseData, FailResponseData, RequestParams } from '../types/api'
-import { useUserStore } from '@/stores/user'
 import { BalancesApi } from '~/api/balances'
 import { MarketApi } from '~/api/market'
 
@@ -12,6 +11,16 @@ export default defineNuxtPlugin(() => {
 		onRequest({ options }) {
 			// 自動注入 token
 			const token = useCookie('user_token').value
+
+			// 調試信息
+			if (import.meta.dev) {
+				console.log('===================')
+				console.log('URL:', options.baseURL || import.meta.env.VITE_API_URL)
+				console.log('Token exists:', !!token)
+				console.log('Token preview:', token ? `${token.substring(0, 20)}...` : 'null')
+				console.log('===================')
+			}
+
 			if (token) {
 				options.headers = {
 					...options.headers,
@@ -47,7 +56,7 @@ export default defineNuxtPlugin(() => {
 		},
 
 		onResponseError({ response }) {
-			const message = response._data?.message || '請求失敗'
+			const message = response._data?.message || response._data?.error || '請求失敗'
 
 			if (import.meta.client) {
 				showNotify({
@@ -60,8 +69,8 @@ export default defineNuxtPlugin(() => {
 			// 401 自動登出
 			if (response.status === 401) {
 				if (import.meta.client) {
-					const userStore = useUserStore()
-					userStore.logout()
+					const { clearAuth } = useAuth()
+					clearAuth()
 				} else {
 					navigateTo('/login')
 				}
