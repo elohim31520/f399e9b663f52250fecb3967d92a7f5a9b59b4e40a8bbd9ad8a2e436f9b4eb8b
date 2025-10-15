@@ -6,6 +6,7 @@ Allow: /post/info-crowdstrike-vision
 Allow: /post/info-meta-glasses
 Allow: /post/info-nvidia-q2-2026
 Allow: /post/info-tesla-elon-musks-vison
+Allow: /companies
 
 Disallow: /login
 Disallow: /register/
