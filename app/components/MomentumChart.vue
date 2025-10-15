@@ -1,24 +1,35 @@
 <template>
-	<ClientOnly>
-		<div class="p-1 bg-white rounded-lg shadow-primary">
-			<div class="flex justify-center gap-5 my-5">
-				<div
-					v-for="day in timeRanges"
-					:key="day"
-					@click="fetchData(day)"
-					:class="[
-						'px-2 py-2 rounded-md w-[3rem] text-center',
-						selectedDays === day ? 'bg-pink-400 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
-					]"
-				>
-					{{ $t('momentum_chart.days_unit', { count: day }) }}
-				</div>
+	<div class="p-1 bg-white rounded-lg shadow-primary">
+		<div class="flex justify-center gap-5 my-5">
+			<div
+				v-for="day in timeRanges"
+				:key="day"
+				@click="refreshData(day)"
+				:class="[
+					'px-2 py-2 rounded-md w-[3rem] text-center',
+					selectedDays === day ? 'bg-pink-400 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
+				]"
+			>
+				{{ $t('momentum_chart.days_unit', { count: day }) }}
 			</div>
+		</div>
+
+		<ClientOnly>
 			<div class="h-[400px]">
 				<v-chart class="chart" :option="option" autoresize />
 			</div>
+		</ClientOnly>
+
+		<div class="text-gray-500 p-1">
+			{{ $t('momentum_chart.tips') }}
+			<ul class="text-xs">
+				<li v-for="(item, index) in momentumData" :key="index" class="mb-1">
+					{{ item.ct }} :
+					<span class="text-pink-500 ml-2">{{ item.v }}</span>
+				</li>
+			</ul>
 		</div>
-	</ClientOnly>
+	</div>
 </template>
 
 <script lang="ts" setup>
@@ -28,91 +39,120 @@
 	import { BarChart } from 'echarts/charts'
 	import { TitleComponent, TooltipComponent, GridComponent, DataZoomComponent } from 'echarts/components'
 	import VChart from 'vue-echarts'
-	import { marketApi } from '../api/market'
 	import { useRouter } from 'vue-router'
 	import { useI18n } from 'vue-i18n'
-	import { useUserStore } from '@/stores/user'
 
 	const { t } = useI18n()
 	const router = useRouter()
-	const userStore = useUserStore()
+	const { isLogin } = useAuth()
+	const { $api } = useNuxtApp()
 
 	use([CanvasRenderer, BarChart, TitleComponent, TooltipComponent, GridComponent, DataZoomComponent])
 
 	const timeRanges = [1, 3, 7, 30]
-	const selectedDays = ref(1)
+	const selectedDays = ref<number>(1)
 	const option = ref({})
 
-	const fetchData = async (days: number): Promise<void> => {
-		if (selectedDays.value == days && !_isEmpty(option.value)) {
-			// 如果選擇的時間範圍相同且已經初始化時，則不重取api
-			return
-		}
-		if (days != 1 && !userStore.isLogin) {
-			router.push('/login')
-			return
-		}
-		selectedDays.value = days
-		try {
-			const res = await marketApi.getMomentumByRange(days)
-			if (!res.success) return
-			const data = res.data
-			//ct: createdAt 為了省流量，後端key直接簡寫	，v: volume
-			const dates = data.map((item: any) => item.ct)
-			const volumes = data.map((item: any) => item.v)
+	interface chartData {
+		ct: string
+		v: number
+	}
+	const momentumData = ref<chartData[]>([])
 
-			option.value = {
-				title: {
-					text: t('momentum_chart.title', { days }),
-					left: 'center',
-				},
-				tooltip: {
-					trigger: 'axis',
-				},
-				grid: {
-					left: '3%',
-					right: '4%',
-					bottom: '3%',
-					containLabel: true,
-				},
-				xAxis: {
-					type: 'category',
-					data: dates,
-				},
-				yAxis: {
-					type: 'value',
-				},
-				series: [
-					{
-						data: volumes,
-						type: 'bar',
-						itemStyle: {
-							color: '#f472b6',
-							borderRadius: [4, 4, 0, 0],
-						},
-						animationDelay: function (idx: number) {
-							// 根據當前選擇的天數動態調整延遲時間
-							const days = selectedDays.value
-							const baseDelay = days >= 30 ? 2 : days >= 7 ? 10 : 50
-							return idx * baseDelay
-						},
-						animationDelayUpdate: function (idx: number) {
-							const days = selectedDays.value
-							const baseDelay = days >= 30 ? 2 : days >= 7 ? 10 : 50
-							return idx * baseDelay
-						},
+	const setupCharts = (data: chartData[]) => {
+		const dates = data.map((item: chartData) => item.ct)
+		const volumes = data.map((item: chartData) => item.v)
+		option.value = {
+			title: {
+				text: t('momentum_chart.title', { days: selectedDays.value }),
+				left: 'center',
+			},
+			tooltip: {
+				trigger: 'axis',
+			},
+			grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true,
+			},
+			xAxis: {
+				type: 'category',
+				data: dates,
+			},
+			yAxis: {
+				type: 'value',
+			},
+			series: [
+				{
+					data: volumes,
+					type: 'bar',
+					itemStyle: {
+						color: '#f472b6',
+						borderRadius: [4, 4, 0, 0],
 					},
-				],
-				animation: true,
-				animationDuration: 1000,
-				animationEasing: 'cubicOut',
-			}
-		} catch (error) {
-			console.error(`Failed to fetch ${days}-day momentum data:`, error)
+					animationDelay: function (idx: number) {
+						// 根據當前選擇的天數動態調整延遲時間
+						const days = selectedDays.value
+						const baseDelay = days >= 30 ? 2 : days >= 7 ? 10 : 50
+						return idx * baseDelay
+					},
+					animationDelayUpdate: function (idx: number) {
+						const days = selectedDays.value
+						const baseDelay = days >= 30 ? 2 : days >= 7 ? 10 : 50
+						return idx * baseDelay
+					},
+				},
+			],
+			animation: true,
+			animationDuration: 1000,
+			animationEasing: 'cubicOut',
 		}
 	}
 
+	const fetchData = async (days: number): Promise<chartData[]> => {
+		try {
+			const res = await $api.market.getMomentumByRange(days)
+			return res.data
+		} catch (error) {
+			console.error(`Failed to fetch ${days}-day momentum data:`, error)
+			return []
+		}
+	}
+
+	const refreshData = async (days: number): Promise<void> => {
+		selectedDays.value = days
+		if (!isLogin.value && selectedDays.value !== 1) {
+			router.push('/login')
+			return
+		}
+		const data = await fetchData(days)
+		if (data) setupCharts(data)
+	}
+
+	const {
+		data: fetchedData,
+		pending,
+		error,
+	} = await useAsyncData(
+		'market-momentum-data',
+		() => {
+			if (selectedDays.value === 1) {
+				return fetchData(1)
+			}
+
+			return fetchData(1)
+		},
+		{
+			// 只在需要時才執行
+			lazy: true,
+		}
+	)
+	if (fetchedData.value) momentumData.value = fetchedData.value
+
 	onMounted(() => {
-		fetchData(selectedDays.value)
+		if (fetchedData.value) {
+			setupCharts(fetchedData.value)
+		}
 	})
 </script>

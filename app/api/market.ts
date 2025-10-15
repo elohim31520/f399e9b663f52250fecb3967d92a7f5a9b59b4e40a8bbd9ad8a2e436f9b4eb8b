@@ -1,18 +1,21 @@
-import { httpClient } from '../utils/service'
 import type { ResponseData, Company } from '../types/api'
 
-class MarketApi {
+export class MarketApi {
+	private httpRequest: any
+
+	constructor(httpRequest: any) {
+		this.httpRequest = httpRequest
+	}
+
 	async getAllMomentum(): Promise<ResponseData<any[]>> {
-		return httpClient.request<any[]>({ method: 'GET', endpoint: '/market/momentum' })
+		return this.httpRequest({ method: 'GET', endpoint: '/market/momentum' })
 	}
 
 	async getMomentumByRange(days: number): Promise<ResponseData<any[]>> {
-		return httpClient.request<any[]>({ method: 'GET', endpoint: `/market/momentum/range/${days}`, useKV: true })
+		return this.httpRequest({ method: 'GET', endpoint: `/market/momentum/range/${days}`, useKV: true })
 	}
 
 	async getMarketWeights(): Promise<ResponseData<any[]>> {
-		return httpClient.request<any[]>({ method: 'GET', endpoint: '/market/weights' })
+		return this.httpRequest({ method: 'GET', endpoint: '/market/weights' })
 	}
 }
-
-export const marketApi = new MarketApi()
