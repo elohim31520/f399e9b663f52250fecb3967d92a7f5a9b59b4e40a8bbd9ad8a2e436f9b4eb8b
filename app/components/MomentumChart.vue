@@ -20,8 +20,11 @@
 			</div>
 		</ClientOnly>
 
-		<div class="text-gray-500 p-1">
-			{{ $t('momentum_chart.tips') }}
+		<div class="text-gray-500 p-2">
+			<div class="mb-2">
+				{{ $t('momentum_chart.tips') }}
+			</div>
+
 			<ul class="text-xs">
 				<li v-for="(item, index) in momentumData" :key="index" class="mb-1">
 					{{ item.ct }} :
@@ -120,6 +123,7 @@
 		}
 	}
 
+	// 其他天數資料會從cloudflare KV中間件會 跟api server做用戶驗證
 	const refreshData = async (days: number): Promise<void> => {
 		selectedDays.value = days
 		if (!isLogin.value && selectedDays.value !== 1) {
@@ -151,6 +155,8 @@
 	if (fetchedData.value) momentumData.value = fetchedData.value
 
 	onMounted(() => {
+		console.log('onMounted')
+
 		if (fetchedData.value) {
 			setupCharts(fetchedData.value)
 		}
