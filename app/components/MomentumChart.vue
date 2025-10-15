@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted } from 'vue'
+	import { ref } from 'vue'
 	import { use } from 'echarts/core'
 	import { CanvasRenderer } from 'echarts/renderers'
 	import { BarChart } from 'echarts/charts'
@@ -54,7 +54,6 @@
 
 	const timeRanges = [1, 3, 7, 30]
 	const selectedDays = ref<number>(1)
-	const option = ref({})
 
 	interface chartData {
 		ct: string
@@ -62,10 +61,11 @@
 	}
 	const momentumData = ref<chartData[]>([])
 
-	const setupCharts = (data: chartData[]) => {
-		const dates = data.map((item: chartData) => item.ct)
-		const volumes = data.map((item: chartData) => item.v)
-		option.value = {
+	const option = computed(() => {
+		const dates = momentumData.value.map((item: chartData) => item.ct)
+		const volumes = momentumData.value.map((item: chartData) => item.v)
+
+		return {
 			title: {
 				text: t('momentum_chart.title', { days: selectedDays.value }),
 				left: 'center',
@@ -95,7 +95,6 @@
 						borderRadius: [4, 4, 0, 0],
 					},
 					animationDelay: function (idx: number) {
-						// 根據當前選擇的天數動態調整延遲時間
 						const days = selectedDays.value
 						const baseDelay = days >= 30 ? 2 : days >= 7 ? 10 : 50
 						return idx * baseDelay
@@ -111,7 +110,7 @@
 			animationDuration: 1000,
 			animationEasing: 'cubicOut',
 		}
-	}
+	})
 
 	const fetchData = async (days: number): Promise<chartData[]> => {
 		try {
@@ -131,7 +130,6 @@
 			return
 		}
 		const data = await fetchData(days)
-		if (data) setupCharts(data)
 	}
 
 	const {
@@ -153,12 +151,4 @@
 		}
 	)
 	if (fetchedData.value) momentumData.value = fetchedData.value
-
-	onMounted(() => {
-		console.log('onMounted')
-
-		if (fetchedData.value) {
-			setupCharts(fetchedData.value)
-		}
-	})
 </script>
