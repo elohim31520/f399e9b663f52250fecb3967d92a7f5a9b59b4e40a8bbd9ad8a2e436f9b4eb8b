@@ -1,18 +1,18 @@
 User-agent: *
 Allow: /
+Allow: /posts
+Allow: /post/info-coreweave-ai-ventrue
+Allow: /post/info-crowdstrike-vision
+Allow: /post/info-meta-glasses
+Allow: /post/info-nvidia-q2-2026
+Allow: /post/info-tesla-elon-musks-vison
 
 Disallow: /login
-
 Disallow: /register/
-
 Disallow: /change-password
-
 Disallow: /svg
-
 Disallow: /records
-
 Disallow: /404
-
 Disallow: /records
 
 Sitemap: https://urtrade.org/sitemap.xml
