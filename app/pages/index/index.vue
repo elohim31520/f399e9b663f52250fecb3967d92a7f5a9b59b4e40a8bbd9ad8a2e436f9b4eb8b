@@ -5,6 +5,7 @@
 		</header>
 		<MomentumChart />
 		<HeatMap class="h-[500px] my-2.5" />
+		<MarketQuotes />
 		<MarketBreadth />
 		<VolatileAsset />
 		<SeeMore :to="'/volatile-stock'" class="my-2.5" />

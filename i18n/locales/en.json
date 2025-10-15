@@ -243,5 +243,13 @@
 		"feature2_title": "Company Information Inquiry:",
 		"feature2_description": "Provides basic data inquiry for listed companies, such as key financial indicators like the Price-to-Earnings (PE) Ratio and Price-to-Book (PB) Ratio, to help you make more informed investment decisions.",
 		"conclusion": "We are committed to providing a simple, intuitive interface to make investment management and market analysis easier."
+	},
+	"market_quotes": {
+		"btcusd": "Bitcoin/US Dollar",
+		"dxy": "US Dollar Index",
+		"usoil": "US Crude Oil",
+		"us10y": "US 10-Year Treasury",
+		"xauusd": "Gold/US Dollar",
+		"title": "Latest Market Rates"
 	}
 }

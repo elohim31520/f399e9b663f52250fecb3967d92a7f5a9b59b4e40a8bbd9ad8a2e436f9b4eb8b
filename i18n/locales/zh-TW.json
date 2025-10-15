@@ -243,5 +243,13 @@
 		"feature2_title": "公司資訊查詢：",
 		"feature2_description": "提供上市公司的基本資料查詢，例如本益比（PE Ratio）、股價淨值比（PB Ratio）等關鍵財務指標，幫助您做出更明智的投資決策。",
 		"conclusion": "我們致力於提供一個簡單、直觀的界面，讓投資管理和市場分析變得更加輕鬆。"
+	},
+	"market_quotes": {
+		"btcusd": "比特幣/美元",
+		"dxy": "美元指數",
+		"usoil": "美國原油",
+		"us10y": "美國10年期公債",
+		"xauusd": "黃金/美元",
+		"title": "市場最新報價"
 	}
 }

@@ -18,4 +18,8 @@ export class MarketApi {
 	async getMarketWeights(): Promise<ResponseData<any[]>> {
 		return this.httpRequest({ method: 'GET', endpoint: '/market/weights' })
 	}
+
+	async getQuotes(): Promise<ResponseData<any[]>> {
+		return this.httpRequest({ method: 'GET', endpoint: '/market/quotes' })
+	}
 }
