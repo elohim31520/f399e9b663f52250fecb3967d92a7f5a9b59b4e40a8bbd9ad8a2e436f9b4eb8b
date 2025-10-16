@@ -27,6 +27,6 @@ export default defineEventHandler(async (event) => {
 			htmlContent: await convertMarkdownToHtml(post.htmlContent),
 		}))
 	)
-
+	processedPosts.sort((a, b) => +new Date(b.publishDate!) - +new Date(a.publishDate!))
 	return processedPosts
 })
