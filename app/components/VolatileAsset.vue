@@ -30,23 +30,23 @@
 
 <script lang="ts" setup>
 	import { ref, onMounted, watch } from 'vue'
-	import { useRouter } from 'vue-router'
-	import { stockApi } from '../api/stock'
 
 	const winners = ref<any[]>([])
 	const losers = ref<any[]>([])
 	const activeTab = ref(0)
-	const router = useRouter()
+	const { $api } = useNuxtApp()
 
-	onMounted(async () => {
-		const winnersRes = await stockApi.getStockWinners()
-		winners.value = winnersRes.data
+	const { data: fetchedData } = await useAsyncData('volatile-asset', async () => {
+		const res = await $api.stock.getStockWinners()
+		return res.data
 	})
+
+	winners.value = fetchedData.value || []
 
 	watch(activeTab, async (newTab) => {
 		// 省流：如果弱勢股沒有資料，再獲取弱勢股資料
 		if (newTab === 1 && losers.value.length === 0) {
-			const losersRes = await stockApi.getStockLosers()
+			const losersRes = await $api.stock.getStockLosers()
 			losers.value = _reverse(losersRes.data)
 		}
 	})

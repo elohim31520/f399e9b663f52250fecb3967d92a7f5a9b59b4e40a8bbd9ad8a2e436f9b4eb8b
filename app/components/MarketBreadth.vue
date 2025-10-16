@@ -9,13 +9,12 @@
 </template>
 
 <script setup lang="ts">
-	import { onMounted, ref, computed } from 'vue'
+	import { ref, computed } from 'vue'
 	import { use } from 'echarts/core'
 	import { CanvasRenderer } from 'echarts/renderers'
 	import { PieChart } from 'echarts/charts'
 	import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
 	import VChart from 'vue-echarts'
-	import { stockApi } from '../api/stock'
 	import { formatNumber } from '~/utils/util'
 	import { useI18n } from 'vue-i18n'
 
@@ -23,17 +22,7 @@
 	use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent])
 
 	const marketBreadth = ref<number>(0)
-
-	async function fetchMarketBreadth() {
-		const res = await stockApi.getMarketBreadth()
-		if (res.success) {
-			if (_isNumber(res.data)) {
-				marketBreadth.value = formatNumber(res.data * 100)
-			}
-		}
-	}
-
-	fetchMarketBreadth()
+	const { $api } = useNuxtApp()
 
 	const chartOption = computed(() => {
 		return {
@@ -74,4 +63,13 @@
 			],
 		}
 	})
+
+	const { data: fetchedData } = await useAsyncData('market-breadth', async () => {
+		const res = await $api.stock.getMarketBreadth()
+		if (_isNumber(res.data)) {
+			return formatNumber(res.data * 100)
+		}
+	})
+
+	marketBreadth.value = fetchedData.value ?? 0
 </script>
