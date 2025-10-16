@@ -20,15 +20,16 @@
 	import { useRouter } from 'vue-router'
 
 	const router = useRouter()
+	const { $api } = useNuxtApp()
 
 	defineOptions({
 		name: 'companies',
 	})
 
-	const { data: companies } = await useAsyncData<Company[]>(
-		'company-symbols',
-		() => $fetch<Company[]>('/api/company')
-	)
+	const { data: companies } = await useAsyncData<Company[]>('company-symbols', async () => {
+		const res = await $api.stock.getCompanySymbols()
+		return res.data
+	})
 
 	const handleClick = (symbol: string) => {
 		router.push(`/company-metrics/${symbol}`)
