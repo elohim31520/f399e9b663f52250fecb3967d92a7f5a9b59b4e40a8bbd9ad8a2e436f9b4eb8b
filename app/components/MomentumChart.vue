@@ -151,4 +151,14 @@
 		}
 	)
 	if (fetchedData.value) momentumData.value = fetchedData.value
+
+	watch(
+		fetchedData,
+		(newData) => {
+			if (newData) {
+				momentumData.value = newData
+			}
+		},
+		{ immediate: true }
+	)
 </script>
