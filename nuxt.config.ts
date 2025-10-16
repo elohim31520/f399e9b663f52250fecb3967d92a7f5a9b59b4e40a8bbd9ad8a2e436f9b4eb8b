@@ -3,13 +3,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 
-const generateBlogPostsPlugin = () => {
+const generateBlogPostsPlugin = (lang: string) => {
 	return {
 		name: 'generate-blog-posts',
 		async buildStart() {
 			// @ts-ignore
 			const blogPosts: BlogPost[] = []
-			const postsDirectory = path.join(process.cwd(), 'blogs', 'info', 'en')
+			const postsDirectory = path.join(process.cwd(), 'blogs', 'info', lang)
 			const files = await fs.promises.readdir(postsDirectory)
 
 			for (const file of files) {
@@ -33,48 +33,56 @@ const generateBlogPostsPlugin = () => {
 					})
 				}
 			}
-			fs.writeFileSync(path.join(process.cwd(), 'server/data/', 'blog-posts.json'), JSON.stringify(blogPosts, null, 2))
+			fs.writeFileSync(
+				path.join(process.cwd(), 'server/data/', `blog-posts-${lang}.json`),
+				JSON.stringify(blogPosts, null, 2)
+			)
 		},
 	}
 }
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+	compatibilityDate: '2025-07-15',
+	devtools: { enabled: false },
 
-  nitro: {
-    preset: "cloudflare-pages",
+	nitro: {
+		preset: 'cloudflare-pages',
 
-    cloudflare: {
-      deployConfig: true,
-      nodeCompat: true
-    }
-  },
+		cloudflare: {
+			deployConfig: true,
+			nodeCompat: true,
+		},
+	},
 
-  modules: [
-    "nitro-cloudflare-dev",
-    "@nuxtjs/i18n",
-    "@nuxtjs/tailwindcss",
-    "@pinia/nuxt",
-    "@vant/nuxt",
-    "nuxt-echarts",
-    "@vueuse/nuxt",
-    './modules/nuxt4-lodash',
+	modules: [
+		'nitro-cloudflare-dev',
+		'@nuxtjs/i18n',
+		'@nuxtjs/tailwindcss',
+		'@pinia/nuxt',
+		'@vant/nuxt',
+		'nuxt-echarts',
+		'@vueuse/nuxt',
+		'./modules/nuxt4-lodash',
 		[
 			'nuxt-vue3-google-signin',
 			{
 				clientId: GOOGLE_CLIENT_ID,
 			},
 		],
-  ],
-  i18n: {
+	],
+	i18n: {
 		locales: [
 			{ code: 'en', file: 'en.json', language: 'en-US' },
 			{ code: 'zh', file: 'zh-TW.json', language: 'zh-TW' },
 		],
 		defaultLocale: 'en',
 		strategy: 'prefix_except_default',
+		// ✅ 加入自動偵測
+		detectBrowserLanguage: {
+			useCookie: true,
+			redirectOn: 'root',
+		},
 	},
 	devServer: {
 		port: 5177,
@@ -96,7 +104,7 @@ export default defineNuxtConfig({
 				defineModel: true,
 			},
 		},
-		plugins: [generateBlogPostsPlugin()],
+		plugins: [generateBlogPostsPlugin('zh'), generateBlogPostsPlugin('en')],
 		base: '/',
 		build: {
 			assetsDir: '_nuxt',

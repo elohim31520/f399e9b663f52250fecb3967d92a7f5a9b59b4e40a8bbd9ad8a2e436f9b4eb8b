@@ -1,6 +1,7 @@
 import { marked } from 'marked'
-import blogPostsData from '../data/blog-posts.json'
-import { defineEventHandler } from 'h3'
+import { defineEventHandler, getQuery } from 'h3'
+import blogPostsZh from '../data/blog-posts-zh.json'
+import blogPostsEn from '../data/blog-posts-en.json'
 
 const convertMarkdownToHtml = async (fileContent: string) => {
 	return await marked(fileContent)
@@ -18,9 +19,16 @@ interface BlogPost {
 	tags?: string[]
 }
 
-export default defineEventHandler(async (event) => {
-	const blogPosts: BlogPost[] = blogPostsData as BlogPost[]
+const blogPostsMap: Record<string, BlogPost[]> = {
+	zh: blogPostsZh as BlogPost[],
+	en: blogPostsEn as BlogPost[],
+}
 
+export default defineEventHandler(async (event) => {
+	const query = getQuery(event)
+	const lang = query.lang as string
+
+	const blogPosts = blogPostsMap[lang]
 	const processedPosts = await Promise.all(
 		blogPosts.map(async (post) => ({
 			...post,

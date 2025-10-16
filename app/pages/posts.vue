@@ -26,8 +26,12 @@
 		categories?: string[]
 		tags?: string[]
 	}
-
-	const { data: fetchedPost } = await useAsyncData<BlogPost[]>(`blog-posts`, () => $fetch<BlogPost[]>('/api/blog'))
+	const { locale } = useI18n()
+	const { data: fetchedPost } = await useAsyncData<BlogPost[]>(`blog-posts-${locale.value}`, () =>
+		$fetch<BlogPost[]>('/api/blog', {
+			query: { lang: locale.value }, // ← 傳遞語系參數
+		})
+	)
 </script>
 
 <style scoped>

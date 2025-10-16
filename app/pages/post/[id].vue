@@ -22,9 +22,11 @@
 	}
 
 	const route = useRoute()
-
+	const { locale } = useI18n()
 	const { data: fetchedPost } = await useAsyncData(`blog-post-${route.params.id as string}`, async () => {
-		const allPosts = await $fetch<BlogPost[]>('/api/blog')
+		const allPosts = await $fetch<BlogPost[]>('/api/blog', {
+			query: { lang: locale.value }, // ← 傳遞語系參數
+		})
 		return allPosts.find((p) => p.id === (route.params.id as string)) || null
 	})
 </script>
