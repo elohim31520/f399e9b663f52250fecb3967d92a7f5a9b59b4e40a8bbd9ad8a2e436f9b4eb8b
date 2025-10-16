@@ -37,6 +37,7 @@
 		"@types/node": "^24.7.2",
 		"nitro-cloudflare-dev": "^0.2.2",
 		"sass-embedded": "^1.93.2",
+		"webp-converter": "^2.3.3",
 		"wrangler": "^4.42.2"
 	}
 }
