@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted, watch } from 'vue'
+	import { ref } from 'vue'
 
 	const winners = ref<any[]>([])
 	const losers = ref<any[]>([])
@@ -37,17 +37,10 @@
 	const { $api } = useNuxtApp()
 
 	const { data: fetchedData } = await useAsyncData('volatile-asset', async () => {
-		const res = await $api.stock.getStockWinners()
+		const res = await $api.stock.getTodayStocks()
 		return res.data
 	})
 
-	winners.value = fetchedData.value || []
-
-	watch(activeTab, async (newTab) => {
-		// 省流：如果弱勢股沒有資料，再獲取弱勢股資料
-		if (newTab === 1 && losers.value.length === 0) {
-			const losersRes = await $api.stock.getStockLosers()
-			losers.value = _reverse(losersRes.data)
-		}
-	})
+	winners.value = fetchedData.value?.slice(0, 5) || []
+	losers.value = fetchedData.value?.slice(-5) || []
 </script>

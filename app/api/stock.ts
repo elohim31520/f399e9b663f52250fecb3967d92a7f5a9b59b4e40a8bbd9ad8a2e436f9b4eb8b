@@ -19,14 +19,6 @@ export class StockApi {
 		return this.httpRequest({ method: 'GET', endpoint: '/stock/breadth', useKV: true })
 	}
 
-	async getStockWinners(): Promise<ResponseData<any[]>> {
-		return this.httpRequest({ method: 'GET', endpoint: '/stock/winners', useKV: true })
-	}
-
-	async getStockLosers(): Promise<ResponseData<any[]>> {
-		return this.httpRequest({ method: 'GET', endpoint: '/stock/losers', useKV: true })
-	}
-
 	async getTodayStocks(): Promise<ResponseData<any[]>> {
 		return this.httpRequest({ method: 'GET', endpoint: '/stock/today', useKV: true })
 	}
