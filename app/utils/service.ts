@@ -101,16 +101,25 @@ class HttpClient {
 		useKV = false,
 	}: RequestParams): Promise<ResponseData<T>> {
 		try {
-			// 開發時可以強制關閉KV
 			if (import.meta.env.VITE_UNUSE_KV === 'true') {
 				useKV = false
 			}
-			const host = useKV ? import.meta.env.VITE_KV_HOST : import.meta.env.VITE_API_URL
-			const response: AxiosResponse<ResponseData<T>> = await this.service({
+
+			// 決定 baseURL
+			const baseURL = useKV ? import.meta.env.VITE_KV_HOST : import.meta.env.VITE_API_URL
+
+			if (import.meta.dev) {
+				console.log('發api:', baseURL + endpoint)
+			}
+
+			const config: any = {
 				method,
-				url: host + endpoint,
+				url: endpoint,
+				baseURL,
 				...(method.toUpperCase() === 'GET' ? { params } : { data: params }),
-			})
+			}
+
+			const response: AxiosResponse<ResponseData<T>> = await this.service(config)
 			return response.data
 		} catch (err) {
 			if (!quiet) {
