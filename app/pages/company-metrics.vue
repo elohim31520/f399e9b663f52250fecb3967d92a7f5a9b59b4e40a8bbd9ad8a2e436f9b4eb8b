@@ -1,6 +1,6 @@
 <template>
 	<div class="p-4 space-y-4">
-		<div class="mb-60">
+		<div class="mb-[3.75rem]">
 			<TradingviewGadget :symbol="symbol" :disabled="uiStore.isMenuShown" />
 		</div>
 
@@ -71,7 +71,7 @@
 			<div class="flex-y-center justify-center font-[500] mb-2">
 				{{ `${bigSymbol} ${$t('company_metrics.pe_forwards_title')}` }}...
 			</div>
-			<div class="flex-y-center justify-center text-pink-400" @click="$router.push('/login')">
+			<div class="flex-y-center justify-center text-pink-400" @click="$router.push('/login')" v-if="!isLogin">
 				{{ $t('company_metrics.login_to_see_data') }}
 			</div>
 		</div>
@@ -84,14 +84,11 @@
 	import { metricsApi } from '@/api/metrics'
 	import { useUIStore } from '@/stores/ui'
 	import { HOT_COMPANIES } from '@/constants/hotCompanies'
-	import { useUserStore } from '@/stores/user'
-	import { toUpper as _toUpper, reverse as _reverse, get as _get } from 'lodash-es'
 
 	const uiStore = useUIStore()
 	const router = useRouter()
 	const route = useRoute()
-	const userStore = useUserStore()
-
+	const { isLogin } = useAuth()
 	const symbol = computed(() => {
 		return route.params.symbol as string
 	})
@@ -106,7 +103,7 @@
 
 	const getMetrics = async (symbol: string, days: number = 60) => {
 		// 只有熱門股票的資料可以不做認證就可以看
-		if (!HOT_COMPANIES.includes(_toUpper(symbol)) && !userStore.isLogin) return
+		if (!HOT_COMPANIES.includes(_toUpper(symbol)) && !isLogin) return
 		const response = await metricsApi.getStatementBySymbol(symbol, days)
 		metrics.value = _reverse(_get(response, 'data', []))
 	}
