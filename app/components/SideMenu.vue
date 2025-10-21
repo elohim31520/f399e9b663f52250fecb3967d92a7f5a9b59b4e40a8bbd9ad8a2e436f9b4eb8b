@@ -68,7 +68,7 @@
 		{
 			to: '/m7',
 			icon: 'side-bar-no1',
-			text: 'sidemenu.hot_stocks',
+			text: 'sidemenu.m7',
 			auth: 'always',
 		},
 		{ to: '/market-metrics', icon: 'media', text: 'sidemenu.market_indicators', auth: 'always' },

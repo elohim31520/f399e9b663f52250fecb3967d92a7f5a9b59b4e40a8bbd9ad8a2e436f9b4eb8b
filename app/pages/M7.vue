@@ -29,7 +29,8 @@
 		MSFT: [] as any[],
 		GOOG: [] as any[],
 		AMZN: [] as any[],
-		PLTR: [] as any[],
+		AAPL: [] as any[],
+		META: [] as any[],
 	})
 
 	const allSymbols = Object.keys(metrics) as (keyof typeof metrics)[]
