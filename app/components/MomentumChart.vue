@@ -92,7 +92,6 @@
 					type: 'bar',
 					itemStyle: {
 						color: '#f472b6',
-						borderRadius: [4, 4, 0, 0],
 					},
 					animationDelay: function (idx: number) {
 						const days = selectedDays.value
