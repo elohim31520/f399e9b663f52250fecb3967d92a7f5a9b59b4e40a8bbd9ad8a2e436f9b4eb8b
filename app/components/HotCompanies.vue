@@ -11,7 +11,7 @@
 				class="group relative cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl"
 			>
 				<img
-					:src="`/hot/${company.id}.webp`"
+					:src="company.useLogoPath ? `/logo/${company.id}.svg` : `/hot/${company.id}.webp`"
 					class="h-full w-full transition-transform duration-300 group-hover:scale-110 object-cover bg-#fff"
 				/>
 				<div
@@ -41,6 +41,9 @@
 		{ id: 'goog' },
 		{ id: 'meta' },
 		{ id: 'msft' },
+		{ id: 'aapl', useLogoPath: true },
+		{ id: 'crwv', useLogoPath: true },
+		{ id: 'oklo', useLogoPath: true },
 	])
 
 	const router = useRouter()
