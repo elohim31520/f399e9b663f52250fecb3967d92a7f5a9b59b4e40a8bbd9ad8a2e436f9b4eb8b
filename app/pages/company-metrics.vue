@@ -89,6 +89,7 @@
 	const router = useRouter()
 	const route = useRoute()
 	const { isLogin } = useAuth()
+
 	const symbol = computed(() => {
 		return route.params.symbol as string
 	})
@@ -97,18 +98,22 @@
 		return symbol.value?.toUpperCase()
 	})
 
+	const isHot = computed(() => {
+		return HOT_COMPANIES.includes(bigSymbol.value)
+	})
+
 	const showNotice = ref(true)
 
 	const metrics = ref<any[]>([])
 
-	const getMetrics = async (symbol: string, days: number = 60) => {
+	const getMetrics = async (days: number = 60) => {
 		// 只有熱門股票的資料可以不做認證就可以看
-		if (!HOT_COMPANIES.includes(_toUpper(symbol)) && !isLogin) return
-		const response = await metricsApi.getStatementBySymbol(symbol, days)
+		if (!isHot.value && !isLogin.value) return
+		const response = await metricsApi.getStatementBySymbol(symbol.value, days)
 		metrics.value = _reverse(_get(response, 'data', []))
 	}
 
 	onMounted(() => {
-		getMetrics(symbol.value)
+		getMetrics()
 	})
 </script>
