@@ -27,6 +27,7 @@
 
 	const route = useRoute()
 	const router = useRouter()
+	const localePath = useLocalePath()
 
 	const activeTab = computed(() => {
 		return (route.name as string) || 'index'
@@ -71,7 +72,6 @@
 	]
 
 	const handleClick = (to: string) => {
-		// TODO: 同路由不跳轉
-		router.push(to)
+		router.push(localePath(to))
 	}
 </script>

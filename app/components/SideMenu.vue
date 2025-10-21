@@ -15,7 +15,7 @@
 							(item.auth === 'auth' && userStore.isLogin) ||
 							(item.auth === 'guest' && !userStore.isLogin)
 						"
-						:to="item.to"
+						:to="localePath(item.to)"
 						@click="closeMenu"
 						class="flex items-center justify-center rounded-lg text-gray-700 hover:bg-gray-100"
 						active-class="text-pink-400"
@@ -43,6 +43,7 @@
 	import { useRouter } from 'vue-router'
 	import { useUserStore } from '@/stores/user'
 
+	const localePath = useLocalePath()
 	const router = useRouter()
 	const uiStore = useUIStore()
 	const userStore = useUserStore()
@@ -81,7 +82,6 @@
 	}
 
 	const logout = () => {
-		removeToken()
 		closeMenu()
 		router.push('/login').then(() => {
 			window.location.reload()

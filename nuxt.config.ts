@@ -78,10 +78,11 @@ export default defineNuxtConfig({
 		],
 		defaultLocale: 'en',
 		strategy: 'prefix_except_default',
-		// ✅ 加入自動偵測
 		detectBrowserLanguage: {
-			useCookie: true,
-			redirectOn: 'root',
+			useCookie: false,
+			redirectOn: 'root', // 只在根路徑時重定向
+			alwaysRedirect: false, // 設為 true 會每次都檢查
+			fallbackLocale: 'en',
 		},
 	},
 	devServer: {
