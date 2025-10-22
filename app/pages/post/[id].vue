@@ -34,7 +34,7 @@
 <style>
 	.post-con {
 		h1 {
-			font-size: 2.5rem;
+			font-size: 2rem;
 			font-weight: 700;
 			line-height: 1.2;
 			margin: 2rem 0 1rem;
@@ -42,7 +42,7 @@
 		}
 
 		h2 {
-			font-size: 2rem;
+			font-size: 1.5rem;
 			font-weight: 600;
 			line-height: 1.3;
 			margin: 1.5rem 0 0.75rem;
@@ -50,7 +50,7 @@
 		}
 
 		h3 {
-			font-size: 1.5rem;
+			font-size: 1.2rem;
 			font-weight: 500;
 			line-height: 1.4;
 			margin: 1.25rem 0 0.5rem;
