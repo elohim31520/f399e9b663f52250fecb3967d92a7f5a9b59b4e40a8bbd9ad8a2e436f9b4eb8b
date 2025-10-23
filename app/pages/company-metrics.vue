@@ -1,7 +1,7 @@
 <template>
 	<div class="p-4 space-y-4">
 		<div class="mb-[3.75rem]">
-			<TradingviewGadget :symbol="symbol" :disabled="uiStore.isMenuShown" />
+			<TradingviewGadget :symbol="symbol" :symbolPrefix="symbolPrefix" :disabled="uiStore.isMenuShown" />
 		</div>
 
 		<van-notice-bar
@@ -84,6 +84,7 @@
 	import { metricsApi } from '@/api/metrics'
 	import { useUIStore } from '@/stores/ui'
 	import { HOT_COMPANIES } from '@/constants/hotCompanies'
+	import { NYSE } from '../constants/symbolPrefix'
 
 	const uiStore = useUIStore()
 	const router = useRouter()
@@ -92,6 +93,11 @@
 
 	const symbol = computed(() => {
 		return route.params.symbol as string
+	})
+
+	const symbolPrefix = computed(() => {
+		if (NYSE.includes(_upperCase(symbol.value))) return 'NYSE'
+		return 'NASDAQ'
 	})
 
 	const bigSymbol = computed(() => {

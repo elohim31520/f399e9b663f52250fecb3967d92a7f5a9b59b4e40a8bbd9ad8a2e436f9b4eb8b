@@ -14,6 +14,7 @@
 
 	const props = defineProps<{
 		symbol: string
+		symbolPrefix?: string
 		disabled?: boolean
 	}>()
 
@@ -24,7 +25,7 @@
 		script.onload = () => {
 			new (window as any).TradingView.widget({
 				autosize: true,
-				symbol: `NASDAQ:${props.symbol}`,
+				symbol: `${props.symbolPrefix ? props.symbolPrefix : 'NASDAQ'}:${props.symbol}`,
 				interval: 'D',
 				timezone: 'Etc/UTC',
 				theme: 'light',
