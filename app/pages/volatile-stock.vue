@@ -6,6 +6,7 @@
 					v-for="(stock, index) in fetchedData"
 					:key="index"
 					class="flex items-center py-4 px-2.5 shadow-primary gap-5"
+					@click="handleRoute(stock)"
 				>
 					<CompanyIcon :symbol="stock.symbol || ''" />
 					<span class="text-gray-600">{{ stock.name }}</span>
@@ -17,13 +18,25 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref } from 'vue'
-	import CompanyIcon from '../components/CompanyIcon.vue'
-
 	const { $api } = useNuxtApp()
 
 	const { data: fetchedData } = await useAsyncData('volatile-stock', async () => {
 		const res = await $api.stock.getTodayStocks()
 		return res.data
 	})
+
+	interface Stock {
+		name: string
+		symbol?: string | null
+		price: string
+		chg: number
+		cap: string
+		time: string
+	}
+
+	const handleRoute = (stock: Stock) => {
+		if (stock.symbol) {
+			navigateTo(`/company-metrics/${stock.symbol}`)
+		}
+	}
 </script>
