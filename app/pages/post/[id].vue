@@ -31,7 +31,7 @@
 	})
 </script>
 
-<style>
+<style lang="scss">
 	.post-con {
 		h1 {
 			font-size: 2rem;
@@ -77,6 +77,68 @@
 			line-height: 1.6;
 			margin: 1rem 0;
 			color: #333;
+		}
+
+		ol {
+			margin: 0 0 1rem 0;
+			padding: 0 0 0 1.5rem;
+			list-style-position: outside;
+			list-style-type: decimal;
+
+			ol {
+				margin: 0.5rem 0;
+				list-style-type: lower-alpha;
+
+				ol {
+					list-style-type: lower-roman;
+				}
+			}
+		}
+
+		li {
+			margin: 0 0 0.5rem 0;
+			padding: 0;
+			line-height: 1.6;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			ol,
+			ul {
+				margin-top: 0.5rem;
+			}
+		}
+
+		ul {
+			margin: 0 0 1rem 0;
+			padding: 0 0 0 1.5rem;
+			list-style-position: outside;
+			list-style-type: disc;
+
+			ul {
+				margin: 0.5rem 0;
+				list-style-type: circle;
+
+				ul {
+					list-style-type: square;
+				}
+			}
+		}
+
+		li {
+			margin: 0 0 0.5rem 0;
+			padding: 0;
+			line-height: 1.6;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			ul,
+			ol {
+				margin-top: 0.5rem;
+			}
 		}
 	}
 </style>
