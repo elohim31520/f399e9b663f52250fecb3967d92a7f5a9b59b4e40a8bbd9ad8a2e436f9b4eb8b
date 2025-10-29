@@ -71,25 +71,19 @@
 			<div class="flex-y-center justify-center font-[500] mb-2">
 				{{ `${bigSymbol} ${$t('company_metrics.pe_forwards_title')}` }}...
 			</div>
-			<div class="flex-y-center justify-center text-pink-400" @click="$router.push('/login')" v-if="!isLogin">
-				{{ $t('company_metrics.login_to_see_data') }}
-			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import { ref, computed, onMounted } from 'vue'
-	import { useRoute, useRouter } from 'vue-router'
+	import { useRoute } from 'vue-router'
 	import { metricsApi } from '@/api/metrics'
 	import { useUIStore } from '@/stores/ui'
-	import { HOT_COMPANIES } from '@/constants/hotCompanies'
 	import { NYSE } from '../constants/symbolPrefix'
 
 	const uiStore = useUIStore()
-	const router = useRouter()
 	const route = useRoute()
-	const { isLogin } = useAuth()
 
 	const symbol = computed(() => {
 		return route.params.symbol as string
@@ -104,17 +98,12 @@
 		return symbol.value?.toUpperCase()
 	})
 
-	const isHot = computed(() => {
-		return HOT_COMPANIES.includes(bigSymbol.value)
-	})
-
 	const showNotice = ref(true)
 
 	const metrics = ref<any[]>([])
 
 	const getMetrics = async (days: number = 60) => {
 		// 只有熱門股票的資料可以不做認證就可以看
-		if (!isHot.value && !isLogin.value) return
 		const response = await metricsApi.getStatementBySymbol(symbol.value, days)
 		metrics.value = _reverse(_get(response, 'data', []))
 	}
