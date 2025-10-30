@@ -8,19 +8,22 @@
 
 <script setup lang="ts">
 	import { onMounted } from 'vue'
+	import { useI18n } from 'vue-i18n'
 
 	onMounted(() => {
 		const script = document.createElement('script')
 		script.type = 'text/javascript'
 		script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js'
 		script.async = true
+		const { locale } = useI18n()
+		const tradingviewLocale = locale.value === 'zh' ? 'zh_TW' : 'en_US'
 		script.innerHTML = JSON.stringify({
 			exchanges: [],
 			dataSource: 'SPX500',
 			grouping: 'sector',
 			blockSize: 'market_cap_basic',
 			blockColor: 'change',
-			locale: 'zh_TW',
+			locale: tradingviewLocale,
 			symbolUrl: '',
 			colorTheme: 'dark',
 			hasTopBar: false,
