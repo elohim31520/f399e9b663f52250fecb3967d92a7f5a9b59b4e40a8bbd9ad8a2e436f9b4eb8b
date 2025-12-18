@@ -24,13 +24,6 @@
 			<div class="mb-2">
 				{{ $t('momentum_chart.tips') }}
 			</div>
-
-			<ul class="text-xs">
-				<li v-for="(item, index) in momentumData" :key="index" class="mb-1">
-					{{ item.ct }} :
-					<span class="text-pink-500 ml-2">{{ item.v }}</span>
-				</li>
-			</ul>
 		</div>
 	</div>
 </template>
