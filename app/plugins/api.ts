@@ -3,6 +3,7 @@ import type { ResponseData, FailResponseData, RequestParams } from '../types/api
 import { BalancesApi } from '~/api/balances'
 import { MarketApi } from '~/api/market'
 import { StockApi } from '~/api/stock'
+import { NewsApi } from '~/api/news'
 
 export default defineNuxtPlugin(() => {
 	const api = $fetch.create({
@@ -118,6 +119,7 @@ export default defineNuxtPlugin(() => {
 	const balancesApi = new BalancesApi(request)
 	const marketApi = new MarketApi(request)
 	const stockApi = new StockApi(request)
+	const newsApi = new NewsApi(request)
 
 	return {
 		provide: {
@@ -125,6 +127,7 @@ export default defineNuxtPlugin(() => {
 				balances: balancesApi,
 				market: marketApi,
 				stock: stockApi,
+				news: newsApi,
 			},
 		},
 	}

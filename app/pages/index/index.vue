@@ -5,6 +5,7 @@
 		</header>
 		<MomentumChart />
 		<HeatMap class="h-[500px] my-2.5" />
+		<News />
 		<MarketQuotes />
 		<MarketBreadth />
 		<VolatileAsset />
