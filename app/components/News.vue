@@ -1,7 +1,13 @@
 <template>
 	<div class="shadow-primary bg-#fff p-2 rounded-xl" v-if="fetchedData?.rows.length">
 		<div v-for="(vo, index) in fetchedData.rows">
-			<van-text-ellipsis rows="2" :content="vo.content" expand-text="展开" collapse-text="收起" position="end" />
+			<van-text-ellipsis
+				rows="2"
+				:content="getDisplayContent(vo)"
+				:expand-text="$t('com.expand')"
+				:collapse-text="$t('com.collapse')"
+				position="end"
+			/>
 			<van-divider :style="{ borderColor: '#ec4899' }" v-if="index + 1 != fetchedData?.rows.length" />
 		</div>
 	</div>
@@ -9,10 +15,12 @@
 
 <script setup lang="ts">
 	const { $api } = useNuxtApp()
+	const { locale } = useI18n()
 
 	interface News {
 		id?: string
 		content: string
+		contentEn: string | null
 		status: 'draft' | 'published' | 'archived'
 		publishedAt?: Date
 		viewCount?: number
@@ -32,6 +40,14 @@
 			console.error(`Failed to fetch News:`, error)
 			return { rows: [], count: 0 }
 		}
+	}
+
+	const getDisplayContent = (vo: any) => {
+		if (locale.value === 'en' && vo.contentEn) {
+			return vo.contentEn
+		}
+
+		return vo.content
 	}
 
 	const {

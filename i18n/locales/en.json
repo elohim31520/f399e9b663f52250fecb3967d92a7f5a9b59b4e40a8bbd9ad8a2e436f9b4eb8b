@@ -251,5 +251,9 @@
 		"us10y": "US 10-Year Treasury",
 		"xauusd": "Gold/US Dollar",
 		"title": "Latest Market Rates"
+	},
+	"com": {
+		"expand": "Expand",
+		"collapse": "Collapse"
 	}
 }
