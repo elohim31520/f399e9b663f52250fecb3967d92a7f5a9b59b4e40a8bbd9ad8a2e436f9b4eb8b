@@ -5,6 +5,7 @@
 	"scripts": {
 		"build": "nuxt build",
 		"dev": "nuxt dev",
+		"dev:prod": "nuxi dev --dotenv .env.production",
 		"generate": "nuxt generate",
 		"preview": "npm run build && wrangler pages dev",
 		"postinstall": "nuxt prepare",
