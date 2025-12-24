@@ -36,7 +36,7 @@
 	.flex-center {
 		@apply flex items-center justify-center;
 	}
-	.shadow-primary {
+	.shadow-card-primary {
 		@apply shadow-[0_0_1rem_0_#0000001A];
 	}
 	.flex-x-center {
