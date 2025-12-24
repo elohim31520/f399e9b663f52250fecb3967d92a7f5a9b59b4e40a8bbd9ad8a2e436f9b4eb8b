@@ -9,7 +9,7 @@
 		"generate": "nuxt generate",
 		"preview": "npm run build && wrangler pages dev",
 		"postinstall": "nuxt prepare",
-		"deploy": "npm run build && npx wrangler deploy .output/server/index.mjs --site .output/public",
+		"deploy": "npx wrangler pages deploy dist",
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
