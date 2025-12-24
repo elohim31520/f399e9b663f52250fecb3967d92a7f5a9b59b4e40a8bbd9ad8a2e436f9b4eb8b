@@ -1,5 +1,5 @@
 <template>
-	<header class="w-full flex-y-center bg-white h-15 shadow-primary">
+	<header class="w-full flex-y-center bg-white h-15 shadow-card-primary">
 		<div
 			class="bg-[url('/logo.webp')] bg-no-repeat bg-center bg-contain scale-up"
 			style="height: 3.75rem; width: 7rem"

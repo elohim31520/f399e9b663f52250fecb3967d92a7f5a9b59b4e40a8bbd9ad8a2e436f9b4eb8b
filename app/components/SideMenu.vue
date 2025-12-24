@@ -18,7 +18,7 @@
 						:to="localePath(item.to)"
 						@click="closeMenu"
 						class="flex items-center justify-center rounded-lg text-gray-700 hover:bg-gray-100"
-						active-class="text-pink-400"
+						active-class="text-primary"
 					>
 						<SvgIcon :name="item.icon" size="1.2rem" class="mr-5" />
 						<span class="text-xl">{{ $t(item.text) }}</span>
@@ -28,7 +28,7 @@
 					v-if="userStore.isLogin"
 					@click="logout"
 					class="flex items-center justify-center rounded-lg text-gray-700 hover:bg-gray-100"
-					active-class="text-pink-400"
+					active-class="text-primary"
 				>
 					<SvgIcon name="icon_quit" size="1.2rem" class="mr-5" />
 					<span class="text-xl">{{ $t('sidemenu.logout') }}</span>

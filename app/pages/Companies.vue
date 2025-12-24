@@ -1,9 +1,9 @@
 <template>
-	<div class="bg-white p-2 shadow-primary">
+	<div class="bg-white p-2 shadow-card-primary">
 		<div class="text-xl font-bold">{{ $t('companies.title') }}</div>
 		<div v-for="(company, index) in companies" :key="index" class="flex-y-center justify-between">
 			<div
-				class="w-full flex-y-center text-#434343 h-[3.75rem] px-1 shadow-primary gap-5"
+				class="w-full flex-y-center text-#434343 h-[3.75rem] px-1 shadow-card-primary gap-5"
 				@click="handleClick(company.symbol)"
 			>
 				<CompanyIcon :symbol="company.symbol" />

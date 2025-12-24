@@ -43,7 +43,7 @@
 							</div>
 						</div>
 						<template #left>
-							<div class="h-full flex items-center justify-center bg-pink-400 text-white w-65px">
+							<div class="h-full flex items-center justify-center bg-primary text-white w-65px">
 								{{ $t('records.update') }}
 							</div>
 						</template>

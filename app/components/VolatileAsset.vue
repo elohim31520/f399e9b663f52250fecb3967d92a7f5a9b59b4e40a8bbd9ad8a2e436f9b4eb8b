@@ -1,5 +1,5 @@
 <template>
-	<van-tabs v-model:active="activeTab" type="card" class="p-2" color="#f472b6">
+	<van-tabs v-model:active="activeTab" type="card" class="p-2" color="#F88379">
 		<van-tab :title="$t('volatile_asset.strong_stocks')">
 			<div class="grid grid-cols-1 gap-1 px-1 mt-2">
 				<div>
@@ -7,7 +7,7 @@
 						<li
 							v-for="(stock, index) in winners"
 							:key="index"
-							class="flex items-center py-5 px-2 shadow-primary gap-1"
+							class="flex items-center py-5 px-2 shadow-card-primary gap-1"
 							@click="handleRoute(stock)"
 						>
 							<SvgIcon name="icon_ghost" size="2.5rem" />
@@ -25,7 +25,7 @@
 					<li
 						v-for="(stock, index) in losers"
 						:key="index"
-						class="flex items-center py-5 px-2 shadow-primary gap-1"
+						class="flex items-center py-5 px-2 shadow-card-primary gap-1"
 						@click="handleRoute(stock)"
 					>
 						<SvgIcon name="icon_ghost" size="2.5rem" />

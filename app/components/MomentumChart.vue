@@ -1,5 +1,5 @@
 <template>
-	<div class="p-1 bg-white rounded-lg shadow-primary">
+	<div class="p-1 bg-white rounded-lg shadow-card-primary">
 		<div class="flex justify-center gap-5 my-5">
 			<div
 				v-for="day in timeRanges"
@@ -7,7 +7,7 @@
 				@click="refreshData(day)"
 				:class="[
 					'px-2 py-2 rounded-md w-[3rem] text-center',
-					selectedDays === day ? 'bg-pink-400 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
+					selectedDays === day ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
 				]"
 			>
 				{{ $t('momentum_chart.days_unit', { count: day }) }}
@@ -84,7 +84,7 @@
 					data: volumes,
 					type: 'bar',
 					itemStyle: {
-						color: '#f472b6',
+						color: '#F88379',
 					},
 					animationDelay: function (idx: number) {
 						const days = selectedDays.value

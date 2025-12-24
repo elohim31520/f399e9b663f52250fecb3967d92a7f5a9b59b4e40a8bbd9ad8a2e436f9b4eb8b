@@ -13,10 +13,10 @@
 				<van-field name="transaction_type" :label="$t('transaction.transaction_type')">
 					<template #input>
 						<van-radio-group v-model="form.transaction_type" direction="horizontal">
-							<van-radio name="buy" checked-color="#f472b6">
+							<van-radio name="buy" checked-color="#F88379">
 								<span class="text-green-600">{{ $t('transaction.buy') }}</span>
 							</van-radio>
-							<van-radio name="sell" checked-color="#f472b6">
+							<van-radio name="sell" checked-color="#F88379">
 								<span class="text-red-600">{{ $t('transaction.sell') }}</span>
 							</van-radio>
 						</van-radio-group>
@@ -70,14 +70,14 @@
 			</van-popup>
 			<!-- button要放這裡才能讓van-form的驗證生效 -->
 			<div class="px-2 py-5">
-				<van-button round block type="primary" color="#f472b6" native-type="submit">
+				<van-button round block type="primary" color="#F88379" native-type="submit">
 					{{ $t('transaction.record') }}
 				</van-button>
 			</div>
 
 			<!-- TODO: 暫時關閉 -->
 			<!-- <div
-				class="rounded-30 flex-y-center justify-center text-pink-400 bd-1 border-#f472b6 mt-2 w-95% h-44 mx-auto"
+				class="rounded-30 flex-y-center justify-center text-primary bd-1 border-#F88379 mt-2 w-95% h-44 mx-auto"
 				@click="$router.push('/image-to-json')"
 			>
 				{{ $t('transaction.upload_screenshot') }}

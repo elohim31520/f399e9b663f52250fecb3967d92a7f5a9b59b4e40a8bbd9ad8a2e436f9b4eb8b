@@ -43,7 +43,7 @@
 			smooth: props.smooth,
 			data: props.chartData.map((item) => parseFloat(item[series.key])),
 			itemStyle: {
-				color: series.color || '#f472b6',
+				color: series.color || '#F88379',
 			},
 		}))
 	})

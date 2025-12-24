@@ -60,7 +60,7 @@
 				type: 'bar',
 				data: seriesData.value,
 				itemStyle: {
-					color: lineColor || '#f472b6',
+					color: lineColor || '#F88379',
 				},
 			},
 		],

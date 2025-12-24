@@ -5,7 +5,7 @@
 				<li
 					v-for="(stock, index) in fetchedData"
 					:key="index"
-					class="flex items-center py-4 px-2.5 shadow-primary gap-5"
+					class="flex items-center py-4 px-2.5 shadow-card-primary gap-5"
 					@click="handleRoute(stock)"
 				>
 					<CompanyIcon :symbol="stock.symbol || ''" />

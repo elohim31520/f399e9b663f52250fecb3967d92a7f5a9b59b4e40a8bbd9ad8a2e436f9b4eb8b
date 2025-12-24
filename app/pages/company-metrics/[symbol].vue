@@ -71,7 +71,7 @@
 			<div class="flex-y-center justify-center font-[500] mb-2">
 				{{ `${bigSymbol} ${$t('company_metrics.pe_forwards_title')}` }}...
 			</div>
-			<div class="flex-y-center justify-center text-pink-400" @click="$router.push('/login')">
+			<div class="flex-y-center justify-center text-primary" @click="$router.push('/login')">
 				{{ $t('company_metrics.login_to_see_data') }}
 			</div>
 		</div>

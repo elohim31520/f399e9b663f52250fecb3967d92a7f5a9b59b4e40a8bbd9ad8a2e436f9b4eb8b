@@ -3,9 +3,13 @@
 		<h1 class="text-lg font-bold flex-center">{{ $t('market_quotes.title') }}</h1>
 		<div>
 			<ul>
-				<li v-for="(item, index) in fetchedData" :key="index" class="flex items-center py-5 px-2 shadow-primary gap-1">
+				<li
+					v-for="(item, index) in fetchedData"
+					:key="index"
+					class="flex items-center py-5 px-2 shadow-card-primary gap-1"
+				>
 					<span class="text-gray-600">{{ getSymbolName(item.symbol) }}</span>
-					<span class="text-pink-500 ml-auto">{{ item.price }}</span>
+					<span class="text-primary-600 ml-auto">{{ item.price }}</span>
 				</li>
 			</ul>
 		</div>

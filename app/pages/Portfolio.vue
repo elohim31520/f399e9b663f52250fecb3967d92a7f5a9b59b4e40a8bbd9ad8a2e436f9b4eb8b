@@ -27,7 +27,7 @@
 			{{ $t('portfolio.notice') }}
 		</van-notice-bar>
 
-		<van-tabs v-model:active="activeTab" color="#F472B6">
+		<van-tabs v-model:active="activeTab" color="#F88379">
 			<van-tab :title="$t('portfolio.holding_details')">
 				<div v-if="portfolioStore.portfolioData.length > 0" class="mt-2">
 					<van-cell-group>
@@ -50,7 +50,7 @@
 								</div>
 							</van-cell>
 							<template #left>
-								<div class="h-full flex items-center justify-center bg-pink-400 text-white w-65px">
+								<div class="h-full flex items-center justify-center bg-primary text-white w-65px">
 									{{ $t('portfolio.update') }}
 								</div>
 							</template>

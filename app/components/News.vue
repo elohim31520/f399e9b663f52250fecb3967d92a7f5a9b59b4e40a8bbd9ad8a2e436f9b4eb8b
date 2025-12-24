@@ -1,5 +1,5 @@
 <template>
-	<div class="shadow-primary bg-#fff p-2 rounded-xl" v-if="fetchedData?.rows.length">
+	<div class="shadow-card-primary bg-#fff p-2 rounded-xl" v-if="fetchedData?.rows.length">
 		<div v-for="(vo, index) in fetchedData.rows">
 			<van-text-ellipsis
 				rows="2"

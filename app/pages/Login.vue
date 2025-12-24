@@ -20,15 +20,15 @@
 				/>
 			</van-cell-group>
 			<div class="flex-y-center">
-				<div class="text-pink-400 font-bold px-5 pt-2" @click="router.push('/register')">
+				<div class="text-primary font-bold px-5 pt-2" @click="router.push('/register')">
 					{{ $t('login.register') }}
 				</div>
-				<div class="text-pink-400 font-bold px-5 pt-2 ml-auto" @click="router.push('/change-password')">
+				<div class="text-primary font-bold px-5 pt-2 ml-auto" @click="router.push('/change-password')">
 					{{ $t('login.forgot_password') }}
 				</div>
 			</div>
 			<div style="margin: 16px">
-				<van-button round block type="primary" color="#f472b6" native-type="submit">{{ $t('login.login') }}</van-button>
+				<van-button round block type="primary" color="#F88379" native-type="submit">{{ $t('login.login') }}</van-button>
 			</div>
 			<div class="flex-center m-16">
 				<GoogleSignInButton

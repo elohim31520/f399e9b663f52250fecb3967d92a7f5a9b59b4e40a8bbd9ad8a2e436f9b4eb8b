@@ -64,11 +64,11 @@
 						:class="isScrolled ? 'rounded-t-[1.25rem] p-1' : 'rounded-full px-1 mx-1 py-1'"
 					>
 						<div class="flex-y-center font-bold">
-							<SvgIcon class="text-pink-400" name="icon_dollar_fill" size="1.6rem" />
-							<span class="ml-5 font-[600] text-xl text-pink-400">
+							<SvgIcon class="text-primary" name="icon_dollar_fill" size="1.6rem" />
+							<span class="ml-5 font-[600] text-xl text-primary">
 								{{ balanceStore.usdBalance }}
 							</span>
-							<SvgIcon class="text-pink-400 ml-5" name="icon_arrow_right" size="1rem" />
+							<SvgIcon class="text-primary ml-5" name="icon_arrow_right" size="1rem" />
 						</div>
 						<div class="flex-y-center gap-2 text-white text-xs font-[500]">
 							<template v-if="userStore.isLogin">
@@ -105,8 +105,8 @@
 				<div class="bg-white" :style="{ paddingTop: isScrolled ? headerHeight + 'px' : '0px' }">
 					<!-- My Portfolio -->
 					<div class="m-2 pt-5">
-						<h3 class="font-[500] mb-1 text-pink-400" v-if="userStore.isLogin">{{ $t('my.my_portfolio') }}</h3>
-						<h3 class="font-[500] mb-1 text-pink-400" v-else>{{ $t('my.login_to_create_portfolio') }}</h3>
+						<h3 class="font-[500] mb-1 text-primary" v-if="userStore.isLogin">{{ $t('my.my_portfolio') }}</h3>
+						<h3 class="font-[500] mb-1 text-primary" v-else>{{ $t('my.login_to_create_portfolio') }}</h3>
 						<div class="w-full">
 							<PortfolioChart />
 						</div>

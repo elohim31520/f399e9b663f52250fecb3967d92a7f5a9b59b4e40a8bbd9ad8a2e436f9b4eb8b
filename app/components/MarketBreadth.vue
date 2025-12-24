@@ -1,9 +1,9 @@
 <template>
-	<div class="bg-white p-2 shadow-primary">
+	<div class="bg-white p-2 shadow-card-primary">
 		<div class="text-lg font-bold mb-4 text-#434343">
 			{{ $t('market_breadth.title') }}
 		</div>
-		<div class="text-base font-bold text-pink-400">{{ marketBreadth }}%</div>
+		<div class="text-base font-bold text-primary">{{ marketBreadth }}%</div>
 		<v-chart class="chart" :option="chartOption" style="height: 400px" />
 	</div>
 </template>
@@ -41,7 +41,7 @@
 					type: 'pie',
 					radius: '50%',
 					center: ['50%', '60%'],
-					color: ['#f472b6', '#FDF3F4'],
+					color: ['#F88379', '#FDF3F4'],
 					data: [
 						{
 							value: formatNumber(marketBreadth.value),
