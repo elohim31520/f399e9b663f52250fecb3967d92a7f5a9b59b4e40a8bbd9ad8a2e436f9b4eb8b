@@ -16,7 +16,7 @@ const CONFIG = {
 	// WebP 品質 (0-100)
 	quality: 100,
 	// 是否保留原始 PNG 檔案
-	keepOriginal: true,
+	keepOriginal: false,
 	// 輸出資訊
 	verbose: true,
 	// 僅轉換未存在 WebP 版本的檔案
