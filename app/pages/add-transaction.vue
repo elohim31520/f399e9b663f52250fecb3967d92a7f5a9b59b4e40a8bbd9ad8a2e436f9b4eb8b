@@ -105,7 +105,7 @@
 		transaction_type: 'buy',
 		quantity: '',
 		price: '',
-		transaction_date: new Date().toISOString().split('T')[0],
+		transaction_date: new Date().toISOString().split('T')[0] as string,
 	})
 
 	const formRef = ref<FormInstance>()

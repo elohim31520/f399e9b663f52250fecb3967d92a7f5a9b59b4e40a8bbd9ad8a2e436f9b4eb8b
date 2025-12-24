@@ -111,13 +111,15 @@
 		set: (val) => emit('update:modelValue', val),
 	})
 
+	const getTodayStr = () => new Date().toISOString().split('T')[0] as string
+
 	const formRef = ref<FormInstance>()
 	const form = ref<TransactionForm>({
 		stock_id: '',
 		transaction_type: 'buy',
 		quantity: '',
 		price: '',
-		transaction_date: new Date().toISOString().split('T')[0],
+		transaction_date: getTodayStr(),
 	})
 
 	watch(
@@ -128,7 +130,7 @@
 				form.value.transaction_type = 'buy'
 				form.value.quantity = ''
 				form.value.price = ''
-				form.value.transaction_date = new Date().toISOString().split('T')[0]
+				form.value.transaction_date = getTodayStr()
 			}
 		}
 	)
