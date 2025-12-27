@@ -1,5 +1,6 @@
 <template>
 	<div class="shadow-card-primary bg-#fff p-2 rounded-xl" v-if="fetchedData?.rows.length">
+		<h1 class="text-lg font-bold flex-center mb-2">{{ $t('news.title') }}</h1>
 		<div v-for="(vo, index) in fetchedData.rows">
 			<van-text-ellipsis
 				rows="2"

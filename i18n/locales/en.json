@@ -255,5 +255,8 @@
 	"com": {
 		"expand": "Expand",
 		"collapse": "Collapse"
+	},
+	"news": {
+		"title": "News Info"
 	}
 }

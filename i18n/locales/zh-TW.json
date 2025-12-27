@@ -255,5 +255,8 @@
 	"com": {
 		"expand": "展開",
 		"collapse": "收起"
+	},
+	"news": {
+		"title": "消息"
 	}
 }
