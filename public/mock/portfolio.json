@@ -99,6 +99,18 @@
 			}
 		},
 		{
+			"id": 100009,
+			"stock_id": "SOXX",
+			"quantity": 200,
+			"avg": "300",
+			"createdAt": "2025-03-18T18:40:36.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
+			"company": {
+				"name": "iShares Semiconductor ETF",
+				"symbol": "SOXX"
+			}
+		},
+		{
 			"id": 99985,
 			"stock_id": "META",
 			"quantity": 197,
@@ -108,6 +120,18 @@
 			"company": {
 				"name": "Meta Platforms, Inc.",
 				"symbol": "META"
+			}
+		},
+		{
+			"id": 100013,
+			"stock_id": "XLV",
+			"quantity": 150,
+			"avg": "150.25",
+			"createdAt": "2025-03-18T18:40:36.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
+			"company": {
+				"name": "State Street Health Care Select Sector SPDR ETF",
+				"symbol": "XLV"
 			}
 		}
 	],
