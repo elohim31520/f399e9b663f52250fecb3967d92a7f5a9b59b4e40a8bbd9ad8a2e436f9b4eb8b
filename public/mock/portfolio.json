@@ -3,12 +3,72 @@
 	"success": true,
 	"data": [
 		{
+			"id": 99983,
+			"stock_id": "NVDA",
+			"quantity": 4285,
+			"avg": "105.00",
+			"createdAt": "2025-02-11T20:05:02.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
+			"company": {
+				"name": "NVIDIA Corporation",
+				"symbol": "NVDA"
+			}
+		},
+		{
+			"id": 100002,
+			"stock_id": "XAUUSD",
+			"quantity": 100,
+			"avg": "2500.00",
+			"createdAt": "2025-12-27T15:00:00.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
+			"company": {
+				"name": "Gold / US Dollar",
+				"symbol": "XAU"
+			}
+		},
+		{
+			"id": 100001,
+			"stock_id": "BTCUSD",
+			"quantity": 2.2,
+			"avg": "100000.00",
+			"createdAt": "2025-12-27T15:00:00.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
+			"company": {
+				"name": "Bitcoin / US Dollar",
+				"symbol": "BTC"
+			}
+		},
+		{
+			"id": 99982,
+			"stock_id": "TSLA",
+			"quantity": 500,
+			"avg": "200.00",
+			"createdAt": "2025-02-11T20:05:08.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
+			"company": {
+				"name": "Tesla, Inc.",
+				"symbol": "TSLA"
+			}
+		},
+		{
+			"id": 100003,
+			"stock_id": "SPY",
+			"quantity": 133,
+			"avg": "601.50",
+			"createdAt": "2025-12-27T15:00:00.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
+			"company": {
+				"name": "SPDR S&P 500 ETF Trust",
+				"symbol": "SPY"
+			}
+		},
+		{
 			"id": 99987,
 			"stock_id": "AMZN",
-			"quantity": 9999,
+			"quantity": 332,
 			"avg": "150.50",
 			"createdAt": "2025-03-20T20:36:14.000Z",
-			"updatedAt": "2025-08-05T08:15:53.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
 			"company": {
 				"name": "Amazon.com, Inc.",
 				"symbol": "AMZN"
@@ -17,61 +77,37 @@
 		{
 			"id": 99986,
 			"stock_id": "GOOG",
-			"quantity": 10000,
+			"quantity": 307,
 			"avg": "130.13",
 			"createdAt": "2025-02-11T20:04:55.000Z",
-			"updatedAt": "2025-09-16T09:38:45.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
 			"company": {
 				"name": "Alphabet Inc.",
 				"symbol": "GOOG"
 			}
 		},
 		{
-			"id": 99985,
-			"stock_id": "META",
-			"quantity": 20000,
-			"avg": "505.55",
-			"createdAt": "2025-03-18T18:40:36.000Z",
-			"updatedAt": "2025-08-05T08:15:52.000Z",
-			"company": {
-				"name": "Meta Platforms, Inc.",
-				"symbol": "META"
-			}
-		},
-		{
 			"id": 99984,
 			"stock_id": "MSFT",
-			"quantity": 10000,
-			"avg": "381.81",
+			"quantity": 78,
+			"avg": "384.61",
 			"createdAt": "2025-03-16T23:29:31.000Z",
-			"updatedAt": "2025-07-20T19:32:24.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
 			"company": {
 				"name": "Microsoft Corporation",
 				"symbol": "MSFT"
 			}
 		},
 		{
-			"id": 99983,
-			"stock_id": "NVDA",
-			"quantity": 50000,
-			"avg": "105.00",
-			"createdAt": "2025-02-11T20:05:02.000Z",
-			"updatedAt": "2025-08-29T07:54:57.000Z",
+			"id": 99985,
+			"stock_id": "META",
+			"quantity": 197,
+			"avg": "505.55",
+			"createdAt": "2025-03-18T18:40:36.000Z",
+			"updatedAt": "2025-12-27T15:00:00.000Z",
 			"company": {
-				"name": "NVIDIA Corporation",
-				"symbol": "NVDA"
-			}
-		},
-		{
-			"id": 99982,
-			"stock_id": "TSLA",
-			"quantity": 30000,
-			"avg": "200",
-			"createdAt": "2025-02-11T20:05:08.000Z",
-			"updatedAt": "2025-09-17T03:20:29.000Z",
-			"company": {
-				"name": "Tesla, Inc.",
-				"symbol": "TSLA"
+				"name": "Meta Platforms, Inc.",
+				"symbol": "META"
 			}
 		}
 	],
