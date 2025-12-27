@@ -44,6 +44,16 @@
 		{ id: 'aapl', useLogoPath: true },
 		{ id: 'crwv', useLogoPath: true },
 		{ id: 'oklo', useLogoPath: true },
+		// --- 熱門建議標的 ---
+		{ id: 'tsm', useLogoPath: true },
+		{ id: 'amd', useLogoPath: true },
+		{ id: 'mu', useLogoPath: true },
+		{ id: 'mstr', useLogoPath: true },
+		{ id: 'hood', useLogoPath: true },
+		{ id: 'vst', useLogoPath: true },
+		{ id: 'app', useLogoPath: true },
+		{ id: 'sofi', useLogoPath: true },
+		{ id: 'avgo', useLogoPath: true },
 	])
 
 	const router = useRouter()
