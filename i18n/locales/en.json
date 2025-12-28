@@ -266,6 +266,7 @@
 		"volatility": "Volatility (σ)",
 		"calculating": "Calculating...",
 		"runSimulation": "Run Simulation",
-		"chartTitle": "Monte Carlo Stock Price Prediction"
+		"chartTitle": "Monte Carlo Price Prediction",
+		"menu": "Monte Carlo Simulator"
 	}
 }

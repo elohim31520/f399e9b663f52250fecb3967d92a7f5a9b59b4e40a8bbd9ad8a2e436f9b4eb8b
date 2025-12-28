@@ -266,6 +266,7 @@
 		"volatility": "波動率 (σ)",
 		"calculating": "計算中...",
 		"runSimulation": "重新模擬",
-		"chartTitle": "蒙地卡羅股價預測"
+		"chartTitle": "蒙地卡羅股價預測",
+		"menu": "蒙地卡羅股價模擬"
 	}
 }

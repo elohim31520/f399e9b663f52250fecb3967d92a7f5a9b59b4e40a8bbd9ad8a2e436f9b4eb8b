@@ -74,6 +74,7 @@
 		{ to: '/volatile-stock', icon: 'icon_ghost', text: 'sidemenu.todays_volatility', auth: 'always' },
 		{ to: '/login', icon: 'icon_user2', text: 'sidemenu.login', auth: 'guest' },
 		{ to: '/register', icon: 'icon_settings_invite', text: 'sidemenu.register', auth: 'guest' },
+		{ to: '/monte-carlo-simulation', icon: 'icon_button_system', text: 'monte-sim.menu', auth: 'always' },
 	]
 
 	const closeMenu = () => {

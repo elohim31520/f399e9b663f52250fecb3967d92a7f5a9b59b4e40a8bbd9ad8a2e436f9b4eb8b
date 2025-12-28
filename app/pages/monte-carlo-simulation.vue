@@ -118,7 +118,7 @@
 
 	const getOption = (data: SimulationResult) => {
 		return {
-			title: { text: '蒙地卡羅股價預測', left: 'center' },
+			title: { text: $t('monte-sim.chartTitle'), left: 'center' },
 			tooltip: { trigger: 'axis' },
 			xAxis: {
 				type: 'category',
