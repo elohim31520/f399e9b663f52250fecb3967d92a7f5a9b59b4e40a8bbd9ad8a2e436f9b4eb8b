@@ -267,6 +267,10 @@
 		"calculating": "Calculating...",
 		"runSimulation": "Run Simulation",
 		"chartTitle": "Monte Carlo Price Prediction",
-		"menu": "Monte Carlo Simulator"
+		"menu": "Monte Carlo Simulator",
+		"meanFinalPrice": "Mean Final Price",
+		"profitProbability": "Profit Probability",
+		"expectedReturn": "Expected Return",
+		"h3": "Results for {times} simulations:"
 	}
 }

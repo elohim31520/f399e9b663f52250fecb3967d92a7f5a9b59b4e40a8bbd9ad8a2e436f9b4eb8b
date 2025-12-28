@@ -267,6 +267,10 @@
 		"calculating": "計算中...",
 		"runSimulation": "重新模擬",
 		"chartTitle": "蒙地卡羅股價預測",
-		"menu": "蒙地卡羅股價模擬"
+		"menu": "蒙地卡羅股價模擬",
+		"meanFinalPrice": "預期平均最終股價",
+		"profitProbability": "獲利機率",
+		"expectedReturn": "預期報酬率",
+		"h3": "跑{ times }次模擬結果:"
 	}
 }

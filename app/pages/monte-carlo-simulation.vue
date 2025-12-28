@@ -46,6 +46,26 @@
 				<v-chart :option="chartOption" autoresize />
 			</div>
 		</ClientOnly>
+
+		<div v-if="results" class="m-4">
+			<div class="text-lg font-bold mb-2">{{ $t('monte-sim.h3', { times: params.n_simulations }) }}</div>
+			<van-row gutter="20">
+				<van-col span="12">
+					<div class="flex flex-col">
+						<span class="font-bold">{{ $t('monte-sim.meanFinalPrice') }}</span>
+						<span class="text-primary">${{ results.meanFinalPrice.toFixed(2) }}</span>
+					</div>
+				</van-col>
+				<van-col span="12">
+					<div class="flex flex-col">
+						<span class="font-bold">{{ $t('monte-sim.profitProbability') }}</span>
+						<span class="text-primary" :class="{ 'text-red': results.profitProbability > 0.5 }">
+							{{ (results.profitProbability * 100).toFixed(2) }}%
+						</span>
+					</div>
+				</van-col>
+			</van-row>
+		</div>
 	</div>
 </template>
 
@@ -61,7 +81,11 @@
 	let worker: Worker | null = null
 	const stockPrices = ref<any[]>([])
 	const selectedSymbol = ref('')
-	// 模擬參數 (與你之前的設定一致)
+	const results = ref<{
+		meanFinalPrice: number
+		profitProbability: number
+	} | null>(null)
+
 	const params = ref<SimulationParams>({
 		s0: 1,
 		mu: 0.1,
@@ -87,6 +111,12 @@
 		worker.onmessage = (e: MessageEvent<SimulationResult>) => {
 			chartOption.value = getOption(e.data)
 			isCalculating.value = false
+			console.log(e.data)
+
+			results.value = {
+				meanFinalPrice: e.data.meanFinalPrice,
+				profitProbability: e.data.profitProbability,
+			}
 		}
 
 		$api.stock.getTodayStocks().then((res) => {
