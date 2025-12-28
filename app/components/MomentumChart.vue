@@ -54,10 +54,16 @@
 	}
 	const momentumData = ref<chartData[]>([])
 
+	const DELAY_CONFIG: Record<number, number> = {
+		1: 50,
+		3: 0,
+		7: 0,
+		30: 0,
+	}
 	const option = computed(() => {
 		const dates = momentumData.value.map((item: chartData) => item.ct)
 		const volumes = momentumData.value.map((item: chartData) => item.v)
-
+		const baseDelay = DELAY_CONFIG[selectedDays.value] || 0
 		return {
 			title: {
 				text: t('momentum_chart.title', { days: selectedDays.value }),
@@ -86,16 +92,8 @@
 					itemStyle: {
 						color: '#F88379',
 					},
-					animationDelay: function (idx: number) {
-						const days = selectedDays.value
-						const baseDelay = days >= 30 ? 2 : days >= 7 ? 10 : 50
-						return idx * baseDelay
-					},
-					animationDelayUpdate: function (idx: number) {
-						const days = selectedDays.value
-						const baseDelay = days >= 30 ? 2 : days >= 7 ? 10 : 50
-						return idx * baseDelay
-					},
+					animationDelay: (idx: number) => idx * baseDelay,
+					animationDelayUpdate: (idx: number) => idx * baseDelay,
 				},
 			],
 			animation: true,
@@ -114,42 +112,33 @@
 		}
 	}
 
-	// 其他天數資料會從cloudflare KV中間件會 跟api server做用戶驗證
 	const refreshData = async (days: number): Promise<void> => {
-		selectedDays.value = days
-		if (!isLogin.value && selectedDays.value !== 1) {
+		// 1. 權限檢查：如果沒登入 且 選的是 7 或 30 天
+		if (!isLogin.value && ![1, 3].includes(days)) {
 			router.push('/login')
 			return
 		}
+
+		// 2. 通過檢查後，才更新 UI 狀態
+		selectedDays.value = days
+
+		// 3. 抓取資料並「確實賦值」
 		const data = await fetchData(days)
+		momentumData.value = data
 	}
 
-	const {
-		data: fetchedData,
-		pending,
-		error,
-	} = await useAsyncData(
+	const { data: fetchedData } = await useAsyncData(
 		'market-momentum-data',
-		() => {
-			if (selectedDays.value === 1) {
-				return fetchData(1)
-			}
-
-			return fetchData(1)
-		},
+		() => fetchData(1), // 初始預設抓 1 天，這是不需要登入的
 		{
-			// 只在需要時才執行
 			lazy: true,
 		}
 	)
-	if (fetchedData.value) momentumData.value = fetchedData.value
 
 	watch(
 		fetchedData,
 		(newData) => {
-			if (newData) {
-				momentumData.value = newData
-			}
+			if (newData) momentumData.value = newData
 		},
 		{ immediate: true }
 	)
