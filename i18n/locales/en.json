@@ -258,5 +258,14 @@
 	},
 	"news": {
 		"title": "News Info"
+	},
+	"monte-sim": {
+		"selectStock": "Select Stock",
+		"placeholder": "Please select a stock",
+		"initialPrice": "Initial Price (s0)",
+		"volatility": "Volatility (σ)",
+		"calculating": "Calculating...",
+		"runSimulation": "Run Simulation",
+		"chartTitle": "Monte Carlo Stock Price Prediction"
 	}
 }

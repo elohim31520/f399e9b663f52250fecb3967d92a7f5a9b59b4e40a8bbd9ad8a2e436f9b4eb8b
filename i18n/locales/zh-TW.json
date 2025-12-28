@@ -258,5 +258,14 @@
 	},
 	"news": {
 		"title": "消息"
+	},
+	"monte-sim": {
+		"selectStock": "選擇股票",
+		"placeholder": "請選擇股票",
+		"initialPrice": "初始股價 (s0)",
+		"volatility": "波動率 (σ)",
+		"calculating": "計算中...",
+		"runSimulation": "重新模擬",
+		"chartTitle": "蒙地卡羅股價預測"
 	}
 }
