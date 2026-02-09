@@ -26,7 +26,8 @@ export const login = async (params: LoginParams): Promise<ResponseData<string>> 
 	})
 	if (res.success && res.data) {
 		const userStore = useUserStore()
-		userStore.login(res.data)
+		const token = _get(res, 'data.token', '')
+		userStore.login(token)
 		userStore.setUsername(params.email)
 	}
 	return res
