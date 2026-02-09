@@ -3,8 +3,8 @@ import type { ResponseData } from '../types/api'
 import { useUserStore } from '@/stores/user'
 
 interface LoginParams {
-	name: string
-	pwd: string
+	email: string
+	password: string
 }
 
 interface RegisterParams extends LoginParams {
@@ -27,7 +27,7 @@ export const login = async (params: LoginParams): Promise<ResponseData<string>> 
 	if (res.success && res.data) {
 		const userStore = useUserStore()
 		userStore.login(res.data)
-		userStore.setUsername(params.name)
+		userStore.setUsername(params.email)
 	}
 	return res
 }
