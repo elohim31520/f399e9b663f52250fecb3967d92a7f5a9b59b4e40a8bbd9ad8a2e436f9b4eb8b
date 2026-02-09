@@ -21,7 +21,7 @@ interface UserData {
 export const login = async (params: LoginParams): Promise<ResponseData<string>> => {
 	const res = await httpClient.request<string>({
 		method: 'POST',
-		endpoint: '/users/login',
+		endpoint: '/user/login',
 		params,
 	})
 	if (res.success && res.data) {
@@ -35,7 +35,7 @@ export const login = async (params: LoginParams): Promise<ResponseData<string>> 
 export const loginWithGoogle = async (credential: string): Promise<ResponseData<string>> => {
 	const res = await httpClient.request<any>({
 		method: 'POST',
-		endpoint: '/users/google/login',
+		endpoint: '/user/google/login',
 		params: {
 			credential,
 		},
@@ -54,7 +54,7 @@ export const loginWithGoogle = async (credential: string): Promise<ResponseData<
 export const register = async (params: RegisterParams): Promise<ResponseData<UserData>> => {
 	const response = await httpClient.request<UserData>({
 		method: 'POST',
-		endpoint: '/users/register',
+		endpoint: '/user/register',
 		params,
 	})
 	if (response.success && response.data.token) {
@@ -68,7 +68,7 @@ export const register = async (params: RegisterParams): Promise<ResponseData<Use
 export const changePassword = async (params: any) => {
 	return await httpClient.request({
 		method: 'POST',
-		endpoint: '/users/password',
+		endpoint: '/user/password',
 		params,
 	})
 }

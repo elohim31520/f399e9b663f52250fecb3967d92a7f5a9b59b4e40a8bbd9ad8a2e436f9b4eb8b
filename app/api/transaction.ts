@@ -8,27 +8,16 @@ interface PaginationParams {
 }
 
 class TransactionApi {
-	/**
-	 * 取得所有交易紀錄
-	 */
 	async getAllTransactions({ page, size }: PaginationParams): Promise<ResponseData<any>> {
-		return httpClient.request<any>({ method: 'GET', endpoint: '/transactions', params: { page, size } })
+		return httpClient.request<any>({ method: 'GET', endpoint: '/trade', params: { page, size } })
 	}
 
-	/**
-	 * 刪除單筆交易紀錄
-	 * @param id 交易紀錄 ID
-	 */
 	async deleteTransaction(id: number): Promise<ResponseData<any>> {
-		return httpClient.request<any>({ method: 'DELETE', endpoint: `/transactions/${id}` })
+		return httpClient.request<any>({ method: 'DELETE', endpoint: `/trade/${id}` })
 	}
 
-	/**
-	 * 新增多筆交易紀錄
-	 * @param transactions 交易紀錄陣列
-	 */
 	async recordMyTransactions(transaction: Transaction): Promise<ResponseData<any>> {
-		return httpClient.request<any>({ method: 'POST', endpoint: '/transactions', params: transaction })
+		return httpClient.request<any>({ method: 'POST', endpoint: '/trade', params: transaction })
 	}
 
 	private parseDate(dateStr: string): string | null {

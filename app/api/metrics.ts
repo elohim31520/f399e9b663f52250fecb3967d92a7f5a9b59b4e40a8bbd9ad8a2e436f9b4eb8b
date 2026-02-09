@@ -3,7 +3,7 @@ import type { ResponseData, Company } from '../types/api'
 
 class MetricsApi {
 	async getStatementBySymbol(symbol: string, days: number): Promise<ResponseData<any>> {
-		return httpClient.request<any>({ method: 'GET', endpoint: `/statements/${symbol}`, params: { days }, useKV: true })
+		return httpClient.request<any>({ method: 'GET', endpoint: `/company-metrics/${symbol}`, params: { days }, useKV: true })
 	}
 }
 
