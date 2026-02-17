@@ -1,6 +1,6 @@
 import { httpClient } from '../utils/service'
 import type { ResponseData } from '../types/api'
-import type { Transaction, TransactionForm } from '../types/transactions'
+import type { TradeParams } from '../types/trade'
 
 interface PaginationParams {
 	page: number
@@ -16,10 +16,11 @@ class TransactionApi {
 		return httpClient.request<any>({ method: 'DELETE', endpoint: `/trade/${id}` })
 	}
 
-	async recordMyTransactions(transaction: Transaction): Promise<ResponseData<any>> {
+	async recordMyTransactions(transaction: TradeParams): Promise<ResponseData<any>> {
 		return httpClient.request<any>({ method: 'POST', endpoint: '/trade', params: transaction })
 	}
 
+	// 上傳截圖給AI分析後記錄
 	async aiAnalyzeScreenshot(file: File): Promise<ResponseData<any>> {
 		return httpClient.uploadFile<any>({ 
 			endpoint: '/trade/analyze-screenshot',

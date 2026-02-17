@@ -6,18 +6,13 @@
 			</div>
 			<van-form ref="formRef" @submit="onSubmit">
 				<van-cell-group class="!rounded-xl overflow-hidden">
-					<van-field
-						v-model="form.stock_id"
-						name="stock_id"
-						:label="$t('transaction.stock_id')"
+					<van-field v-model="form.stockSymbol" name="stockSymbol" :label="$t('transaction.stock_id')"
 						:placeholder="$t('transaction.enter_stock_id')"
-						:rules="[{ required: true, message: $t('transaction.enter_stock_id') }]"
-						readonly
-					/>
+						:rules="[{ required: true, message: $t('transaction.enter_stock_id') }]" readonly />
 
-					<van-field name="transaction_type" :label="$t('transaction.transaction_type')">
+					<van-field name="tradeType" :label="$t('transaction.transaction_type')">
 						<template #input>
-							<van-radio-group v-model="form.transaction_type" direction="horizontal">
+							<van-radio-group v-model="form.tradeType" direction="horizontal">
 								<van-radio name="buy" checked-color="#F88379">
 									<span class="text-green-600">{{ $t('transaction.buy') }}</span>
 								</van-radio>
@@ -28,49 +23,32 @@
 						</template>
 					</van-field>
 
-					<van-field
-						v-model="form.quantity"
-						type="digit"
-						name="quantity"
-						:label="$t('transaction.quantity')"
-						:placeholder="$t('transaction.enter_quantity')"
-						:rules="[
+					<van-field v-model="form.quantity" type="digit" name="quantity" :label="$t('transaction.quantity')"
+						:placeholder="$t('transaction.enter_quantity')" :rules="[
 							{ required: true, message: $t('transaction.enter_quantity') },
 							{
 								pattern: /^[1-9]\d*$/,
 								message: $t('transaction.enter_positive_integer'),
 							},
-						]"
-					/>
+						]" />
 
-					<van-field
-						v-model="form.price"
-						type="number"
-						name="price"
-						:label="$t('transaction.price')"
-						:placeholder="$t('transaction.enter_price')"
-						:rules="[
+					<van-field v-model="form.price" type="number" name="price" :label="$t('transaction.price')"
+						:placeholder="$t('transaction.enter_price')" :rules="[
 							{ required: true, message: $t('transaction.enter_price') },
 							{
 								pattern: /^\d+(\.\d{1,2})?$/,
 								message: $t('transaction.enter_correct_price_format'),
 							},
-						]"
-					/>
+						]" />
 
-					<van-field
-						v-model="form.transaction_date"
-						type="date"
-						name="transaction_date"
+					<van-field v-model="form.tradeDate" type="date" name="tradeDate"
 						:label="$t('transaction.transaction_date')"
-						:placeholder="$t('transaction.select_transaction_date')"
-						:rules="[
+						:placeholder="$t('transaction.select_transaction_date')" :rules="[
 							{
 								required: true,
 								message: $t('transaction.select_transaction_date'),
 							},
-						]"
-					/>
+						]" />
 				</van-cell-group>
 				<div class="px-2 py-5">
 					<van-button round block type="primary" color="#F88379" native-type="submit">
@@ -83,82 +61,82 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, watch, computed } from 'vue'
-	import type { FormInstance } from 'vant'
-	import type { PortfolioItem } from '@/types/portfolio'
-	import { useI18n } from 'vue-i18n'
+import { ref, watch, computed } from 'vue'
+import type { FormInstance } from 'vant'
+import type { PortfolioItem } from '@/types/portfolio'
+import { useI18n } from 'vue-i18n'
 
-	const { t } = useI18n()
+const { t } = useI18n()
 
-	interface TransactionForm {
-		stock_id: string
-		transaction_type: 'buy' | 'sell'
-		quantity: string
-		price: string
-		transaction_date: string
-	}
+interface TransactionForm {
+	stockSymbol: string
+	tradeType: 'buy' | 'sell'
+	quantity: string
+	price: string
+	tradeDate: string
+}
 
-	const props = defineProps<{
-		modelValue: boolean
-		item: PortfolioItem | null
-		apiFunction: (payload: any) => Promise<any>
-	}>()
+const props = defineProps<{
+	modelValue: boolean
+	item: PortfolioItem | null
+	apiFunction: (payload: any) => Promise<any>
+}>()
 
-	const emit = defineEmits(['update:modelValue', 'submitSuccess'])
+const emit = defineEmits(['update:modelValue', 'submitSuccess'])
 
-	const show = computed({
-		get: () => props.modelValue,
-		set: (val) => emit('update:modelValue', val),
-	})
+const show = computed({
+	get: () => props.modelValue,
+	set: (val) => emit('update:modelValue', val),
+})
 
-	const getTodayStr = () => new Date().toISOString().split('T')[0] as string
+const getTodayStr = () => new Date().toISOString().split('T')[0] as string
 
-	const formRef = ref<FormInstance>()
-	const form = ref<TransactionForm>({
-		stock_id: '',
-		transaction_type: 'buy',
-		quantity: '',
-		price: '',
-		transaction_date: getTodayStr(),
-	})
+const formRef = ref<FormInstance>()
+const form = ref<TransactionForm>({
+	stockSymbol: '',
+	tradeType: 'buy',
+	quantity: '',
+	price: '',
+	tradeDate: getTodayStr(),
+})
 
-	watch(
-		() => props.item,
-		(newItem) => {
-			if (newItem) {
-				form.value.stock_id = newItem.stock_id
-				form.value.transaction_type = 'buy'
-				form.value.quantity = ''
-				form.value.price = ''
-				form.value.transaction_date = getTodayStr()
-			}
-		}
-	)
-
-	const onSubmit = async () => {
-		if (!formRef.value) return
-
-		try {
-			await formRef.value?.validate()
-			const payload = {
-				...form.value,
-				quantity: Number(form.value.quantity),
-				price: Number(form.value.price),
-			}
-			await props.apiFunction(payload)
-			showToast({
-				type: 'success',
-				message: t('transaction.transaction_saved'),
-			})
-
-			emit('submitSuccess')
-			show.value = false
-		} catch (error) {
-			console.error(error)
-			showToast({
-				type: 'fail',
-				message: t('transaction.check_input_data'),
-			})
+watch(
+	() => props.item,
+	(newItem) => {
+		if (newItem) {
+			form.value.stockSymbol = newItem.stockSymbol
+			form.value.tradeType = 'buy'
+			form.value.quantity = ''
+			form.value.price = ''
+			form.value.tradeDate = getTodayStr()
 		}
 	}
+)
+
+const onSubmit = async () => {
+	if (!formRef.value) return
+
+	try {
+		await formRef.value?.validate()
+		const payload = {
+			...form.value,
+			quantity: Number(form.value.quantity),
+			price: Number(form.value.price),
+		}
+		await props.apiFunction(payload)
+		showToast({
+			type: 'success',
+			message: t('transaction.transaction_saved'),
+		})
+
+		emit('submitSuccess')
+		show.value = false
+	} catch (error) {
+		console.error(error)
+		showToast({
+			type: 'fail',
+			message: t('transaction.check_input_data'),
+		})
+	}
+}
 </script>

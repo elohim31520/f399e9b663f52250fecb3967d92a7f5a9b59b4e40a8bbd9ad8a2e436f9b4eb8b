@@ -2,13 +2,13 @@
 	<div class="w-full mx-auto pt-2">
 		<van-form ref="formRef" @submit="onSubmit" class="shadow-2xl">
 			<van-cell-group class="!rounded-xl overflow-hidden">
-				<van-field v-model="form.stock_id" name="stock_id" :label="$t('transaction.stock_id')"
+				<van-field v-model="form.stockSymbol" name="stockSymbol" :label="$t('transaction.stock_id')"
 					:placeholder="$t('transaction.enter_stock_id')"
 					:rules="[{ required: true, message: $t('transaction.enter_stock_id') }]" />
 
-				<van-field name="transaction_type" :label="$t('transaction.transaction_type')">
+				<van-field name="tradeType" :label="$t('transaction.transaction_type')">
 					<template #input>
-						<van-radio-group v-model="form.transaction_type" direction="horizontal">
+						<van-radio-group v-model="form.tradeType" direction="horizontal">
 							<van-radio name="buy" checked-color="#F88379">
 								<span class="text-green-600">{{ $t('transaction.buy') }}</span>
 							</van-radio>
@@ -31,7 +31,7 @@
 						{ pattern: /^\d+(\.\d{1,2})?$/, message: $t('transaction.enter_correct_price_format') },
 					]" />
 
-				<van-field v-model="form.transaction_date" is-link readonly name="transaction_date"
+				<van-field v-model="form.tradeDate" is-link readonly name="tradeDate"
 					:label="$t('transaction.transaction_date')" :placeholder="$t('transaction.select_transaction_date')"
 					:rules="[{ required: true, message: $t('transaction.select_transaction_date') }]"
 					@click="showDatePicker = true" />
@@ -67,30 +67,30 @@ import emitter from '~/utils/emitter'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/stores/user'
-import type { TransactionForm } from '@/types/transactions'
+import type { TradeParams } from '@/types/trade'
 
 const { t } = useI18n()
 const router = useRouter()
 const userStore = useUserStore()
 
-const getInitialFormState = (): TransactionForm => ({
-	stock_id: '',
-	transaction_type: 'buy',
+const getInitialFormState = (): TradeParams => ({
+	stockSymbol: '',
+	tradeType: 'buy',
 	quantity: '',
 	price: '',
-	transaction_date: new Date().toISOString().split('T')[0] as string,
+	tradeDate: new Date().toISOString().split('T')[0] as string,
 })
 
 const formRef = ref<FormInstance>()
-const form = ref<TransactionForm>(getInitialFormState())
+const form = ref<TradeParams>(getInitialFormState())
 
 const showDatePicker = ref(false)
 const minDate = new Date(new Date().setFullYear(new Date().getFullYear() - 5))
 const maxDate = new Date()
-const currentDate = ref(form.value.transaction_date.split('-'))
+const currentDate = ref(form.value.tradeDate.split('-'))
 
 const onConfirmDate = ({ selectedValues }: { selectedValues: string[] }) => {
-	form.value.transaction_date = selectedValues.join('-')
+	form.value.tradeDate = selectedValues.join('-')
 	showDatePicker.value = false
 }
 
@@ -105,8 +105,8 @@ const onSubmit = async () => {
 		await formRef.value?.validate()
 		const payload = {
 			...form.value,
-			quantity: Number(form.value.quantity),
-			price: Number(form.value.price),
+			quantity: form.value.quantity,
+			price: form.value.price,
 		}
 		await transactionApi.recordMyTransactions(payload)
 		showToast({
