@@ -80,7 +80,8 @@
 		"upload_screenshot": "上傳截圖紀錄",
 		"please_login_first": "請先登入",
 		"transaction_saved": "交易紀錄已儲存",
-		"check_input_data": "請檢查輸入資料"
+		"check_input_data": "請檢查輸入資料",
+		"img_upload_tips": "上傳截圖讓 AI 自動彙整資訊。提醒您：請遮蔽或避免包含隱私資料。"
 	},
 	"sidemenu": {
 		"home": "首頁",
@@ -272,5 +273,23 @@
 		"profitProbability": "獲利機率",
 		"expectedReturn": "預期報酬率",
 		"h3": "跑{ times }次模擬結果:"
+	},
+	"upload": {
+		"click_to_upload": "點擊上傳截圖",
+		"size_limit": "檔案大小限制：{size}",
+		"size_exceed": "檔案大小超過 {size}",
+		"invalid_format": "僅支援 JPG、PNG、WEBP 格式",
+		"preview": "圖片預覽",
+		"ready_to_submit": "圖片已準備就緒，點擊下方按鈕送出",
+		"uploading": "上傳中...",
+		"submit": "送出截圖",
+		"no_file": "請先上傳截圖",
+		"success": "上傳成功！",
+		"failed": "上傳失敗，請重試"
+	},
+	"common": {
+		"cancel": "取消",
+		"confirm": "確認",
+		"back": "返回"
 	}
 }

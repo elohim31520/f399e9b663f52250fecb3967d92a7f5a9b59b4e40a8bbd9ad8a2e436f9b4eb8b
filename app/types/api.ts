@@ -25,3 +25,13 @@ export interface RequestParams<T = any> {
 	quiet?: boolean
 	useKV?: boolean
 }
+
+export interface UploadParams {
+	endpoint: string
+	file: File
+	fieldName?: string  // FormData 的 field name，預設 'file'
+	additionalData?: Record<string, any>
+	onProgress?: (progress: number) => void
+	quiet?: boolean
+	useKV?: boolean
+}

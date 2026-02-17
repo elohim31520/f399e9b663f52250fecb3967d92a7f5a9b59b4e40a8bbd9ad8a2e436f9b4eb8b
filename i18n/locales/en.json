@@ -80,7 +80,8 @@
 		"upload_screenshot": "Upload Screenshot to Record",
 		"please_login_first": "Please log in first",
 		"transaction_saved": "Transaction record saved",
-		"check_input_data": "Please check your input"
+		"check_input_data": "Please check your input",
+		"img_upload_tips": "Upload screenshots for AI data extraction. Note: Please mask or avoid sharing private details"
 	},
 	"sidemenu": {
 		"home": "Home",
@@ -272,5 +273,23 @@
 		"profitProbability": "Profit Probability",
 		"expectedReturn": "Expected Return",
 		"h3": "Results for {times} simulations:"
+	},
+	"upload": {
+		"click_to_upload": "Click to upload screenshot",
+		"size_limit": "File size limit: {size}",
+		"size_exceed": "File size exceeds {size}",
+		"invalid_format": "Only JPG, PNG, and WEBP formats are supported",
+		"preview": "Image Preview",
+		"ready_to_submit": "Image ready. Click the button below to submit.",
+		"uploading": "Uploading...",
+		"submit": "Submit Screenshot",
+		"no_file": "Please upload a screenshot first",
+		"success": "Upload successful!",
+		"failed": "Upload failed, please try again"
+	},
+	"common": {
+		"cancel": "Cancel",
+		"confirm": "Confirm",
+		"back": "Back"
 	}
 }

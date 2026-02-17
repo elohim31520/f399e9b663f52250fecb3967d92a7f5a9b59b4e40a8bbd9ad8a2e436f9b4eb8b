@@ -2,13 +2,16 @@ import axios from 'axios'
 import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import { showNotify } from 'vant'
 import { API_CONFIG } from '../config/api'
-import type { ResponseData, FailResponseData, RequestParams } from '../types/api'
+import type { ResponseData, FailResponseData, RequestParams, UploadParams } from '../types/api'
 import Cookies from 'js-cookie'
 import { useUserStore } from '@/stores/user'
 
-const getHeaders = (): Record<string, string> => {
-	const headers: Record<string, string> = {
-		'Content-Type': 'application/json',
+const getHeaders = (isFormData = false): Record<string, string> => {
+	const headers: Record<string, string> = {}
+
+	// ✅ 只在非 FormData 時設置 Content-Type
+	if (!isFormData) {
+		headers['Content-Type'] = 'application/json'
 	}
 
 	const token = Cookies.get('user_token')
@@ -27,7 +30,6 @@ class HttpClient {
 		this.service = axios.create({
 			baseURL: API_CONFIG.BASE_URL,
 			timeout: API_CONFIG.TIMEOUT,
-			headers: getHeaders(),
 		})
 
 		this.setupInterceptors()
@@ -43,7 +45,10 @@ class HttpClient {
 	private setupInterceptors(): void {
 		this.service.interceptors.request.use(
 			(config: InternalAxiosRequestConfig) => {
-				const headers = getHeaders()
+				// ✅ 在這裡動態設置 headers
+				const isFormData = config.data instanceof FormData
+				const headers = getHeaders(isFormData)
+
 				Object.entries(headers).forEach(([key, value]) => {
 					config.headers.set(key, value)
 				})
@@ -124,6 +129,59 @@ class HttpClient {
 		} catch (err) {
 			if (!quiet) {
 				console.error('Request failed:', err)
+			}
+			throw err
+		}
+	}
+
+	public async uploadFile<T>({
+		endpoint,
+		file,
+		fieldName = 'file',
+		additionalData = {},
+		onProgress,
+		quiet = false,
+		useKV = false,
+	}: UploadParams): Promise<ResponseData<T>> {
+		try {
+			if (import.meta.env.VITE_UNUSE_KV === 'true') {
+				useKV = false
+			}
+
+			const baseURL = useKV ? import.meta.env.VITE_KV_HOST : import.meta.env.VITE_API_URL
+
+			if (import.meta.dev) {
+				console.log('上傳檔案:', baseURL + endpoint)
+			}
+
+			// 建立 FormData
+			const formData = new FormData()
+			formData.append(fieldName, file)
+
+			// 附加額外資料
+			Object.keys(additionalData).forEach(key => {
+				formData.append(key, additionalData[key])
+			})
+
+			const config: any = {
+				method: 'POST',
+				url: endpoint,
+				baseURL,
+				data: formData,
+				// 上傳進度
+				...(onProgress && {
+					onUploadProgress: (progressEvent: any) => {
+						const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+						onProgress(progress)
+					}
+				})
+			}
+
+			const response: AxiosResponse<ResponseData<T>> = await this.service(config)
+			return response.data
+		} catch (err) {
+			if (!quiet) {
+				console.error('Upload failed:', err)
 			}
 			throw err
 		}

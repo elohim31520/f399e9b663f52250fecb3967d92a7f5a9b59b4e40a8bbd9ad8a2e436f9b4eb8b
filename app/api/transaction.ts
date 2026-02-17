@@ -20,12 +20,12 @@ class TransactionApi {
 		return httpClient.request<any>({ method: 'POST', endpoint: '/trade', params: transaction })
 	}
 
-	private parseDate(dateStr: string): string | null {
-		const date_format = /^\d{4}-\d{2}-\d{2}$/
-		if (date_format.test(dateStr)) {
-			return dateStr
-		}
-		return null
+	async aiAnalyzeScreenshot(file: File): Promise<ResponseData<any>> {
+		return httpClient.uploadFile<any>({ 
+			endpoint: '/trade/analyze-screenshot',
+			file,
+			fieldName: 'image', // 和後端 uploader.single('image') 一致
+		})
 	}
 }
 
