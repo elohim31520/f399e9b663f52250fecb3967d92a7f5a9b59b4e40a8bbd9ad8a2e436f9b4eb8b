@@ -10,7 +10,7 @@
 							<div class="flex justify-between items-start mb-3">
 								<div>
 									<span class="text-[14px] text-gray-500">{{ $t('records.stock_id') }}</span>
-									<p class="font-semibold text-[18px] text-gray-900">{{ item.stock_id }}</p>
+									<p class="font-semibold text-[18px] text-gray-900">{{ item.stockSymbol }}</p>
 								</div>
 								<span :class="[
 									'px-3 py-1 rounded-full text-[12px] font-semibold tracking-wide',
@@ -59,7 +59,7 @@ import { showConfirmDialog } from 'vant'
 import { format } from 'date-fns'
 import Waterfall from '@/components/Waterfall/index.vue'
 import { useI18n } from 'vue-i18n'
-import type { Transaction } from '@/types/transactions'
+import type { TradeWithCompany } from '@/types/trade'
 
 const { t } = useI18n()
 
@@ -73,7 +73,7 @@ defineOptions({
 
 const waterfallRef = useTemplateRef<InstanceType<typeof Waterfall>>('waterfall')
 
-const onClose = (details: any, item: Transaction) => {
+const onClose = (details: any, item: TradeWithCompany) => {
 	const { position, instance } = details
 	switch (position) {
 		case 'left':

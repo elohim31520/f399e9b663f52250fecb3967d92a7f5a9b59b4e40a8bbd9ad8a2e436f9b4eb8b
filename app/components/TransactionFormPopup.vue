@@ -119,9 +119,11 @@ const onSubmit = async () => {
 	try {
 		await formRef.value?.validate()
 		const payload = {
-			...form.value,
+			stockSymbol: form.value.stockSymbol,
+			tradeType: form.value.tradeType,
 			quantity: Number(form.value.quantity),
 			price: Number(form.value.price),
+			tradeDate: form.value.tradeDate,
 		}
 		await props.apiFunction(payload)
 		showToast({
