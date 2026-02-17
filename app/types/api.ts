@@ -35,3 +35,8 @@ export interface UploadParams {
 	quiet?: boolean
 	useKV?: boolean
 }
+
+export interface PaginationParams {
+	page: number
+	size: number
+}

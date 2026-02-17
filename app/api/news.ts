@@ -1,9 +1,4 @@
-import type { ResponseData } from '../types/api'
-
-interface PaginationParams {
-	page: number
-	size: number
-}
+import type { ResponseData, PaginationParams } from '../types/api'
 
 export class NewsApi {
 	private httpRequest: any

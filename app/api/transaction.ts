@@ -1,11 +1,6 @@
 import { httpClient } from '../utils/service'
-import type { ResponseData } from '../types/api'
+import type { ResponseData, PaginationParams } from '../types/api'
 import type { TradeParams } from '../types/trade'
-
-interface PaginationParams {
-	page: number
-	size: number
-}
 
 class TransactionApi {
 	async getAllTransactions({ page, size }: PaginationParams): Promise<ResponseData<any>> {
