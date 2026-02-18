@@ -50,9 +50,11 @@ import { ref } from 'vue'
 import { showToast, showLoadingToast, closeToast, showImagePreview } from 'vant'
 import type { UploaderFileListItem } from 'vant'
 import { transactionApi } from '../api/transaction'
+import { useUserStore } from '@/stores/user'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+const userStore = useUserStore()
 
 // 檔案列表
 const fileList = ref<UploaderFileListItem[]>([])
@@ -104,6 +106,11 @@ const onClickPreview = (file: UploaderFileListItem) => {
 
 // 送出表單
 const handleSubmit = async () => {
+    if (!userStore.isLogin) {
+        showToast(t('transaction.please_login_first'))
+        return
+    }
+
     if (fileList.value.length === 0) {
         showToast(t('upload.no_file'))
         return
@@ -118,7 +125,7 @@ const handleSubmit = async () => {
 
     try {
         // 取得 File 物件
-        const file = fileList.value[0].file
+        const file = fileList.value[0]?.file
 
         if (!file) {
             throw new Error('No file found')
