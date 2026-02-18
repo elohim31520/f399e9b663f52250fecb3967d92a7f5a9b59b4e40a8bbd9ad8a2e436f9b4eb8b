@@ -202,8 +202,9 @@
 		"starting_download": "Starting download..."
 	},
 	"volatile_asset": {
-		"strong_stocks": "Strong Stocks",
-		"weak_stocks": "Weak Stocks"
+		"strong_stocks": "Positive",
+		"weak_stocks": "Negative",
+		"hv": "High-volatility assets"
 	},
 	"momentum_chart": {
 		"days_unit": "{count}D",

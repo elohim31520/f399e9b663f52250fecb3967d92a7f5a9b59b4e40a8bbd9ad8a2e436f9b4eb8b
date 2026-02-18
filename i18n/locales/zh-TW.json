@@ -202,8 +202,9 @@
 		"starting_download": "開始下載..."
 	},
 	"volatile_asset": {
-		"strong_stocks": "強勢股",
-		"weak_stocks": "弱勢股"
+		"strong_stocks": "正值",
+		"weak_stocks": "負值",
+		"hv": "波動大的標的"
 	},
 	"momentum_chart": {
 		"days_unit": "{count}天",
