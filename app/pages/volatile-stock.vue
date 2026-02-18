@@ -9,6 +9,7 @@
 				}}%</span>
 			</li>
 		</ul>
+		<van-back-top right="1rem" bottom="3.5rem" />
 	</div>
 </template>
 

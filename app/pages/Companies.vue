@@ -9,6 +9,7 @@
 				<div class="ml-auto">{{ company.name }}</div>
 			</div>
 		</div>
+		<van-back-top right="1rem" bottom="3.5rem" />
 	</div>
 </template>
 
