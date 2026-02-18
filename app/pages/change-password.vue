@@ -30,9 +30,11 @@ import { ref, computed } from 'vue'
 import { changePassword } from '../api/user'
 import { showToast } from 'vant'
 import { useI18n } from 'vue-i18n'
+import { useUserStore } from '@/stores/user'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+const userStore = useUserStore()
 const oldPassword = ref('')
 const newPassword = ref('')
 const confirmNewPassword = ref('')
@@ -57,7 +59,7 @@ const onSubmit = async (values: any) => {
 	})
 	if (res.success) {
 		showToast(t('change_password.change_success'))
-		removeToken()
+		userStore.logout()
 		navigateTo(localePath('/login'))
 	}
 }

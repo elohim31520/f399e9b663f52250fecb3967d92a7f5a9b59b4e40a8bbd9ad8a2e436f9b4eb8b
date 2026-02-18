@@ -31,10 +31,11 @@ import { BarChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, GridComponent, DataZoomComponent } from 'echarts/components'
 import VChart from 'vue-echarts'
 import { useI18n } from 'vue-i18n'
+import { useUserStore } from '@/stores/user'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
-const { isLogin } = useAuth()
+const userStore = useUserStore()
 const { $api } = useNuxtApp()
 
 use([CanvasRenderer, BarChart, TitleComponent, TooltipComponent, GridComponent, DataZoomComponent])
@@ -92,7 +93,7 @@ const option = computed(() => {
 		],
 		animation: true,
 		animationDuration: 1000,
-		animationEasing: 'cubicOut',
+		animationEasing: 'cubicOut' as const,
 	}
 })
 
@@ -108,7 +109,7 @@ const fetchData = async (days: number): Promise<chartData[]> => {
 
 const refreshData = async (days: number): Promise<void> => {
 	// 1. 權限檢查：如果沒登入 且 選的是 7 或 30 天
-	if (!isLogin.value && ![1, 3].includes(days)) {
+	if (!userStore.isLogin && ![1, 3].includes(days)) {
 		navigateTo(localePath('/login'))
 		return
 	}

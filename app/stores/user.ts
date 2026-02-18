@@ -1,30 +1,22 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useStorage } from '@vueuse/core'
 
 export const useUserStore = defineStore('user', () => {
-	const { isAuthenticated, setToken, clearAuth } = useAuth()
-	const isLogin = ref(!!isAuthenticated.value)
-	console.log('登入狀態', isLogin.value)
+	const { isAuthenticated, setToken, clearToken } = useAuth()
+	const isLogin = computed(() => isAuthenticated.value)
 
 	const username = useStorage('username', '')
 	const userPicture = useStorage('g_user_picture', '')
 	const googleUserName = useStorage('g_user_name', '')
 
-	const userInfo = computed(() => {
-		return {
-			name: googleUserName.value || username.value,
-			picture: userPicture.value || '/avatar/1.webp',
-		}
-	})
-
-	function checkLoginStatus() {
-		isLogin.value = isAuthenticated.value
-	}
+	const userInfo = computed(() => ({
+		name: googleUserName.value || username.value,
+		picture: userPicture.value || '/avatar/1.webp',
+	}))
 
 	function login(token: string) {
 		setToken(token)
-		isLogin.value = true
 	}
 
 	function setGoogleUserInfo(picture: string, name: string) {
@@ -37,8 +29,7 @@ export const useUserStore = defineStore('user', () => {
 	}
 
 	function logout() {
-		clearAuth()
-		isLogin.value = false
+		clearToken()
 		username.value = ''
 		userPicture.value = ''
 		googleUserName.value = ''
@@ -46,14 +37,11 @@ export const useUserStore = defineStore('user', () => {
 
 	return {
 		isLogin,
-		username,
-		userPicture,
-		googleUserName,
 		userInfo,
-		checkLoginStatus,
+		username,
 		login,
+		logout,
 		setGoogleUserInfo,
 		setUsername,
-		logout,
 	}
 })

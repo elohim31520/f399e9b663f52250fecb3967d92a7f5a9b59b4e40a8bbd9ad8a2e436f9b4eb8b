@@ -71,8 +71,8 @@ export default defineNuxtPlugin(() => {
 			// 401 自動登出
 			if (response.status === 401) {
 				if (import.meta.client) {
-					const { clearAuth } = useAuth()
-					clearAuth()
+					const { clearToken } = useAuth()
+					clearToken()
 				} else {
 					navigateTo('/login')
 				}

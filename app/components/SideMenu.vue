@@ -67,11 +67,11 @@ const closeMenu = () => {
 	uiStore.hideMenu()
 }
 
-const logout = () => {
+const logout = async () => {
 	closeMenu()
-	navigateTo(localePath('/login')).then(() => {
-		window.location.reload()
-	})
+	userStore.logout()
+	await navigateTo(localePath('/login'))
+	window.location.reload()
 }
 </script>
 

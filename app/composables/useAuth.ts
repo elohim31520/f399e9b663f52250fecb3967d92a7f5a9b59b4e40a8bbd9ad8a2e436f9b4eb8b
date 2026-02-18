@@ -7,25 +7,15 @@ export const useAuth = () => {
 		secure: process.env.NODE_ENV === 'production',
 	})
 
-	const user = useState('user', () => null)
-
-	const setToken = (token: string) => {
-		userToken.value = token
-	}
-
-	const clearAuth = () => {
-		userToken.value = null
-		user.value = null
-	}
-
 	const isAuthenticated = computed(() => !!userToken.value)
+
+	const setToken = (token: string) => userToken.value = token
+	const clearToken = () => userToken.value = null
 
 	return {
 		userToken,
-		user,
+		isAuthenticated, //給middleware使用的
 		setToken,
-		clearAuth,
-		isAuthenticated,
-		isLogin: isAuthenticated,
+		clearToken,
 	}
 }
