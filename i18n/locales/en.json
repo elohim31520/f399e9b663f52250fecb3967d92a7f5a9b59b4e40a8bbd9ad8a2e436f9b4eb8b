@@ -208,7 +208,7 @@
 	"momentum_chart": {
 		"days_unit": "{count}D",
 		"title": "Market Momentum (last {days} days)",
-		"tips": "The Market Momentum Index is an exclusive data point on this platform. The value is positively correlated with market sentiment and momentum: A higher value indicates strong market sentiment and powerful momentum; conversely, if the value is negative and continues to decline, it signals weak market momentum and an increased risk of a downturn."
+		"tips": "This market momentum indicator is positively correlated with market sentiment and momentum: higher readings reflect elevated sentiment and robust momentum, while negative and declining values signal weakening momentum and heightened downside risk."
 	},
 	"market_breadth": {
 		"title": "S&P 500 Advance/Decline Percentage:",
