@@ -8,7 +8,7 @@ interface LoginParams {
 }
 
 interface RegisterParams extends LoginParams {
-	email: string
+	name: string
 }
 
 interface UserData {
