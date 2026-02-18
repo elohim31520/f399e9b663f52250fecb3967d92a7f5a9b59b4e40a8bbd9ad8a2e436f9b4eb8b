@@ -40,7 +40,8 @@
 		"forgot_password": "Forgot password?",
 		"login_success": "Login successful",
 		"google_login_success": "Google login successful",
-		"google_login_fail": "Google login failed"
+		"google_login_fail": "Google login failed",
+		"invalid_email_format": "Invalid email format"
 	},
 	"companies": {
 		"title": "Companies"

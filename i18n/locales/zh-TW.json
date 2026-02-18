@@ -40,7 +40,8 @@
 		"forgot_password": "忘記密碼？",
 		"login_success": "登入成功",
 		"google_login_success": "Google 登入成功",
-		"google_login_fail": "Google 登入失敗"
+		"google_login_fail": "Google 登入失敗",
+		"invalid_email_format": "不正確的email格式"
 	},
 	"companies": {
 		"title": "公司列表"
