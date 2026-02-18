@@ -53,7 +53,7 @@
 		</van-notice-bar>
 
 		<div class="rounded-lg flex items-center justify-center text-primary border border-[#f88379] mt-2 w-[95%] h-44 mx-auto cursor-pointer"
-			@click="$router.push('/trade-screenshot')">
+			@click="navigateTo(localePath('/trade-screenshot'))">
 			{{ $t('transaction.upload_screenshot') }}
 		</div>
 	</div>
@@ -64,13 +64,12 @@ import { ref } from 'vue'
 import type { FormInstance } from 'vant'
 import { transactionApi } from '../api/transaction'
 import emitter from '~/utils/emitter'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/stores/user'
 import type { TradeParams } from '@/types/trade'
 
 const { t } = useI18n()
-const router = useRouter()
+const localePath = useLocalePath()
 const userStore = useUserStore()
 
 const getInitialFormState = (): TradeParams => ({

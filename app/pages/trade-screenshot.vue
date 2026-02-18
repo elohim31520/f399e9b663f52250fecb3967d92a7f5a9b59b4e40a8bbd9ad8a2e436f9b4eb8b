@@ -52,7 +52,7 @@ import type { UploaderFileListItem } from 'vant'
 import { transactionApi } from '../api/transaction'
 
 const { t } = useI18n()
-const router = useRouter()
+const localePath = useLocalePath()
 
 // 檔案列表
 const fileList = ref<UploaderFileListItem[]>([])
@@ -135,7 +135,7 @@ const handleSubmit = async () => {
         })
 
         setTimeout(() => {
-            router.push('/records')
+            navigateTo(localePath('/records'))
         }, 1500)
     } catch (error: any) {
         closeToast()

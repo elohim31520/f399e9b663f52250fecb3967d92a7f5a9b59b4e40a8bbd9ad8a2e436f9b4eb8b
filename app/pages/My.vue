@@ -66,7 +66,7 @@
 									<SvgIcon name="icon_redeem" size="1.2rem" color="#fff" />
 									{{ $t('my.update_balance') }}
 								</div>
-								<div @click="$router.push('/change-password')"
+								<div @click="navigateTo(localePath('/change-password'))"
 									class="flex-y-center gap-3 ml-5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl px-1 py-1">
 									<SvgIcon name="icon_room_w" size="1.2rem" />
 									{{ $t('my.change_password') }}
@@ -74,7 +74,7 @@
 							</template>
 							<template v-else>
 								<div class="flex-y-center gap-3 bg-gradient-to-r from-[#E124AF] to-[#CC0EFB] rounded-2xl px-1 py-1"
-									@click="$router.push('/login')">
+									@click="navigateTo(localePath('/login'))">
 									<SvgIcon name="icon_room_w" size="1.2rem" color="#fff" />
 									{{ $t('my.login') }}
 								</div>
@@ -110,6 +110,8 @@ import { ref, onMounted, onUnmounted, watch, nextTick, computed } from 'vue'
 import { useBalanceStore } from '@/stores/balance'
 import { usePortfolioStore } from '@/stores/portfolio'
 import { useUserStore } from '@/stores/user'
+
+const localePath = useLocalePath()
 
 const balanceStore = useBalanceStore()
 const portfolioStore = usePortfolioStore()

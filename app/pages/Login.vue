@@ -13,10 +13,11 @@
 					:rules="[{ required: true, message: $t('login.please_fill_password') }]" />
 			</van-cell-group>
 			<div class="flex-y-center">
-				<div class="text-primary font-bold px-5 pt-2" @click="router.push('/register')">
+				<div class="text-primary font-bold px-5 pt-2" @click="navigateTo(localePath('/register'))">
 					{{ $t('login.register') }}
 				</div>
-				<div class="text-primary font-bold px-5 pt-2 ml-auto" @click="router.push('/change-password')">
+				<div class="text-primary font-bold px-5 pt-2 ml-auto"
+					@click="navigateTo(localePath('/change-password'))">
 					{{ $t('login.forgot_password') }}
 				</div>
 			</div>
@@ -34,14 +35,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { login, loginWithGoogle } from '../api/user'
 import { useStorage } from '@vueuse/core'
 import { GoogleSignInButton } from 'vue3-google-signin'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
-const router = useRouter()
+const localePath = useLocalePath()
 const email = ref('')
 const password = ref('')
 const storedUsername = useStorage('username', '')

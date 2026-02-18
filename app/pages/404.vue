@@ -8,11 +8,9 @@
 	</div>
 </template>
 <script setup lang="ts">
-	import { useRouter } from 'vue-router'
+const localePath = useLocalePath()
 
-	const router = useRouter()
-
-	function redirect(path: string) {
-		router.push(path)
-	}
+function redirect(path: string) {
+	navigateTo(localePath(path))
+}
 </script>
