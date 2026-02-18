@@ -3,9 +3,9 @@
 		<van-nav-bar :title="$t('login.login')" />
 		<van-form @submit="onSubmit">
 			<van-cell-group inset>
-				<van-field v-model="email" name="email" type="email" :label="$t('login.email')"
-					:placeholder="$t('login.enter_email')" :rules="[
-						{ required: true, message: $t('login.please_fill_email') },
+				<van-field v-model="email" name="email" type="email" :label="$t('register.email')"
+					:placeholder="$t('register.enter_email')" :rules="[
+						{ required: true, message: $t('register.enter_email') },
 						{ pattern: /.+@.+\..+/, message: $t('login.invalid_email_format') }
 					]" />
 				<van-field v-model="password" type="password" name="password" :label="$t('login.password')"
