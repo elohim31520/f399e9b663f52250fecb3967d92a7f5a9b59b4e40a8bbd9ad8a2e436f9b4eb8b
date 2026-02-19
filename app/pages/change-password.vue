@@ -54,8 +54,7 @@ const passwordValidator = (val: string) => {
 const onSubmit = async (values: any) => {
 	const res = await changePassword({
 		oldPassword: values.oldPassword,
-		newPassword: values.newPassword,
-		confirmNewPassword: values.confirmNewPassword,
+		newPassword: values.newPassword
 	})
 	if (res.success) {
 		showToast(t('change_password.change_success'))
