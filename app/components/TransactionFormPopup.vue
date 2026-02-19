@@ -116,10 +116,11 @@ watch(
 				// 将 ISO 日期格式转换为 YYYY-MM-DD 格式
 				form.value.tradeDate = tradeItem.date.split('T')[0] as string
 			} else {
-				// 如果是投资组合类型 (PortfolioItem)，使用默认值
+				// 如果是投资组合类型 (PortfolioItem)，填充现有数据
+				const portfolioItem = newItem as PortfolioItem
 				form.value.tradeType = 'buy'
-				form.value.quantity = ''
-				form.value.price = ''
+				form.value.quantity = portfolioItem.quantity ? String(portfolioItem.quantity) : ''
+				form.value.price = portfolioItem.averagePrice ? String(portfolioItem.averagePrice) : ''
 				form.value.tradeDate = getTodayStr()
 			}
 		}
