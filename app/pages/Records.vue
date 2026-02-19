@@ -71,7 +71,7 @@ defineOptions({
 	name: 'records',
 })
 
-const waterfallRef = useTemplateRef<InstanceType<typeof Waterfall>>('waterfall')
+const waterfallRef = useTemplateRef<InstanceType<typeof Waterfall>>('waterfallRef')
 
 const onClose = (details: any, item: TradeWithCompany) => {
 	const { position, instance } = details
@@ -84,13 +84,11 @@ const onClose = (details: any, item: TradeWithCompany) => {
 				title: t('records.confirm_title'),
 				message: t('records.confirm_delete_message'),
 			})
-				.then(() => {
+				.then(async () => {
 					if (item.id) {
-						return transactionApi.deleteTransaction(item.id)
+						await transactionApi.deleteTransaction(item.id)
+						waterfallRef.value?.refresh()
 					}
-				})
-				.then(() => {
-					waterfallRef.value?.refresh()
 				})
 			break
 	}
