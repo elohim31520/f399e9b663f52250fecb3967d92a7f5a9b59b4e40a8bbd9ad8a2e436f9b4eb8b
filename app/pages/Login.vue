@@ -54,7 +54,7 @@ const onSubmit = async (values: any) => {
 	if (res.success) {
 		storedUsername.value = values.email
 		showToast(t('login.login_success'))
-		navigateTo('/')
+		navigateTo(localePath('/'))
 	}
 }
 
@@ -67,11 +67,12 @@ const handleGoogleLogin = async (response: any) => {
 		const res = await loginWithGoogle(credential)
 		if (res.success) {
 			showToast(t('login.google_login_success'))
-			navigateTo('/')
+			navigateTo(localePath('/'))
 		} else {
 			handleGoogleLoginError()
 		}
 	} catch (error) {
+		if (import.meta.dev) console.error(error)
 		handleGoogleLoginError()
 	}
 }
