@@ -15,9 +15,13 @@ class TransactionApi {
 		return httpClient.request<any>({ method: 'POST', endpoint: '/trade', params: transaction })
 	}
 
+	async updateTransaction(id: number, transaction: TradeParams): Promise<ResponseData<any>> {
+		return httpClient.request<any>({ method: 'PUT', endpoint: `/trade/${id}`, params: transaction })
+	}
+
 	// 上傳截圖給AI分析後記錄
 	async aiAnalyzeScreenshot(file: File): Promise<ResponseData<any>> {
-		return httpClient.uploadFile<any>({ 
+		return httpClient.uploadFile<any>({
 			endpoint: '/trade/analyze-screenshot',
 			file,
 			fieldName: 'image', // 和後端 uploader.single('image') 一致

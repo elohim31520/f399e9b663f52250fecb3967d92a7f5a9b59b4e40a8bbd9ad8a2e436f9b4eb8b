@@ -4,8 +4,8 @@
 			<h1 class="text-[24px] font-bold mb-2 text-gray-800">{{ $t('records.transaction_records') }}</h1>
 			<Waterfall ref="waterfallRef" dataPath="data.data" :apiFunction="transactionApi.getAllTransactions">
 				<template #default="{ list }">
-					<van-swipe-cell v-for="item in list" :key="item.id" :right-width="65" :left-width="65"
-						@close="(details) => onClose(details, item)">
+					<van-swipe-cell v-for="item in (list as TradeWithCompany[])" :key="item.id" :right-width="65"
+						:left-width="65" @close="(details) => onClose(details, item)">
 						<div class="mb-4 rounded-lg p-4 transition-shadow duration-300 hover:shadow-md">
 							<div class="flex justify-between items-start mb-3">
 								<div>
@@ -49,6 +49,9 @@
 				</template>
 			</Waterfall>
 		</div>
+
+		<TransactionFormPopup v-model="showUpdatePopup" :item="selectedItemForUpdate" @submit-success="onUpdateSuccess"
+			:api-function="updateTransactionApi" />
 	</div>
 </template>
 
@@ -58,6 +61,7 @@ import { transactionApi } from '../api/transaction'
 import { showConfirmDialog } from 'vant'
 import { format } from 'date-fns'
 import Waterfall from '@/components/Waterfall/index.vue'
+import TransactionFormPopup from '@/components/TransactionFormPopup.vue'
 import { useI18n } from 'vue-i18n'
 import type { TradeWithCompany } from '@/types/trade'
 
@@ -72,11 +76,16 @@ defineOptions({
 })
 
 const waterfallRef = useTemplateRef<InstanceType<typeof Waterfall>>('waterfallRef')
+const showUpdatePopup = ref(false)
+const selectedItemForUpdate = ref<TradeWithCompany | null>(null)
 
 const onClose = (details: any, item: TradeWithCompany) => {
 	const { position, instance } = details
 	switch (position) {
 		case 'left':
+			selectedItemForUpdate.value = item
+			showUpdatePopup.value = true
+			break
 		case 'cell':
 			break
 		case 'right':
@@ -92,6 +101,24 @@ const onClose = (details: any, item: TradeWithCompany) => {
 				})
 			break
 	}
+}
+
+const onUpdateSuccess = () => {
+	waterfallRef.value?.refresh()
+}
+
+const updateTransactionApi = async (payload: any) => {
+	const item = selectedItemForUpdate.value
+	if (!item?.id) {
+		throw new Error('Missing transaction id')
+	}
+	return transactionApi.updateTransaction(item.id, {
+		stockSymbol: payload.stockSymbol,
+		tradeType: payload.tradeType,
+		quantity: String(payload.quantity),
+		price: String(payload.price),
+		tradeDate: payload.tradeDate,
+	})
 }
 </script>
 

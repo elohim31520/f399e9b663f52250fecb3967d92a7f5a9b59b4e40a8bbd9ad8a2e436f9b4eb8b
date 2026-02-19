@@ -64,6 +64,7 @@
 import { ref, watch, computed } from 'vue'
 import type { FormInstance } from 'vant'
 import type { PortfolioItem } from '@/types/portfolio'
+import type { TradeWithCompany } from '@/types/trade'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -78,7 +79,7 @@ interface TransactionForm {
 
 const props = defineProps<{
 	modelValue: boolean
-	item: PortfolioItem | null
+	item: PortfolioItem | TradeWithCompany | null
 	apiFunction: (payload: any) => Promise<any>
 }>()
 
@@ -105,10 +106,22 @@ watch(
 	(newItem) => {
 		if (newItem) {
 			form.value.stockSymbol = newItem.stockSymbol
-			form.value.tradeType = 'buy'
-			form.value.quantity = ''
-			form.value.price = ''
-			form.value.tradeDate = getTodayStr()
+
+			// 如果是交易记录类型 (TradeWithCompany)，填充现有数据
+			if ('type' in newItem && 'date' in newItem) {
+				const tradeItem = newItem as TradeWithCompany
+				form.value.tradeType = tradeItem.type
+				form.value.quantity = tradeItem.quantity
+				form.value.price = tradeItem.price
+				// 将 ISO 日期格式转换为 YYYY-MM-DD 格式
+				form.value.tradeDate = tradeItem.date.split('T')[0] as string
+			} else {
+				// 如果是投资组合类型 (PortfolioItem)，使用默认值
+				form.value.tradeType = 'buy'
+				form.value.quantity = ''
+				form.value.price = ''
+				form.value.tradeDate = getTodayStr()
+			}
 		}
 	}
 )
