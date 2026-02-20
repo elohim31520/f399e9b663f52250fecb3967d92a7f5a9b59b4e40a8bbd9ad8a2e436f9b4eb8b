@@ -27,6 +27,10 @@ class TransactionApi {
 			fieldName: 'image', // 和後端 uploader.single('image') 一致
 		})
 	}
+
+	async getTradeJobStatus(jobId: string): Promise<ResponseData<any>> {
+		return httpClient.request<any>({ method: 'GET', endpoint: `/trade/ai-job/${jobId}` })
+	}
 }
 
 export const transactionApi = new TransactionApi()

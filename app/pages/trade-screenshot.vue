@@ -51,10 +51,12 @@ import { showToast, showLoadingToast, closeToast, showImagePreview } from 'vant'
 import type { UploaderFileListItem } from 'vant'
 import { transactionApi } from '../api/transaction'
 import { useUserStore } from '@/stores/user'
+import { useAiTradeStore } from '@/stores/aiTrade'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
 const userStore = useUserStore()
+const tradeStore = useAiTradeStore()
 
 // 檔案列表
 const fileList = ref<UploaderFileListItem[]>([])
@@ -133,17 +135,12 @@ const handleSubmit = async () => {
 
         // 直接傳 File，FormData 在 httpClient.uploadFile 裡建立
         const response = await transactionApi.aiAnalyzeScreenshot(file)
-        console.log(response)
 
         closeToast()
-        showToast({
-            message: response.message,
-            type: 'success',
-        })
 
-        setTimeout(() => {
-            navigateTo(localePath('/records'))
-        }, 1500)
+        const jobId = response.data?.jobId
+        tradeStore.startTracking(jobId)
+        navigateTo(localePath(`/trade-status/${jobId}`))
     } catch (error: any) {
         closeToast()
         console.error('Upload error:', error)
