@@ -6,6 +6,7 @@
 		<MomentumChart />
 		<HeatMap class="h-[500px] my-2.5" />
 		<News />
+		<SeeMore :to="'/news'" class="my-2.5" />
 		<MarketQuotes />
 		<MarketBreadth />
 		<VolatileAsset />

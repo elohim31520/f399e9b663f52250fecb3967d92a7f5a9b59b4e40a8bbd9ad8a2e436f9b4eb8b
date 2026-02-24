@@ -12,6 +12,6 @@ export class NewsApi {
 	}
 
 	async getNews({ page, size }: PaginationParams): Promise<ResponseData<any>> {
-		return httpClient.request<any>({ method: 'GET', endpoint: '/news', params: { page, size } })
+		return this.httpRequest({ method: 'GET', endpoint: '/news', params: { page, size } })
 	}
 }
