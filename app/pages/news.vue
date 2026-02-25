@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { format } from 'date-fns'
+import { formatDate } from '@/utils/date'
 
 const { $api } = useNuxtApp()
 const { locale, t } = useI18n()
@@ -62,8 +62,4 @@ const waterfallRef = ref(null)
 
 const isZh = computed(() => locale.value.startsWith('zh'))
 
-const formatDate = (dateStr) => {
-    if (!dateStr) return '—'
-    return format(new Date(dateStr), 'yyyy/MM/dd')
-}
 </script>

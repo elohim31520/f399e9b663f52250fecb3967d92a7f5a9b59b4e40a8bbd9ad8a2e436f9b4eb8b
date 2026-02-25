@@ -114,6 +114,7 @@
 import { showToast, showNotify } from 'vant'
 import { useAiTradeStore } from '@/stores/aiTrade'
 import { useRoute } from 'vue-router'
+import { formatTime } from '@/utils/date'
 
 const localePath = useLocalePath()
 const route = useRoute()
@@ -185,12 +186,6 @@ const elapsed = computed(() => {
     if (ms < 1000) return `${ms}ms`
     return `${(ms / 1000).toFixed(1)}s`
 })
-
-function formatTime(ts: number) {
-    return new Date(ts).toLocaleString('zh-TW', {
-        hour: '2-digit', minute: '2-digit', second: '2-digit',
-    })
-}
 
 async function copyJobId() {
     await navigator.clipboard.writeText(jobId)

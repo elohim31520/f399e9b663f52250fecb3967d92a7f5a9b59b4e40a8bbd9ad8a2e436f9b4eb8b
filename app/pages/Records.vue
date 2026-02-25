@@ -32,7 +32,7 @@
 							</div>
 
 							<div class="text-right text-[12px] text-gray-400">
-								{{ format(item.date, 'yyyy-MM-dd') }}
+								{{ formatDate(item.date) }}
 							</div>
 						</div>
 						<template #left>
@@ -59,7 +59,7 @@
 import { ref, useTemplateRef } from 'vue'
 import { transactionApi } from '../api/transaction'
 import { showConfirmDialog } from 'vant'
-import { format } from 'date-fns'
+import { formatDate } from '@/utils/date'
 import Waterfall from '@/components/Waterfall/index.vue'
 import TransactionFormPopup from '@/components/TransactionFormPopup.vue'
 import { useI18n } from 'vue-i18n'
