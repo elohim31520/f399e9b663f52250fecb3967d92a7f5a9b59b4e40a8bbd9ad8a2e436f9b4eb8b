@@ -293,5 +293,17 @@
 		"cancel": "Cancel",
 		"confirm": "Confirm",
 		"back": "Back"
+	},
+	"market": {
+		"marketReport": "Market Report",
+		"bullish": "Bullish",
+		"bearish": "Bearish",
+		"highlights": "Key Highlights",
+		"analysis": "Market Analysis",
+		"sectors": "Sector Performance",
+		"updatedAt": "Last updated:"
+	},
+	"error": {
+		"loadFailed": "Failed to load data, please try again later"
 	}
 }

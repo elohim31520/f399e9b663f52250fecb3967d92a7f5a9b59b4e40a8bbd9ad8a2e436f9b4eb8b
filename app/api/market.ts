@@ -22,4 +22,8 @@ export class MarketApi {
 	async getQuotes(): Promise<ResponseData<any[]>> {
 		return this.httpRequest({ method: 'GET', endpoint: '/market/quotes', useKV: true })
 	}
+
+	async getMarketSummary(): Promise<ResponseData<any>> {
+		return this.httpRequest({ method: 'GET', endpoint: '/market/summary' })
+	}
 }

@@ -260,7 +260,7 @@
 		"collapse": "收起"
 	},
 	"news": {
-		"title": "消息"
+		"title": "最新資訊"
 	},
 	"monte-sim": {
 		"selectStock": "選擇股票",
@@ -293,5 +293,17 @@
 		"cancel": "取消",
 		"confirm": "確認",
 		"back": "返回"
+	},
+	"market": {
+		"marketReport": "市場報告",
+		"bullish": "多頭",
+		"bearish": "空頭",
+		"highlights": "重點摘要",
+		"analysis": "市場分析",
+		"sectors": "板塊表現",
+		"updatedAt": "資料更新時間："
+	},
+	"error": {
+		"loadFailed": "載入失敗，請稍後再試"
 	}
 }
