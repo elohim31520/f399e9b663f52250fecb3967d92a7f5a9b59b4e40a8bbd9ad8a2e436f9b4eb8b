@@ -12,7 +12,6 @@ const listRef = useTemplateRef('listRef')
 const list = ref([])
 const loading = ref(false)
 const finished = ref(false)
-const page = ref(1)
 
 const props = defineProps({
 	apiFunction: {
@@ -44,7 +43,13 @@ const props = defineProps({
 		type: String,
 		default: 'data',
 	},
+	initialPage: {
+		type: Number,
+		default: 1
+	}
 })
+
+const page = ref(props.initialPage)
 
 const onLoad = async () => {
 	await new Promise((resolve) => setTimeout(resolve, 1000))
