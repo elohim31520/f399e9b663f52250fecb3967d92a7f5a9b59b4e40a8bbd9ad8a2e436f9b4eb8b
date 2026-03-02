@@ -61,7 +61,7 @@
                         class="flex gap-3 items-start p-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors duration-300">
                         <span
                             class="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">
-                            {{ i + 1 }}
+                            {{ Number(i) + 1 }}
                         </span>
                         <p class="text-sm text-gray-600 leading-relaxed">{{ item }}</p>
                     </div>
@@ -112,20 +112,19 @@
                 </div>
             </section>
 
-            <!-- Footer timestamp -->
-            <footer class="text-center">
+            <div class="text-center">
                 <p class="text-xs text-gray-400">
                     {{ $t('market.updatedAt') }}
-                    {{ new Date(summary.generatedAt).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
-                    }}
+                    {{ format(new Date(summary.generatedAt), 'HH:mm') }}
                 </p>
-            </footer>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { format } from 'date-fns'
 
 const { $api } = useNuxtApp()
 const { locale } = useI18n()
@@ -134,11 +133,10 @@ const { data: marketData, error } = await useAsyncData('market-summary', () =>
     $api.market.getMarketSummary()
 )
 
-// Compute locale-aware data
 const summary = computed(() => {
     const raw = marketData.value?.data
     if (!raw) return null
-    const lang = locale.value === 'zh' || locale.value === 'zh-TW' || locale.value === 'zh-CN' ? 'zh' : 'en'
+    const lang = locale.value === 'zh' ? 'zh' : 'en'
     return {
         date: raw.date,
         generatedAt: raw.generated_at,
@@ -148,7 +146,6 @@ const summary = computed(() => {
 
 const isBullish = computed(() => summary.value?.sentiment === 'bullish')
 
-// Format date
 const formattedDate = computed(() => {
     if (!summary.value?.date) return ''
     const d = new Date(summary.value.date)
