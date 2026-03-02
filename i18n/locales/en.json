@@ -9,15 +9,15 @@
 		"default_description": "UrTrade is a platform that provides US stock market data, portfolio tracking, and real-time market trend analysis."
 	},
 	"company_metrics": {
-		"pe_forwards_notice": "What is PE Forwards? Forward Price-to-Earnings (FPE) is a projection of a company's P/E ratio for the next year, used to determine if the current stock price is overvalued or undervalued for the coming year. It is a forward-looking valuation tool that helps investors assess whether a company's stock is a worthwhile investment from a 'future' perspective.",
-		"pe_forwards_title": "PE Forwards",
-		"login_to_see_data": "Click here to log in and view complete data",
-		"pe_history_title": "Historical PE",
-		"eps_notice": "What is EPS (Earnings Per Share)? EPS is the earnings generated per share of a company's common stock. It is a financial indicator calculated by dividing the company's net profit by the number of outstanding common shares, used to measure the profitability of each share of stock.",
-		"feps_title": "Future Estimated EPS",
-		"eps_history_title": "Historical EPS",
-		"volume_title": "Volume",
-		"eps_comparison": "EPS Comparison"
+		"pe_forwards_notice": "What is Forward P/E? The Forward Price-to-Earnings ratio estimates a company's P/E for the next 12 months to determine if the current stock price is overvalued or undervalued relative to future earnings. It is a forward-looking valuation tool that helps investors assess a stock's potential from a future perspective.",
+		"pe_forwards_title": "Forward P/E",
+		"login_to_see_data": "Log in to view full data",
+		"pe_history_title": "Trailing P/E",
+		"eps_notice": "What is EPS (Earnings Per Share)? EPS represents the portion of a company's profit allocated to each outstanding share of common stock. It is a financial indicator calculated by dividing net income by the number of shares outstanding, used to measure a company's profitability per share.",
+		"feps_title": "Forward EPS",
+		"eps_history_title": "Trailing EPS",
+		"volume_title": "Trading Volume",
+		"eps_comparison": "EPS Earnings Comparison"
 	},
 	"my": {
 		"cash": "Cash",

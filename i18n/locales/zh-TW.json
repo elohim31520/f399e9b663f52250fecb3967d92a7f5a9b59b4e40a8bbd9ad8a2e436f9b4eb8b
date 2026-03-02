@@ -9,15 +9,15 @@
 		"default_description": "UrTrade 是一個提供美股市場數據、投資組合追蹤和即時市場趨勢分析的平台。"
 	},
 	"company_metrics": {
-		"pe_forwards_notice": "什麼是PE Forwards? 未來市盈率(FPE)是預測未來一年公司的市盈率，用以判斷當前股價對於未來一年是高估還是低估。這是一個前瞻性的估值工具，能幫助投資人從「未來」的角度來評估一家公司的股票是否值得投資。",
-		"pe_forwards_title": "未來市盈率 PE Forwards",
+		"pe_forwards_notice": "什麼是Forward P/E? 前瞻本益比是預測未來一年公司的本益比，用以判斷當前股價對於未來一年是高估還是低估。這是一個前瞻性的估值工具，能幫助投資人從「未來」的角度來評估一家公司的股票是否值得投資。",
+		"pe_forwards_title": "前瞻本益比 Forward P/E",
 		"login_to_see_data": "點我登入，以查看完整資料",
-		"pe_history_title": "歷史市盈率 PE",
+		"pe_history_title": "歷史本益比 Trailing PE",
 		"eps_notice": "什麼是EPS(每股盈餘)? EPS(每股盈餘)是公司每股普通股所賺取的盈餘，它是一個財務指標，計算方式為公司淨利潤除以流通在外的普通股數量，用來衡量公司每股股票的盈利能力。",
-		"feps_title": "未來預估市盈率 EPS",
+		"feps_title": "前瞻每股盈餘 Forward EPS",
 		"eps_history_title": "歷史每股盈餘 EPS",
-		"volume_title": "量能",
-		"eps_comparison": "EPS 比較"
+		"volume_title": "成交量",
+		"eps_comparison": "EPS 獲利比較"
 	},
 	"my": {
 		"cash": "現金",
