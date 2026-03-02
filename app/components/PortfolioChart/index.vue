@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { computed } from 'vue'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { PieChart } from 'echarts/charts'
@@ -24,15 +24,11 @@ defineOptions({
 	name: 'PortfolioChart',
 })
 
-const chartOptions = ref<EChartsOption | null>(null)
-
-const setChartOptions = () => {
+const chartOptions = computed<EChartsOption | null>(() => {
 	const data = portfolioStore.portfolioData
-	if (!data || data.length === 0) {
-		chartOptions.value = null
-		return
-	}
-	chartOptions.value = {
+	if (!data || data.length === 0) return null
+
+	return {
 		title: {
 			text: '投資組合佔比',
 			left: 'center',
@@ -71,21 +67,5 @@ const setChartOptions = () => {
 			},
 		],
 	}
-}
-
-onMounted(() => {
-	setChartOptions()
-})
-
-watch(
-	() => portfolioStore.portfolioData,
-	() => {
-		setChartOptions()
-	},
-	{ deep: true }
-)
-
-defineExpose({
-	setChartOptions,
 })
 </script>

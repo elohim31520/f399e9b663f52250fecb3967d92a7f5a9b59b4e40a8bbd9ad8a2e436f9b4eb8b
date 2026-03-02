@@ -118,7 +118,7 @@ const portfolioStore = usePortfolioStore()
 const userStore = useUserStore()
 
 const portfolioValue = computed(() => {
-	return portfolioStore.portfolioList.reduce((sum, item) => {
+	return portfolioStore.portfolioData.reduce((sum, item) => {
 		return sum + (item.quantity || 0) * (item.averagePrice || 0)
 	}, 0)
 })

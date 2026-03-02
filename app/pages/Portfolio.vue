@@ -52,7 +52,7 @@
 			</van-tab>
 			<van-tab :title="$t('portfolio.chart_analysis')">
 				<div class="w-full">
-					<PortfolioChart ref="portfolioChartRef" />
+					<PortfolioChart />
 				</div>
 			</van-tab>
 		</van-tabs>
@@ -88,12 +88,7 @@ defineOptions({
 	name: 'portfolio',
 })
 
-interface PortfolioChartExposed {
-	setChartOptions: (data: PortfolioItem[]) => void
-}
-
 const activeTab = ref(0)
-const portfolioChartRef = ref<PortfolioChartExposed | null>(null)
 const showUpdatePopup = ref(false)
 const selectedItemForUpdate = ref<PortfolioItem | null>(null)
 const isDataRefreshed = ref(false)
@@ -149,14 +144,4 @@ onActivated(() => {
 		isDataRefreshed.value = true
 	}
 })
-
-watch(
-	() => portfolioStore.portfolioData,
-	(newData) => {
-		if (newData && newData.length > 0 && portfolioChartRef.value) {
-			portfolioChartRef.value.setChartOptions(newData)
-		}
-	},
-	{ deep: true, immediate: true }
-)
 </script>

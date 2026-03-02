@@ -17,6 +17,8 @@ export interface Portfolio {
 	stockSymbol: string;
 	quantity?: number;
 	averagePrice?: number;
+	createdAt?: Date;
+	updatedAt?: Date;
 }
 
 // 带公司信息的 Portfolio 返回类型

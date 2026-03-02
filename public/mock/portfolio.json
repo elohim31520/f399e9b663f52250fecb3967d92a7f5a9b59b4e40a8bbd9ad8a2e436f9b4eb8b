@@ -3,22 +3,10 @@
 	"success": true,
 	"data": [
 		{
-			"id": 99983,
-			"stock_id": "NVDA",
-			"quantity": 4285,
-			"avg": "105.00",
-			"createdAt": "2025-02-11T20:05:02.000Z",
-			"updatedAt": "2025-12-27T15:00:00.000Z",
-			"company": {
-				"name": "NVIDIA Corporation",
-				"symbol": "NVDA"
-			}
-		},
-		{
 			"id": 100002,
-			"stock_id": "XAUUSD",
-			"quantity": 100,
-			"avg": "2500.00",
+			"stockSymbol": "XAUUSD",
+			"quantity": 1000,
+			"averagePrice": "2500.00",
 			"createdAt": "2025-12-27T15:00:00.000Z",
 			"updatedAt": "2025-12-27T15:00:00.000Z",
 			"company": {
@@ -28,9 +16,9 @@
 		},
 		{
 			"id": 100001,
-			"stock_id": "BTCUSD",
-			"quantity": 2.2,
-			"avg": "100000.00",
+			"stockSymbol": "BTCUSD",
+			"quantity": 1000,
+			"averagePrice": "100000.00",
 			"createdAt": "2025-12-27T15:00:00.000Z",
 			"updatedAt": "2025-12-27T15:00:00.000Z",
 			"company": {
@@ -39,99 +27,15 @@
 			}
 		},
 		{
-			"id": 99982,
-			"stock_id": "TSLA",
-			"quantity": 500,
-			"avg": "200.00",
-			"createdAt": "2025-02-11T20:05:08.000Z",
-			"updatedAt": "2025-12-27T15:00:00.000Z",
-			"company": {
-				"name": "Tesla, Inc.",
-				"symbol": "TSLA"
-			}
-		},
-		{
 			"id": 100003,
-			"stock_id": "SPY",
-			"quantity": 133,
-			"avg": "601.50",
+			"stockSymbol": "SPY",
+			"quantity": 1000,
+			"averagePrice": "600.00",
 			"createdAt": "2025-12-27T15:00:00.000Z",
 			"updatedAt": "2025-12-27T15:00:00.000Z",
 			"company": {
 				"name": "SPDR S&P 500 ETF Trust",
 				"symbol": "SPY"
-			}
-		},
-		{
-			"id": 99987,
-			"stock_id": "AMZN",
-			"quantity": 332,
-			"avg": "150.50",
-			"createdAt": "2025-03-20T20:36:14.000Z",
-			"updatedAt": "2025-12-27T15:00:00.000Z",
-			"company": {
-				"name": "Amazon.com, Inc.",
-				"symbol": "AMZN"
-			}
-		},
-		{
-			"id": 99986,
-			"stock_id": "GOOG",
-			"quantity": 307,
-			"avg": "130.13",
-			"createdAt": "2025-02-11T20:04:55.000Z",
-			"updatedAt": "2025-12-27T15:00:00.000Z",
-			"company": {
-				"name": "Alphabet Inc.",
-				"symbol": "GOOG"
-			}
-		},
-		{
-			"id": 99984,
-			"stock_id": "MSFT",
-			"quantity": 78,
-			"avg": "384.61",
-			"createdAt": "2025-03-16T23:29:31.000Z",
-			"updatedAt": "2025-12-27T15:00:00.000Z",
-			"company": {
-				"name": "Microsoft Corporation",
-				"symbol": "MSFT"
-			}
-		},
-		{
-			"id": 100009,
-			"stock_id": "SOXX",
-			"quantity": 200,
-			"avg": "300",
-			"createdAt": "2025-03-18T18:40:36.000Z",
-			"updatedAt": "2025-12-27T15:00:00.000Z",
-			"company": {
-				"name": "iShares Semiconductor ETF",
-				"symbol": "SOXX"
-			}
-		},
-		{
-			"id": 99985,
-			"stock_id": "META",
-			"quantity": 197,
-			"avg": "505.55",
-			"createdAt": "2025-03-18T18:40:36.000Z",
-			"updatedAt": "2025-12-27T15:00:00.000Z",
-			"company": {
-				"name": "Meta Platforms, Inc.",
-				"symbol": "META"
-			}
-		},
-		{
-			"id": 100013,
-			"stock_id": "XLV",
-			"quantity": 150,
-			"avg": "150.25",
-			"createdAt": "2025-03-18T18:40:36.000Z",
-			"updatedAt": "2025-12-27T15:00:00.000Z",
-			"company": {
-				"name": "State Street Health Care Select Sector SPDR ETF",
-				"symbol": "XLV"
 			}
 		}
 	],

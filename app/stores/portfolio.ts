@@ -6,9 +6,6 @@ export const usePortfolioStore = defineStore('portfolio', {
 	state: () => ({
 		portfolioData: [] as PortfolioItem[],
 	}),
-	getters: {
-		portfolioList: (state) => state.portfolioData,
-	},
 	actions: {
 		async fetchMyPortfolio() {
 			try {
