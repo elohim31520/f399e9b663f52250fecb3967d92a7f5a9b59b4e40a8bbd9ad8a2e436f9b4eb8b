@@ -37,6 +37,7 @@ const userStore = useUserStore()
 const menuItems = [
 	{ to: '/', icon: 'icon_settings_Name2', text: 'sidemenu.home', display: 'always' },
 	{ to: '/market-summary', icon: 'icon_menu_Opinion', text: 'market.marketReport', display: 'always' },
+	{ to: '/news', icon: 'icon_menu_Opinion', text: 'news.title', display: 'always' },
 	{ to: '/records', icon: 'money', text: 'sidemenu.my_records', display: 'always' },
 	{
 		to: '/portfolio',
@@ -58,10 +59,9 @@ const menuItems = [
 	},
 	{ to: '/market-metrics', icon: 'media', text: 'sidemenu.market_indicators', display: 'always' },
 	{ to: '/volatile-stock', icon: 'icon_ghost', text: 'sidemenu.todays_volatility', display: 'always' },
+	{ to: '/monte-carlo-simulation', icon: 'icon_button_system', text: 'monte-sim.menu', display: 'always' },
 	{ to: '/login', icon: 'icon_user2', text: 'sidemenu.login', display: 'guest' },
 	{ to: '/register', icon: 'icon_settings_invite', text: 'sidemenu.register', display: 'guest' },
-	{ to: '/monte-carlo-simulation', icon: 'icon_button_system', text: 'monte-sim.menu', display: 'always' },
-	{ to: '/news', icon: 'icon_menu_Opinion', text: 'news.title', display: 'always' },
 ]
 
 const closeMenu = () => {
