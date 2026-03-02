@@ -79,6 +79,9 @@ const option = computed(() => {
 		},
 		yAxis: {
 			type: 'value',
+			axisLabel: {
+				formatter: (value: number) => `${value}%`,
+			},
 		},
 		series: [
 			{
