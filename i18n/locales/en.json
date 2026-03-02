@@ -305,5 +305,15 @@
 	},
 	"error": {
 		"loadFailed": "Failed to load data, please try again later"
+	},
+	"volatile_stock": {
+		"sort": {
+			"asc": "↑ ASC",
+			"desc": "↓ DESC"
+		},
+		"filter": {
+			"positive": "Gainers Only 📈",
+			"negative": "Losers Only 📉"
+		}
 	}
 }

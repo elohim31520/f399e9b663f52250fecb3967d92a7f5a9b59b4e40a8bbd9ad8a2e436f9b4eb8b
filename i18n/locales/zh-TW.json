@@ -305,5 +305,15 @@
 	},
 	"error": {
 		"loadFailed": "載入失敗，請稍後再試"
+	},
+	"volatile_stock": {
+		"sort": {
+			"asc": "↑ 正序",
+			"desc": "↓ 倒序"
+		},
+		"filter": {
+			"positive": "僅正值 📈",
+			"negative": "僅負值 📉"
+		}
 	}
 }
