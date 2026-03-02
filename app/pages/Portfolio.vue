@@ -8,8 +8,8 @@
 			:mode="'closeable'">
 			{{ $t('portfolio.login_for_portfolio') }}
 		</van-notice-bar>
-		<van-notice-bar v-if="showNotice" left-icon="info-o" wrapable :scrollable="false" type="warning" class="mb-2"
-			:mode="'closeable'" @close="showNotice = false">
+		<van-notice-bar v-else-if="showNotice" left-icon="info-o" wrapable :scrollable="false" type="warning"
+			class="mb-2" :mode="'closeable'" @close="showNotice = false">
 			{{ $t('portfolio.notice') }}
 		</van-notice-bar>
 
