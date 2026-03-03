@@ -1,7 +1,7 @@
 <template>
 	<van-popup :show="uiStore.isMenuShown" @update:show="uiStore.isMenuShown = $event" position="left"
 		:style="{ width: '80%', height: '100%' }" z-index="99">
-		<div class="pt-5">
+		<div class="pt-5 flex flex-col h-full">
 			<nav class="flex flex-col gap-y-2">
 				<template v-for="item in menuItems" :key="item.to">
 					<NuxtLink v-if="
@@ -22,6 +22,26 @@
 					<span class="text-xl">{{ $t('sidemenu.logout') }}</span>
 				</div>
 			</nav>
+
+			<!-- 語言切換 -->
+			<div class="mt-6 px-4">
+				<div class="flex rounded-lg overflow-hidden border border-gray-200">
+					<NuxtLink :to="switchLocalePath('zh')" class="flex-1 py-2 text-center text-sm transition-colors"
+						:class="locale === 'zh'
+							? 'bg-primary text-white font-semibold'
+							: 'bg-white text-gray-500 hover:bg-gray-50'" @click="closeMenu">
+						中文
+					</NuxtLink>
+					<div class="w-px bg-gray-200" />
+					<NuxtLink :to="switchLocalePath('en')" class="flex-1 py-2 text-center text-sm transition-colors"
+						:class="locale === 'en'
+							? 'bg-primary text-white font-semibold'
+							: 'bg-white text-gray-500 hover:bg-gray-50'" @click="closeMenu">
+						English
+					</NuxtLink>
+				</div>
+			</div>
+
 		</div>
 	</van-popup>
 </template>
@@ -31,6 +51,8 @@ import { useUIStore } from '@/stores/ui'
 import { useUserStore } from '@/stores/user'
 
 const localePath = useLocalePath()
+const switchLocalePath = useSwitchLocalePath()
+const { locale } = useI18n()
 const uiStore = useUIStore()
 const userStore = useUserStore()
 
