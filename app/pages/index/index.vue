@@ -13,7 +13,7 @@
 		<SeeMore :to="'/volatile-stock'" class="my-2.5" />
 		<!-- 公司入口 -->
 		<HotCompanies />
-		<SeeMore :to="'/m7'" class="my-2.5" />
+		<SeeMore :to="'/companies'" class="my-2.5" />
 	</main>
 </template>
 
