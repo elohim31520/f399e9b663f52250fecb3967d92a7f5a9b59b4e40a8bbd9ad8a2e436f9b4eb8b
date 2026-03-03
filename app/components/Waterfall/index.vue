@@ -5,64 +5,51 @@
 	</van-list>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, useTemplateRef, nextTick } from 'vue'
+import type { ListInstance } from 'vant'
 
-const listRef = useTemplateRef('listRef')
-const list = ref([])
+const listRef = useTemplateRef<ListInstance>('listRef')
+
+const list = ref<unknown[]>([])
 const loading = ref(false)
 const finished = ref(false)
 
-const props = defineProps({
-	apiFunction: {
-		type: Function,
-		default: () => { },
-	},
-	size: {
-		type: Number,
-		default: 10,
-	},
-	immediateCheck: {
-		type: Boolean,
-		default: true,
-	},
-	apiParams: {
-		type: Object,
-		default: () => ({}),
-	},
-	finishedText: {
-		type: String,
-		default: '沒有更多了',
-	},
-	loadingText: {
-		type: String,
-		default: 'loading...',
-	},
-	//讓api數據路徑可以自定義
-	dataPath: {
-		type: String,
-		default: 'data',
-	},
-	initialPage: {
-		type: Number,
-		default: 1
-	}
+interface Props {
+	apiFunction?: (params: Record<string, unknown>) => Promise<unknown>
+	size?: number
+	immediateCheck?: boolean
+	apiParams?: Record<string, unknown>
+	finishedText?: string
+	loadingText?: string
+	dataPath?: string
+	initialPage?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	apiFunction: () => async () => ({}),
+	size: 10,
+	immediateCheck: true,
+	apiParams: () => ({}),
+	finishedText: '沒有更多了',
+	loadingText: 'loading...',
+	dataPath: 'data',
+	initialPage: 1,
 })
 
 const page = ref(props.initialPage)
 
-const onLoad = async () => {
-	await new Promise((resolve) => setTimeout(resolve, 1000))
+const onLoad = async (): Promise<void> => {
+	await new Promise<void>((resolve) => setTimeout(resolve, 1000))
 
-	// 合併外部參數和分頁參數
-	const requestParams = {
+	const requestParams: Record<string, unknown> = {
 		...props.apiParams,
 		page: page.value,
 		size: props.size,
 	}
-	const res = await props.apiFunction(requestParams)
 
-	const newData = _get(res, props.dataPath, [])
+	const res = await props.apiFunction(requestParams)
+	const newData = _get(res, props.dataPath, []) as unknown[]
 
 	list.value = [...list.value, ...newData]
 
@@ -74,8 +61,7 @@ const onLoad = async () => {
 	loading.value = false
 }
 
-const refresh = async () => {
-	// 重置所有狀態
+const refresh = async (): Promise<void> => {
 	list.value = []
 	page.value = 1
 	finished.value = false
@@ -84,13 +70,10 @@ const refresh = async () => {
 	await nextTick()
 
 	loading.value = false
-	// 檢查是否需要立即加載
 	listRef.value?.check()
 }
 
-// 監聽外部參數變化，自動刷新列表
 watch(() => props.apiParams, refresh, { deep: true })
 
-// 將 refresh 方法暴露給父組件
 defineExpose({ refresh })
 </script>
