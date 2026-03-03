@@ -43,8 +43,9 @@ export default defineNuxtModule({
         const excludes = [...options.exclude, ...excludeDefaults]
         for (const name of Object.keys(lodash)) {
             if (excludes.includes(name)) continue
-            const prefix = '_'
-            const as = prefix ? prefix + (options.upperAfterPrefix ? lodash.upperFirst(name) : name) : name
+            const as = options.prefix
+                ? options.prefix + (options.upperAfterPrefix ? lodash.upperFirst(name) : name)
+                : name
             addImports({ name, as, from: 'lodash-es' })
         }
     },
