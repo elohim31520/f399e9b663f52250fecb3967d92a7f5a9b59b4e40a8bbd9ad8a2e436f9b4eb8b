@@ -315,5 +315,39 @@
 			"positive": "Gainers Only 📈",
 			"negative": "Losers Only 📉"
 		}
+	},
+	"asset_price_chart": {
+		"back": "Back",
+		"asset_label": "Asset",
+		"live": "Live",
+		"not_found": "Asset not found: {symbol}",
+		"other_assets": "Other Assets",
+		"assets": {
+			"usoil": {
+				"label": "WTI Crude Oil",
+				"currency": "USD / Barrel",
+				"description": "West Texas Intermediate (WTI), the benchmark price for US crude oil futures."
+			},
+			"us10y": {
+				"label": "US 10-Year Treasury",
+				"currency": "Yield %",
+				"description": "Yield on the US 10-year Treasury note, the global benchmark for risk-free rates."
+			},
+			"xauusd": {
+				"label": "Gold / USD",
+				"currency": "USD / Troy oz",
+				"description": "Spot gold exchange rate against the US Dollar, the premier safe-haven asset."
+			},
+			"btcusd": {
+				"label": "Bitcoin / USD",
+				"currency": "USD / BTC",
+				"description": "Bitcoin to US Dollar spot price, the leading indicator of the cryptocurrency market."
+			},
+			"dxy": {
+				"label": "US Dollar Index",
+				"currency": "Index",
+				"description": "A measure of the value of the US Dollar relative to a basket of major foreign currencies."
+			}
+		}
 	}
 }

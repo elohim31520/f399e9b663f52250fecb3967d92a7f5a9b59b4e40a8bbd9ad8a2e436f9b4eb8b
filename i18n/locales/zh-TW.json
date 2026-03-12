@@ -315,5 +315,39 @@
 			"positive": "僅正值 📈",
 			"negative": "僅負值 📉"
 		}
+	},
+	"asset_price_chart": {
+		"back": "返回",
+		"asset_label": "Asset",
+		"live": "Live",
+		"not_found": "找不到資產：{symbol}",
+		"other_assets": "其他資產",
+		"assets": {
+			"usoil": {
+				"label": "美國原油",
+				"currency": "USD / Barrel",
+				"description": "西德克薩斯中質原油（WTI），美國基準原油期貨價格"
+			},
+			"us10y": {
+				"label": "美國10年期公債",
+				"currency": "Yield %",
+				"description": "美國10年期國庫債券殖利率，全球無風險利率基準"
+			},
+			"xauusd": {
+				"label": "黃金／美元",
+				"currency": "USD / Troy oz",
+				"description": "現貨黃金對美元匯率，避險資產之首"
+			},
+			"btcusd": {
+				"label": "比特幣／美元",
+				"currency": "USD / BTC",
+				"description": "比特幣對美元現貨價格，加密貨幣市場龍頭"
+			},
+			"dxy": {
+				"label": "美元指數",
+				"currency": "Index",
+				"description": "美元對一籃子主要貨幣的綜合強弱指數"
+			}
+		}
 	}
 }

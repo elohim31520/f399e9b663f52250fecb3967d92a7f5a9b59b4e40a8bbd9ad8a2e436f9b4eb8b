@@ -4,7 +4,8 @@
 		<div>
 			<ul>
 				<li v-for="(item, index) in fetchedData" :key="index"
-					class="flex items-center py-5 px-2 shadow-card-primary gap-1">
+					class="flex items-center py-5 px-2 shadow-card-primary gap-1 cursor-pointer active:opacity-60 transition-opacity"
+					@click="navigateTo(localePath(`/asset-price-chart/${item.symbol.toLowerCase()}`))">
 					<span class="text-gray-600">{{ getSymbolName(item.symbol) }}</span>
 					<span class="text-primary-600 ml-auto">{{ parseFloat(item.price) }}</span>
 				</li>
@@ -15,6 +16,7 @@
 
 <script lang="ts" setup>
 const { $api } = useNuxtApp()
+const localePath = useLocalePath()
 
 const symbolNameMap: Record<string, string> = {
 	BTCUSD: $t('market_quotes.btcusd'),
@@ -24,7 +26,6 @@ const symbolNameMap: Record<string, string> = {
 	XAUUSD: $t('market_quotes.xauusd'),
 }
 
-// 取得 symbol 的中文名稱
 const getSymbolName = (symbol: string): string => {
 	return symbolNameMap[symbol] || symbol
 }
