@@ -9,67 +9,67 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, computed } from 'vue'
-	import { use } from 'echarts/core'
-	import { CanvasRenderer } from 'echarts/renderers'
-	import { PieChart } from 'echarts/charts'
-	import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
-	import VChart from 'vue-echarts'
-	import { formatNumber } from '~/utils/util'
-	import { useI18n } from 'vue-i18n'
+import { ref, computed } from 'vue'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import { PieChart } from 'echarts/charts'
+import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
+import VChart from 'vue-echarts'
+import { formatNumber } from '~/utils/util'
+import { useI18n } from 'vue-i18n'
 
-	const { t } = useI18n()
-	use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent])
+const { t } = useI18n()
+use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent])
 
-	const marketBreadth = ref<number>(0)
-	const { $api } = useNuxtApp()
+const marketBreadth = ref<number>(0)
+const { $api } = useNuxtApp()
 
-	const chartOption = computed(() => {
-		return {
-			tooltip: {
-				trigger: 'item',
-				formatter: '{a} <br/>{b} : {c} ({d}%)',
-			},
-			legend: {
-				orient: 'vertical',
-				left: 'left',
-				data: [t('market_breadth.advancers'), t('market_breadth.decliners')],
-			},
-			series: [
-				{
-					name: t('market_breadth.advancers'),
-					type: 'pie',
-					radius: '50%',
-					center: ['50%', '60%'],
-					color: ['#F88379', '#FDF3F4'],
-					data: [
-						{
-							value: formatNumber(marketBreadth.value),
-							name: t('market_breadth.advancers'),
-						},
-						{
-							value: formatNumber(100 - marketBreadth.value),
-							name: t('market_breadth.decliners'),
-						},
-					],
-					emphasis: {
-						itemStyle: {
-							shadowBlur: 10,
-							shadowOffsetX: 0,
-							shadowColor: 'rgba(0, 0, 0, 0.5)',
-						},
+const chartOption = computed(() => {
+	return {
+		tooltip: {
+			trigger: 'item',
+			formatter: '{b}: {d}%',
+		},
+		legend: {
+			orient: 'vertical',
+			left: 'left',
+			data: [t('market_breadth.advancers'), t('market_breadth.decliners')],
+		},
+		series: [
+			{
+				name: t('market_breadth.advancers'),
+				type: 'pie',
+				radius: '50%',
+				center: ['50%', '60%'],
+				color: ['#F88379', '#FDF3F4'],
+				data: [
+					{
+						value: formatNumber(marketBreadth.value),
+						name: t('market_breadth.advancers'),
+					},
+					{
+						value: formatNumber(100 - marketBreadth.value),
+						name: t('market_breadth.decliners'),
+					},
+				],
+				emphasis: {
+					itemStyle: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.5)',
 					},
 				},
-			],
-		}
-	})
+			},
+		],
+	}
+})
 
-	const { data: fetchedData } = await useAsyncData('market-breadth', async () => {
-		const res = await $api.stock.getMarketBreadth()
-		if (_isNumber(res.data)) {
-			return formatNumber(res.data * 100)
-		}
-	})
+const { data: fetchedData } = await useAsyncData('market-breadth', async () => {
+	const res = await $api.stock.getMarketBreadth()
+	if (_isNumber(res.data)) {
+		return formatNumber(res.data * 100)
+	}
+})
 
-	marketBreadth.value = fetchedData.value ?? 0
+marketBreadth.value = fetchedData.value ?? 0
 </script>
