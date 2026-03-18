@@ -260,7 +260,10 @@
 		"collapse": "Collapse"
 	},
 	"news": {
-		"title": "News Info"
+		"title": "News Info",
+		"searchPlaceholder": "Search News",
+		"searchHint": "Enter keywords to search news",
+		"noResult": "No related news found"
 	},
 	"monte-sim": {
 		"selectStock": "Select Stock",
@@ -292,7 +295,8 @@
 	"common": {
 		"cancel": "Cancel",
 		"confirm": "Confirm",
-		"back": "Back"
+		"back": "Back",
+		"noMore": "No more"
 	},
 	"market": {
 		"marketReport": "Market Report",
