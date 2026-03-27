@@ -1,36 +1,57 @@
 <template>
-	<div>
-		<h1 class="text-lg font-bold flex-center">{{ $t('volatile_asset.hv') }}</h1>
-		<van-tabs v-model:active="activeTab" type="card" class="p-2" color="#F88379">
-			<van-tab :title="$t('volatile_asset.strong_stocks')">
-				<div class="grid grid-cols-1 gap-1 px-1 mt-2">
-					<div>
-						<ul>
-							<li v-for="(stock, index) in winners" :key="index"
-								class="flex items-center py-5 px-2 shadow-card-primary gap-1"
-								@click="handleRoute(stock)">
-								<SvgIcon name="icon_ghost" size="2.5rem" />
-								<span class="text-gray-600">{{ stock.name }}</span>
-								<span class="text-green-600 ml-auto">{{ stock.dayChg }}%</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</van-tab>
+	<div class="py-1">
+		<div class="flex items-baseline justify-between mb-5 px-1">
+			<span class="text-sm font-bold tracking-widest uppercase">
+				{{ $t('volatile_asset.hv') }}
+			</span>
+		</div>
 
-			<van-tab :title="$t('volatile_asset.weak_stocks')">
-				<div class="grid grid-cols-1 gap-1 px-1 my-2">
-					<ul>
-						<li v-for="(stock, index) in losers" :key="index"
-							class="flex items-center py-5 px-2 shadow-card-primary gap-1" @click="handleRoute(stock)">
-							<SvgIcon name="icon_ghost" size="2.5rem" />
-							<span class="text-gray-600">{{ stock.name }}</span>
-							<span class="text-red-500 ml-auto">{{ stock.dayChg }}%</span>
-						</li>
-					</ul>
+		<!-- 自訂 tabs，取代 van-tabs -->
+		<div class="flex gap-2 mb-4">
+			<button class="flex-1 py-2 text-sm font-[500] border rounded-lg transition-all" :class="activeTab === 0
+				? 'bg-[#EAF3DE] border-[#97C459] text-[#3B6D11]'
+				: 'bg-white border-gray-100 text-gray-400'" @click="activeTab = 0">
+				{{ $t('volatile_asset.strong_stocks') }}
+			</button>
+			<button class="flex-1 py-2 text-sm font-[500] border rounded-lg transition-all" :class="activeTab === 1
+				? 'bg-[#FAECE7] border-[#F0997B] text-[#993C1D]'
+				: 'bg-white border-gray-100 text-gray-400'" @click="activeTab = 1">
+				{{ $t('volatile_asset.weak_stocks') }}
+			</button>
+		</div>
+
+		<!-- 列表 -->
+		<ul class="flex flex-col gap-2">
+			<li v-for="(stock, index) in activeTab === 0 ? winners : losers" :key="index"
+				class="flex items-center gap-3 px-4 py-3.5 bg-white border border-gray-100 rounded-xl cursor-pointer active:scale-[0.99] transition-all hover:border-gray-200 hover:bg-gray-50"
+				@click="handleRoute(stock)">
+				<!-- 排名 -->
+				<span class="w-5 text-[12px] text-gray-300 tabular-nums text-center shrink-0">
+					{{ index + 1 }}
+				</span>
+
+				<!-- icon badge -->
+				<div class="w-12 h-12 rounded-lg flex items-center justify-center text-sm font-[500] shrink-0"
+					:class="activeTab === 0 ? 'bg-[#EAF3DE] text-[#3B6D11]' : 'bg-[#FAECE7] text-[#993C1D]'">
+					{{ stock.symbol ?? '??' }}
 				</div>
-			</van-tab>
-		</van-tabs>
+
+				<!-- 名稱 -->
+				<div class="flex-1 min-w-0">
+					<div class="text-[14px] font-[500] truncate">{{ stock.name }}</div>
+					<div class="text-[12px] text-gray-400 mt-0.5">{{ stock.symbol }}</div>
+				</div>
+
+				<!-- 分隔線 -->
+				<div class="w-px h-7 bg-gray-100 shrink-0" />
+
+				<!-- 漲跌幅 -->
+				<span class="text-[15px] font-[500] tabular-nums shrink-0"
+					:class="activeTab === 0 ? 'text-[#3B6D11]' : 'text-[#993C1D]'">
+					{{ stock.dayChg }}%
+				</span>
+			</li>
+		</ul>
 	</div>
 </template>
 
