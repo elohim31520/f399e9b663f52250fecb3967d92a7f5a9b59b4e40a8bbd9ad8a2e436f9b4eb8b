@@ -1,16 +1,39 @@
 <template>
-	<div class="grid grid-cols-1 gap-1 px-1 mt-2">
-		<h1 class="text-lg font-bold flex-center">{{ $t('market_quotes.title') }}</h1>
-		<div>
-			<ul>
-				<li v-for="(item, index) in fetchedData" :key="index"
-					class="flex items-center py-5 px-2 shadow-card-primary gap-1 cursor-pointer active:opacity-60 transition-opacity"
-					@click="navigateTo(localePath(`/asset-price-chart/${item.symbol.toLowerCase()}`))">
-					<span class="text-gray-600">{{ getSymbolName(item.symbol) }}</span>
-					<span class="text-primary-600 ml-auto">{{ parseFloat(item.price) }}</span>
-				</li>
-			</ul>
+	<div class="py-1">
+		<div class="flex items-baseline justify-between mb-5 px-1">
+			<span class="text-[13px] font-[500] tracking-widest uppercase text-gray-400">
+				{{ $t('market_quotes.title') }}
+			</span>
+			<span class="text-sm text-gray-300">{{ fetchedData.length }} 檔</span>
 		</div>
+
+		<ul class="flex flex-col gap-2">
+			<li v-for="(item, index) in fetchedData" :key="index"
+				class="flex items-center gap-3 px-4 py-3.5 bg-white border border-gray-100 rounded-xl cursor-pointer active:scale-[0.99] transition-all hover:border-gray-200 hover:bg-gray-50"
+				@click="navigateTo(localePath(`/asset-price-chart/${item.symbol.toLowerCase()}`))">
+				<!-- 縮寫 icon -->
+				<div
+					class="w-9 h-9 rounded-lg bg-[#FEF1EF] flex items-center justify-center text-sm font-[500] text-primary-600 shrink-0">
+					{{ item.symbol.slice(0, 2) }}
+				</div>
+
+				<!-- 名稱 -->
+				<div class="flex-1 min-w-0">
+					<div class="text-[14px] font-[500] truncate">{{ getSymbolName(item.symbol) }}</div>
+					<div class="text-sm text-gray-400 mt-0.5">{{ item.symbol }}</div>
+				</div>
+
+				<!-- 分隔線 -->
+				<div class="w-px h-7 bg-gray-100 shrink-0" />
+
+				<!-- 價格 -->
+				<div class="text-right shrink-0">
+					<div class="text-[15px] font-[500] tabular-nums">
+						${{ parseFloat(item.price).toFixed(2) }}
+					</div>
+				</div>
+			</li>
+		</ul>
 	</div>
 </template>
 
