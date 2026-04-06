@@ -26,9 +26,9 @@
 				class="flex items-center gap-3 px-4 py-3.5 bg-white border border-gray-100 rounded-xl cursor-pointer active:scale-[0.99] transition-all hover:border-gray-200 hover:bg-gray-50"
 				@click="handleRoute(stock)">
 				<!-- 排名 -->
-				<span class="w-5 text-[12px] text-gray-300 tabular-nums text-center shrink-0">
+				<!-- <span class="w-5 text-[12px] text-gray-300 tabular-nums text-center shrink-0">
 					{{ index + 1 }}
-				</span>
+				</span> -->
 
 				<!-- icon badge -->
 				<div class="w-12 h-12 rounded-lg flex items-center justify-center text-sm font-[500] shrink-0"
