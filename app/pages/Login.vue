@@ -1,5 +1,5 @@
 <template>
-	<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-8">
+	<div class="flex items-center justify-center bg-gray-50 px-4 py-4">
 		<div class="w-full max-w-480px rounded-2xl overflow-hidden shadow-card-primary bg-white">
 
 			<!-- Header -->
