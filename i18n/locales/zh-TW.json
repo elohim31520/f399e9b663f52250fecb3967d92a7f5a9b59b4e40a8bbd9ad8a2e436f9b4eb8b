@@ -41,7 +41,9 @@
 		"login_success": "登入成功",
 		"google_login_success": "Google 登入成功",
 		"google_login_fail": "Google 登入失敗",
-		"invalid_email_format": "不正確的email格式"
+		"invalid_email_format": "不正確的email格式",
+		"welcome_back": "歡迎回來",
+		"login_to_continue": "登入您的帳號以繼續"
 	},
 	"companies": {
 		"title": "公司列表"

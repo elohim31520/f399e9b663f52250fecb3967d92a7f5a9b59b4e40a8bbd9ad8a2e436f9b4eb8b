@@ -1,35 +1,81 @@
 <template>
-	<div>
-		<van-nav-bar :title="$t('login.login')" />
-		<van-form @submit="onSubmit">
-			<van-cell-group inset>
-				<van-field v-model="email" name="email" type="email" :label="$t('register.email')"
-					:placeholder="$t('register.enter_email')" :rules="[
-						{ required: true, message: $t('register.enter_email') },
-						{ pattern: /.+@.+\..+/, message: $t('login.invalid_email_format') }
-					]" />
-				<van-field v-model="password" type="password" name="password" :label="$t('login.password')"
-					:placeholder="$t('login.enter_password')"
-					:rules="[{ required: true, message: $t('login.please_fill_password') }]" />
-			</van-cell-group>
-			<div class="flex-y-center">
-				<div class="text-primary font-bold px-5 pt-2" @click="navigateTo(localePath('/register'))">
-					{{ $t('login.register') }}
+	<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-8">
+		<div class="w-full max-w-480px rounded-2xl overflow-hidden shadow-card-primary bg-white">
+
+			<!-- Header -->
+			<div class="relative bg-primary pb-10 px-8 pt-8">
+				<div
+					class="w-12 h-12 rounded-full bg-white/25 border border-white/50 flex items-center justify-content mb-4">
+					<van-icon name="manager-o" size="24" color="#fff" class="m-auto" />
 				</div>
-				<div class="text-primary font-bold px-5 pt-2 ml-auto"
-					@click="navigateTo(localePath('/change-password'))">
-					{{ $t('login.forgot_password') }}
-				</div>
+				<h1 class="text-2xl font-semibold text-white tracking-tight">{{ $t('login.welcome_back') }}</h1>
+				<p class="text-sm text-white/75 mt-1">{{ $t('login.login_to_continue') }}</p>
+				<!-- 波浪切角 -->
+				<div class="absolute bottom-0 left-0 right-0 h-6 bg-white rounded-t-2xl" />
 			</div>
-			<div style="margin: 16px">
-				<van-button round block type="primary" color="#F88379" native-type="submit">{{ $t('login.login')
-				}}</van-button>
+
+			<!-- Body -->
+			<div class="px-6 pb-8 pt-2">
+				<van-form @submit="onSubmit">
+
+					<!-- Email -->
+					<div class="mb-4">
+						<label class="block text-xs font-medium text-gray-400 uppercase tracking-widest mb-1.5">
+							{{ $t('register.email') }}
+						</label>
+						<van-field v-model="email" name="email" type="email"
+							class="!rounded-xl !bg-gray-50 !border !border-gray-200 focus-within:!border-primary focus-within:!bg-white focus-within:!shadow-[0_0_0_3px_rgba(248,131,121,0.12)]"
+							:placeholder="$t('register.enter_email')" :rules="[
+								{ required: true, message: $t('register.enter_email') },
+								{ pattern: /.+@.+\..+/, message: $t('login.invalid_email_format') }
+							]" />
+					</div>
+
+					<!-- Password -->
+					<div class="mb-2">
+						<label class="block text-xs font-medium text-gray-400 uppercase tracking-widest mb-1.5">
+							{{ $t('login.password') }}
+						</label>
+						<van-field v-model="password" type="password" name="password"
+							class="!rounded-xl !bg-gray-50 !border !border-gray-200 focus-within:!border-primary focus-within:!bg-white focus-within:!shadow-[0_0_0_3px_rgba(248,131,121,0.12)]"
+							:placeholder="$t('login.enter_password')"
+							:rules="[{ required: true, message: $t('login.please_fill_password') }]" />
+					</div>
+
+					<!-- Links -->
+					<div class="flex justify-between mb-5">
+						<span class="text-sm text-primary font-medium cursor-pointer"
+							@click="navigateTo(localePath('/register'))">
+							{{ $t('login.register') }}
+						</span>
+						<span class="text-sm text-primary font-medium cursor-pointer"
+							@click="navigateTo(localePath('/change-password'))">
+							{{ $t('login.forgot_password') }}
+						</span>
+					</div>
+
+					<!-- Submit -->
+					<van-button round block native-type="submit" color="#F88379"
+						class="!h-11 !text-base !font-semibold !rounded-xl">
+						{{ $t('login.login') }}
+					</van-button>
+
+					<!-- Divider -->
+					<div class="flex items-center gap-3 my-5">
+						<div class="flex-1 h-px bg-gray-100" />
+						<span class="text-xs text-gray-400"> OR </span>
+						<div class="flex-1 h-px bg-gray-100" />
+					</div>
+
+					<!-- Google -->
+					<div class="flex justify-center">
+						<GoogleSignInButton size="large" type="standard" @success="handleGoogleLogin"
+							@error="handleGoogleLoginError" />
+					</div>
+
+				</van-form>
 			</div>
-			<div class="flex-center m-16">
-				<GoogleSignInButton size="large" type="standard" @success="handleGoogleLogin"
-					@error="handleGoogleLoginError"></GoogleSignInButton>
-			</div>
-		</van-form>
+		</div>
 	</div>
 </template>
 

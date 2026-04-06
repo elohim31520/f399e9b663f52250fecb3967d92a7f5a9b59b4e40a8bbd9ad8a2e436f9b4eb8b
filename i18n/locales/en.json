@@ -41,7 +41,9 @@
 		"login_success": "Login successful",
 		"google_login_success": "Google login successful",
 		"google_login_fail": "Google login failed",
-		"invalid_email_format": "Invalid email format"
+		"invalid_email_format": "Invalid email format",
+		"welcome_back": "Welcome Back",
+		"login_to_continue": "Login To Continue"
 	},
 	"companies": {
 		"title": "Companies"
