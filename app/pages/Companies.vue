@@ -1,16 +1,50 @@
 <template>
-	<div class="bg-white shadow-card-primary">
-		<div class="text-xl font-bold p-2">{{ $t('companies.title') }}</div>
+	<div class="bg-white min-h-screen">
+		<!-- Header -->
+		<div class="sticky top-0 z-10 bg-white/90 backdrop-blur-sm border-b border-gray-100 px-4 py-3">
+			<h1 class="text-lg font-semibold text-gray-800 tracking-tight">
+				{{ $t('companies.title') }}
+			</h1>
+		</div>
 
-		<van-index-bar :index-list="indexList">
+		<van-index-bar :index-list="indexList" :sticky-offset-top="52">
 			<template v-for="(group, letter) in groupedCompanies" :key="letter">
-				<van-index-anchor :index="letter" />
-				<div v-for="company in group" :key="company.symbol" class="flex-y-center justify-between">
-					<div class="w-full flex-y-center text-#434343 h-[3.75rem] px-1 shadow-card-primary gap-5"
+				<!-- Index Anchor -->
+				<van-index-anchor :index="letter">
+					<span class="text-xs font-semibold tracking-widest text-primary uppercase px-1">
+						{{ letter }}
+					</span>
+				</van-index-anchor>
+
+				<!-- Company List -->
+				<div class="px-3 pb-2 space-y-1">
+					<div v-for="company in group" :key="company.symbol"
+						class="group flex items-center gap-3 px-3 py-3 rounded-xl bg-white border border-gray-100 active:scale-[0.98] transition-all duration-150 cursor-pointer hover:border-primary/30 hover:shadow-card-primary"
 						@click="handleClick(company.symbol)">
-						<CompanyIcon :symbol="company.symbol" />
-						<div class="text-primary font-bold">{{ company.symbol }}</div>
-						<div class="ml-2 text-sm">{{ company.name }}</div>
+						<!-- Company Icon -->
+						<div class="shrink-0">
+							<CompanyIcon :symbol="company.symbol" />
+						</div>
+
+						<!-- Symbol Badge -->
+						<div class="shrink-0 min-w-[3rem] px-2 py-0.5 rounded-md bg-primary/10 text-center">
+							<span class="text-xs font-bold text-primary tracking-wide">
+								{{ company.symbol }}
+							</span>
+						</div>
+
+						<!-- Company Name -->
+						<div class="flex-1 min-w-0">
+							<p class="text-sm text-gray-600 truncate leading-snug">{{ company.name }}</p>
+						</div>
+
+						<!-- Arrow -->
+						<div class="shrink-0 text-gray-300 group-hover:text-primary/50 transition-colors duration-150">
+							<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+								<path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+									stroke-linejoin="round" />
+							</svg>
+						</div>
 					</div>
 				</div>
 			</template>
