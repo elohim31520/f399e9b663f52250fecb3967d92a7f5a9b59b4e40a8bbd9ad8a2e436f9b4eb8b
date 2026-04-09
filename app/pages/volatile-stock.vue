@@ -1,42 +1,48 @@
 <template>
-	<div class="grid grid-cols-1 gap-1 mt-2">
-		<!-- 過濾選單 -->
-		<div class="px-1 mb-2">
+	<div class="min-h-screen bg-gray-50">
+		<!-- 過濾工具列 -->
+		<div class="sticky top-0 z-10 bg-white/90 backdrop-blur-sm border-b border-gray-100 px-3 py-2.5">
 			<van-row gutter="8">
-				<!-- 排序方向 -->
 				<van-col span="8">
-					<van-button size="small" block @click="toggleSort">
+					<van-button size="small" block hairline round class="!text-xs !font-semibold" @click="toggleSort">
 						{{ sortOrder === 'asc' ? $t('volatile_stock.sort.asc') : $t('volatile_stock.sort.desc') }}
 					</van-button>
 				</van-col>
 
-				<!-- 只顯示正值 -->
 				<van-col span="8">
-					<van-button size="small" block :type="filter === 'positive' ? 'success' : 'default'"
+					<van-button size="small" block hairline round :type="filter === 'positive' ? 'success' : 'default'"
 						@click="setFilter('positive')">
-						{{ $t('volatile_stock.filter.positive') }}
+						▲ {{ $t('volatile_stock.filter.positive') }}
 					</van-button>
 				</van-col>
 
-				<!-- 只顯示負值 -->
 				<van-col span="8">
-					<van-button size="small" block :type="filter === 'negative' ? 'danger' : 'default'"
+					<van-button size="small" block hairline round :type="filter === 'negative' ? 'danger' : 'default'"
 						@click="setFilter('negative')">
-						{{ $t('volatile_stock.filter.negative') }}
+						▼ {{ $t('volatile_stock.filter.negative') }}
 					</van-button>
 				</van-col>
 			</van-row>
 		</div>
 
 		<!-- 股票列表 -->
-		<ul>
+		<ul class="px-3 pt-3 pb-24 space-y-1.5">
 			<li v-for="(stock, index) in displayedData" :key="index"
-				class="flex items-center py-1 px-2.5 shadow-card-primary gap-5" @click="handleRoute(stock)">
-				<CompanyIcon :symbol="stock.symbol || ''" />
-				<span class="text-gray-600">{{ stock.name }}</span>
-				<span class="text-green-600 ml-auto" :class="{ 'text-red-600': +stock.dayChg < 0 }">
-					{{ stock.dayChg }}%
-				</span>
+				class="group flex items-center gap-3 px-3 py-3 rounded-xl bg-white border border-gray-100 cursor-pointer active:scale-[0.98] transition-all duration-150 hover:border-gray-200 hover:shadow-card-primary"
+				@click="handleRoute(stock)">
+				<div class="shrink-0">
+					<CompanyIcon :symbol="stock.symbol || ''" />
+				</div>
+
+				<div class="flex-1 min-w-0">
+					<div class="text-xs font-bold text-primary tracking-wide">{{ stock.symbol }}</div>
+					<div class="text-sm text-gray-500 truncate leading-snug mt-0.5">{{ stock.name }}</div>
+				</div>
+
+				<div class="shrink-0 min-w-[4.5rem] text-right px-2.5 py-1.5 rounded-lg text-sm font-bold tabular-nums"
+					:class="+stock.dayChg >= 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-500'">
+					{{ +stock.dayChg >= 0 ? '+' : '' }}{{ stock.dayChg }}%
+				</div>
 			</li>
 		</ul>
 
