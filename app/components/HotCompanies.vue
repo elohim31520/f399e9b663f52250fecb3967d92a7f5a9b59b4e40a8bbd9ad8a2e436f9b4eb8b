@@ -27,17 +27,9 @@ import { ref } from 'vue'
 const localePath = useLocalePath()
 
 const companies = ref([
-	{ id: 'tsla' },
-	{ id: 'nvda' },
-	{ id: 'pltr' },
-	{ id: 'amzn' },
-	{ id: 'goog' },
-	{ id: 'meta' },
-	{ id: 'msft' },
-	{ id: 'aapl', useLogoPath: true },
-	{ id: 'crwv', useLogoPath: true },
-	{ id: 'oklo', useLogoPath: true },
 	// --- 熱門建議標的 ---
+	{ id: 'cohr', useLogoPath: true },
+	{ id: 'lite', useLogoPath: true },
 	{ id: 'tsm', useLogoPath: true },
 	{ id: 'amd', useLogoPath: true },
 	{ id: 'mu', useLogoPath: true },
@@ -47,6 +39,16 @@ const companies = ref([
 	{ id: 'app', useLogoPath: true },
 	{ id: 'sofi', useLogoPath: true },
 	{ id: 'avgo', useLogoPath: true },
+	{ id: 'crwv', useLogoPath: true },
+	{ id: 'oklo', useLogoPath: true },
+	{ id: 'tsla' },
+	{ id: 'nvda' },
+	{ id: 'pltr' },
+	{ id: 'amzn' },
+	{ id: 'goog' },
+	{ id: 'meta' },
+	{ id: 'msft' },
+	{ id: 'aapl', useLogoPath: true },
 ])
 
 const handleClick = (symbol: string) => {
