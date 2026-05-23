@@ -13,6 +13,9 @@
 			<div class="h-[400px]">
 				<v-chart class="chart" :option="option" autoresize />
 			</div>
+			<template #fallback>
+				<div class="h-[400px] bg-gray-100 animate-pulse" />
+			</template>
 		</ClientOnly>
 
 		<div class="text-gray-500 p-2">
