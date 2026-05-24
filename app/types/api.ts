@@ -40,3 +40,8 @@ export interface PaginationParams {
 	page: number
 	size: number
 }
+
+export interface NewsPagination extends PaginationParams {
+	keyword?: string | undefined
+	lang?: string
+}
