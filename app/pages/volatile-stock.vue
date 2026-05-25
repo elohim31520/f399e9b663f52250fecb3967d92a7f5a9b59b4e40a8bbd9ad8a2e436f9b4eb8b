@@ -51,11 +51,11 @@
 </template>
 
 <script lang="ts" setup>
-const { $api } = useNuxtApp()
+const { $publicKV } = useNuxtApp()
 import type { TodayStockPrice } from '@/types/stock'
 
 const { data: fetchedData } = await useAsyncData('volatile-stock', async () => {
-	const res = await $api.stock.getTodayStocks()
+	const res = await $publicKV.getTodayStocks()
 	return res.data
 })
 

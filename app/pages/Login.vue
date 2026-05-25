@@ -81,37 +81,58 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { login, loginWithGoogle } from '../api/user'
 import { useStorage } from '@vueuse/core'
 import { GoogleSignInButton } from 'vue3-google-signin'
 import { useI18n } from 'vue-i18n'
+import { useUserStore } from '../stores/user'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
 const email = ref('')
 const password = ref('')
 const storedUsername = useStorage('username', '')
+const userStore = useUserStore()
+const { isAuthenticated } = useAuth()
 
 const onSubmit = async (values: any) => {
-	const res = await login({
-		email: values.email,
-		password: values.password,
-	})
-	if (res.success) {
-		storedUsername.value = values.email
-		showToast(t('login.login_success'))
-		navigateTo(localePath('/'))
+	try {
+		const res = await $fetch('/api/user/login', {
+			method: 'POST',
+			body: {
+				email: values.email,
+				password: values.password,
+			},
+		})
+
+		if (res.success) {
+			// BFF 已寫入 cookie，這裡只更新前端狀態
+			userStore.setUsername(res.data.name)
+			isAuthenticated.value = true
+			showToast(t('login.login_success'))
+			navigateTo(localePath('/'))
+		}
+	} catch (error) {
+		if (import.meta.dev) console.error(error)
+		showToast(t('login.login_fail'))
 	}
 }
 
 const handleGoogleLogin = async (response: any) => {
 	const { credential } = response
-	if (!credential) {
-		return handleGoogleLoginError()
-	}
+	if (!credential) return handleGoogleLoginError()
+
 	try {
-		const res = await loginWithGoogle(credential)
+		const res = await $fetch<{
+			success: boolean
+			data: { name: string; picture: string }
+		}>('/api/user/google-login', {
+			method: 'POST',
+			body: { credential },
+		})
+
 		if (res.success) {
+			isAuthenticated.value = true
+			userStore.setGoogleUserInfo(res.data.picture, res.data.name)
 			showToast(t('login.google_login_success'))
 			navigateTo(localePath('/'))
 		} else {

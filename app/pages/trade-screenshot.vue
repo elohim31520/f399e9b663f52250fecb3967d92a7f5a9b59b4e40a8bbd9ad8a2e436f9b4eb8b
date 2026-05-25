@@ -49,7 +49,6 @@
 import { ref } from 'vue'
 import { showToast, showLoadingToast, closeToast, showImagePreview } from 'vant'
 import type { UploaderFileListItem } from 'vant'
-import { transactionApi } from '../api/transaction'
 import { useUserStore } from '@/stores/user'
 import { useAiTradeStore } from '@/stores/aiTrade'
 
@@ -57,6 +56,7 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const userStore = useUserStore()
 const tradeStore = useAiTradeStore()
+const { $bffApi } = useNuxtApp()
 
 // 檔案列表
 const fileList = ref<UploaderFileListItem[]>([])
@@ -133,8 +133,9 @@ const handleSubmit = async () => {
             throw new Error('No file found')
         }
 
-        // 直接傳 File，FormData 在 httpClient.uploadFile 裡建立
-        const response = await transactionApi.aiAnalyzeScreenshot(file)
+        const formData = new FormData()
+        formData.append('file', file)
+        const response = await $bffApi.analyzeScreenshot(file)
 
         closeToast()
 

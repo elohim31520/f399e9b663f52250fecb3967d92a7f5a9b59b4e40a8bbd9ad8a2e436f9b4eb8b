@@ -27,7 +27,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { register } from '../api/user'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -42,12 +41,17 @@ const passwordValidator = (val: string) => {
 }
 
 const onSubmit = async (values: any) => {
-	const res = await register({
-		name: values.username,
-		password: values.password,
-		email: values.email,
+	const res = await $fetch('/api/user/register', {
+		method: 'POST',
+		body: {
+			name: values.username,
+			password: values.password,
+			email: values.email,
+		},
 	})
 	if (res.success) {
+		const userStore = useUserStore()
+		userStore.fetchMe()
 		showToast(t('register.register_success'))
 		navigateTo(localePath('/'))
 	}

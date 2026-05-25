@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
         success: boolean
         data: { token: string }
         message: string
-    }>(`${process.env.API_BASE_URL}/user/login`, {
+    }>(`${process.env.VITE_API_URL}/user/login`, {
         method: 'POST' as const,
         body,
     })
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
         res.data.token
     )
 
-    setCookie(event, 'auth_token', res.data.token, {
+    setCookie(event, 'user_token', res.data.token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',

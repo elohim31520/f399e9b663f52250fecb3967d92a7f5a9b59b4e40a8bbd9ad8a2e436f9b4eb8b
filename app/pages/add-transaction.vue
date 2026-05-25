@@ -80,7 +80,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { FormInstance } from 'vant'
-import { transactionApi } from '../api/transaction'
 import emitter from '~/utils/emitter'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/stores/user'
@@ -89,6 +88,7 @@ import type { TradeParams } from '@/types/trade'
 const { t } = useI18n()
 const localePath = useLocalePath()
 const userStore = useUserStore()
+const { $bffApi } = useNuxtApp()
 
 const getInitialFormState = (): TradeParams => ({
 	stockSymbol: '',
@@ -125,7 +125,7 @@ const onSubmit = async () => {
 			quantity: form.value.quantity,
 			price: form.value.price,
 		}
-		await transactionApi.recordMyTransactions(payload)
+		await $bffApi.createTrade(payload)
 		showToast({
 			type: 'success',
 			message: t('transaction.transaction_saved'),

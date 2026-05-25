@@ -27,7 +27,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { changePassword } from '../api/user'
 import { showToast } from 'vant'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/stores/user'
@@ -35,6 +34,8 @@ import { useUserStore } from '@/stores/user'
 const { t } = useI18n()
 const localePath = useLocalePath()
 const userStore = useUserStore()
+const { $bffApi } = useNuxtApp()
+
 const oldPassword = ref('')
 const newPassword = ref('')
 const confirmNewPassword = ref('')
@@ -52,7 +53,7 @@ const passwordValidator = (val: string) => {
 }
 
 const onSubmit = async (values: any) => {
-	const res = await changePassword({
+	const res = await $bffApi.changePassword({
 		oldPassword: values.oldPassword,
 		newPassword: values.newPassword
 	})

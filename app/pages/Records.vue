@@ -2,7 +2,7 @@
 	<div class="bg-gray-50">
 		<div class="mx-2 bg-white p-2 rounded-2xl shadow-lg">
 			<h1 class="text-[24px] font-bold mb-2 text-gray-800">{{ $t('records.transaction_records') }}</h1>
-			<Waterfall ref="waterfallRef" dataPath="data.data" :apiFunction="transactionApi.getAllTransactions">
+			<Waterfall ref="waterfallRef" dataPath="data.data" :apiFunction="fetchTrades">
 				<template #default="{ list }">
 					<van-swipe-cell v-for="item in (list as TradeWithCompany[])" :key="item.id" :right-width="65"
 						:left-width="65" @close="(details) => onClose(details, item)">
@@ -57,7 +57,6 @@
 
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue'
-import { transactionApi } from '../api/transaction'
 import { showConfirmDialog } from 'vant'
 import { formatDate } from '@/utils/date'
 import Waterfall from '@/components/Waterfall/index.vue'
@@ -66,6 +65,9 @@ import { useI18n } from 'vue-i18n'
 import type { TradeWithCompany } from '@/types/trade'
 
 const { t } = useI18n()
+const { $bffApi } = useNuxtApp()
+
+const fetchTrades = (params: Record<string, unknown>) => $bffApi.getTrades(params)
 
 definePageMeta({
 	middleware: 'auth',
@@ -95,7 +97,7 @@ const onClose = (details: any, item: TradeWithCompany) => {
 			})
 				.then(async () => {
 					if (item.id) {
-						await transactionApi.deleteTransaction(item.id)
+						await $bffApi.deleteTrade(item.id)
 						waterfallRef.value?.refresh()
 					}
 				})
@@ -112,7 +114,7 @@ const updateTransactionApi = async (payload: any) => {
 	if (!item?.id) {
 		throw new Error('Missing transaction id')
 	}
-	return transactionApi.updateTransaction(item.id, {
+	return $bffApi.updateTrade(item.id, {
 		stockSymbol: payload.stockSymbol,
 		tradeType: payload.tradeType,
 		quantity: String(payload.quantity),

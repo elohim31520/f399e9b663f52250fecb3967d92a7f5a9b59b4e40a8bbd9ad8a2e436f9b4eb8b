@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { showNotify } from 'vant'
-import { transactionApi } from '../api/transaction'
 
 export type JobStatus = 'pending' | 'success' | 'failed'
 
@@ -85,7 +84,7 @@ export const useAiTradeStore = defineStore('aiTrade', {
 
         async _fetchJobStatus(jobId: string) {
             try {
-                const res = await transactionApi.getTradeJobStatus(jobId)
+                const res = await useNuxtApp().$bffApi.getAIJobStatus(jobId)
                 const data = res.data
                 console.log(data);
 

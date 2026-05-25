@@ -59,7 +59,7 @@
 
 		<TransactionFormPopup v-model="showUpdatePopup" :item="selectedItemForUpdate" @submit-success="onUpdateSuccess"
 			:api-function="(payload) =>
-				portfolioApi.updateMyPortfolio({
+				$bffApi.updatePortfolio({
 					stockSymbol: payload.stockSymbol,
 					quantity: payload.quantity,
 					averagePrice: payload.price,
@@ -72,7 +72,6 @@
 import { ref, onMounted, watch, onActivated } from 'vue'
 import { showConfirmDialog, showToast } from 'vant'
 import { usePortfolioStore } from '@/stores/portfolio'
-import { portfolioApi } from '@/api/portfolio'
 import { formatNumber } from '~/utils/util'
 import type { PortfolioItem } from '@/types/portfolio'
 import { useI18n } from 'vue-i18n'
@@ -81,6 +80,7 @@ import { useUserStore } from '@/stores/user'
 const { t } = useI18n()
 const portfolioStore = usePortfolioStore()
 const userStore = useUserStore()
+const { $bffApi } = useNuxtApp()
 
 const showNotice = ref(true)
 
@@ -114,7 +114,7 @@ const onClose = (details: any, item: PortfolioItem) => {
 						showToast(t('portfolio.missing_item_id'))
 						return Promise.reject('Missing item id')
 					}
-					return portfolioApi.deleteMyPortfolio(item.id)
+					return $bffApi.deletePortfolio(item.id)
 				})
 				.then(() => {
 					portfolioStore.fetchMyPortfolio()

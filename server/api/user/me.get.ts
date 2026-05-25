@@ -1,7 +1,7 @@
 import { decodeJwtPayload } from '../../utils/jwt'
 
 export default defineEventHandler((event) => {
-    const token = getCookie(event, 'auth_token')
+    const token = getCookie(event, 'user_token')
 
     if (!token) {
         throw createError({ statusCode: 401, message: 'Unauthorized' })

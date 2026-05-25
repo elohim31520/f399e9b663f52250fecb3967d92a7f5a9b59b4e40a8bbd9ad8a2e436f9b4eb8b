@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { portfolioApi } from '../api/portfolio'
 import type { PortfolioItem } from '@/types/portfolio'
 
 export const usePortfolioStore = defineStore('portfolio', {
@@ -11,7 +10,7 @@ export const usePortfolioStore = defineStore('portfolio', {
 			try {
 				const { isAuthenticated } = useAuth()
 				if (!isAuthenticated.value) return
-				const res = await portfolioApi.getMyPortfolio()
+				const res = await useNuxtApp().$bffApi.getPortfolios()
 				if (_isArray(_get(res, 'data'))) {
 					this.portfolioData = _get(res, 'data')
 				} else {

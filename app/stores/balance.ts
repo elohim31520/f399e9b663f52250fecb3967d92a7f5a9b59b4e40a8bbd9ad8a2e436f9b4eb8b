@@ -17,8 +17,8 @@ export const useBalanceStore = defineStore('balance', {
 			const { isAuthenticated } = useAuth()
 			if (!isAuthenticated.value) return
 			try {
-				const { $api } = useNuxtApp()
-				const res = await $api.balances.getMyBalances()
+				const { $bffApi } = useNuxtApp()
+				const res = await $bffApi.getMyBalances()
 				const usdData = _get(res, 'data')
 				if (usdData) {
 					this.usdInfo = usdData
