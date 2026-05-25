@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-const { $api } = useNuxtApp()
+const { $publicKV } = useNuxtApp()
 const { locale } = useI18n()
 
 interface News {
@@ -48,7 +48,7 @@ interface NewsResponse {
 
 const fetchKV = async (): Promise<NewsResponse> => {
 	try {
-		const res = await $api.news.getNewsKV()
+		const res = await $publicKV.getNews()
 		return res.data as unknown as NewsResponse
 	} catch (error) {
 		console.error(`Failed to fetch News:`, error)

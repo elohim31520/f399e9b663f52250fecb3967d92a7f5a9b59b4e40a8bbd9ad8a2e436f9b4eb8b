@@ -126,11 +126,11 @@
 import { computed } from 'vue'
 import { format } from 'date-fns'
 
-const { $api } = useNuxtApp()
+const { $publicApi } = useNuxtApp()
 const { locale } = useI18n()
 
 const { data: marketData, error } = await useAsyncData('market-summary', () =>
-    $api.market.getMarketSummary()
+    $publicApi.getMarketSummary()
 )
 
 const summary = computed(() => {

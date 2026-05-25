@@ -57,6 +57,7 @@ export default defineNuxtPlugin(() => {
         provide: {
             publicKV: {
                 // market
+                /** days 僅支援 1（1 小時快取）與 3（每日快取），其他 days 請走 bff.getMomentumByRange */
                 getMomentumByRange: (days: number) =>
                     client<ResponseData<any[]>>(`/market/momentum/range/${days}`),
                 getQuotes: () =>

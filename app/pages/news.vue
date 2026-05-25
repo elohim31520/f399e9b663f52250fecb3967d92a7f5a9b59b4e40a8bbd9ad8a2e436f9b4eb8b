@@ -20,7 +20,7 @@
             <!-- CSR 後續分頁（Waterfall） -->
             <ClientOnly>
                 <Waterfall ref="waterfallRef" dataPath="data.rows" :initialPage="2"
-                    :apiFunction="(params) => $api.news.getNews(params)">
+                    :apiFunction="(params) => $publicApi.getNews(params)">
                     <template #default="{ list }">
                         <div class="news-list px-4 pb-6 space-y-4">
                             <NewsCard v-for="item in list" :key="item.id" :item="item" />
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-const { $api } = useNuxtApp()
+const { $publicKV } = useNuxtApp()
 const { t } = useI18n()
 
 const waterfallRef = ref(null)
@@ -41,7 +41,7 @@ const isSearching = ref(false)
 
 const { data: fetchedData } = await useAsyncData(
     'news-first-page',
-    () => $api.news.getNewsKV()
+    () => $publicKV.getNews()
 )
 
 const firstPageList = computed(() => fetchedData.value?.data?.rows ?? [])

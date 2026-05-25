@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-const { $api } = useNuxtApp()
+const { $publicKV } = useNuxtApp()
 const localePath = useLocalePath()
 
 const symbolNameMap: Record<string, string> = {
@@ -60,7 +60,7 @@ const {
 } = await useAsyncData(
 	'market-quotes-data',
 	async () => {
-		const res = await $api.market.getQuotes()
+		const res = await $publicKV.getQuotes()
 		return _get(res, 'data', [])
 	},
 	{

@@ -50,12 +50,12 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { metricsApi } from '@/api/metrics'
 import { useUIStore } from '@/stores/ui'
 import { NYSE } from '../constants/symbolPrefix'
 
 const uiStore = useUIStore()
 const route = useRoute()
+const { $publicKV } = useNuxtApp()
 
 const symbol = computed(() => {
 	return route.params.symbol as string
@@ -76,7 +76,7 @@ const metrics = ref<any[]>([])
 
 const getMetrics = async (days: number = 60) => {
 	// 只有熱門股票的資料可以不做認證就可以看
-	const response = await metricsApi.getStatementBySymbol(symbol.value, days)
+	const response = await $publicKV.getStatementBySymbol(symbol.value, days)
 	metrics.value = _reverse(_get(response, 'data', []))
 }
 

@@ -22,7 +22,7 @@ const { t } = useI18n()
 use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent])
 
 const marketBreadth = ref<number>(0)
-const { $api } = useNuxtApp()
+const { $publicKV } = useNuxtApp()
 
 const chartOption = computed(() => {
 	return {
@@ -65,7 +65,7 @@ const chartOption = computed(() => {
 })
 
 const { data: fetchedData } = await useAsyncData('market-breadth', async () => {
-	const res = await $api.stock.getMarketBreadth()
+	const res = await $publicKV.getMarketBreadth()
 	if (_isNumber(res.data)) {
 		return formatNumber(res.data * 100)
 	}

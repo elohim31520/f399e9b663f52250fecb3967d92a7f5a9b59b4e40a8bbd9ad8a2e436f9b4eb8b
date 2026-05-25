@@ -60,10 +60,10 @@ import { ref } from 'vue'
 import type { TodayStockPrice } from '@/types/stock'
 
 const activeTab = ref(0)
-const { $api } = useNuxtApp()
+const { $publicKV } = useNuxtApp()
 
 const { data: fetchedData } = await useAsyncData('volatile-asset', async () => {
-	const res = await $api.stock.getTodayStocks()
+	const res = await $publicKV.getTodayStocks()
 	return res.data
 })
 

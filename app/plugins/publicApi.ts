@@ -51,15 +51,11 @@ export default defineNuxtPlugin(() => {
     return {
         provide: {
             publicApi: {
-                // market
-                getAllMomentum: () =>
-                    client<ResponseData<any[]>>('/market/momentum'),
-                getMarketWeights: () =>
-                    client<ResponseData<any[]>>('/market/weights'),
+                // market（公開，無需 auth）
                 getMarketSummary: () =>
                     client<ResponseData<any>>('/market/summary'),
 
-                // news
+                // news（size ≤ 10 免登入）
                 getNews: (params: NewsPagination) =>
                     client<ResponseData<any>>('/news', { query: params }),
             },

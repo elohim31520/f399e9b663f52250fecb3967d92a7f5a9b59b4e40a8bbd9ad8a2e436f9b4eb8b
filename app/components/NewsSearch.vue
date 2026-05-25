@@ -31,7 +31,7 @@
 
 <script setup>
 import { nextTick } from "vue";
-const { $api } = useNuxtApp()
+const { $publicApi } = useNuxtApp()
 const { t, locale } = useI18n()
 
 defineEmits(['close'])
@@ -63,7 +63,7 @@ async function loadMore() {
 
     loading.value = true
     try {
-        const res = await $api.news.getNews({
+        const res = await $publicApi.getNews({
             keyword: searchKeyword.value.trim(),
             page: page.value,
             size: PAGE_SIZE,

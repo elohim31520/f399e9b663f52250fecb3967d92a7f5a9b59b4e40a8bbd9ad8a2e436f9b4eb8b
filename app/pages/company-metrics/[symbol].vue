@@ -52,7 +52,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { metricsApi } from '@/api/metrics'
 import { useUIStore } from '@/stores/ui'
 import { HOT_COMPANIES } from '@/constants/hotCompanies'
 import { useUserStore } from '@/stores/user'
@@ -62,6 +61,7 @@ const uiStore = useUIStore()
 const localePath = useLocalePath()
 const route = useRoute()
 const userStore = useUserStore()
+const { $publicKV } = useNuxtApp()
 
 const symbol = computed(() => {
 	return route.params.symbol as string
@@ -78,7 +78,7 @@ const metrics = ref<any[]>([])
 const getMetrics = async (symbol: string, days: number = 60) => {
 	// 只有熱門股票的資料可以不做認證就可以看
 	if (!HOT_COMPANIES.includes(_toUpper(symbol)) && !userStore.isLogin) return
-	const response = await metricsApi.getStatementBySymbol(symbol, days)
+	const response = await $publicKV.getStatementBySymbol(symbol, days)
 	metrics.value = _reverse(_get(response, 'data', []))
 }
 

@@ -58,14 +58,14 @@
 import type { Company } from '../types/api'
 
 const localePath = useLocalePath()
-const { $api } = useNuxtApp()
+const { $publicKV } = useNuxtApp()
 
 defineOptions({
 	name: 'companies',
 })
 
 const { data: companies } = await useAsyncData<Company[]>('company-symbols', async () => {
-	const res = await $api.stock.getCompanySymbols()
+	const res = await $publicKV.getCompanySymbols()
 	return res.data
 })
 
