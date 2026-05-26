@@ -39,7 +39,7 @@ import { useUserStore } from '@/stores/user'
 const { t } = useI18n()
 const localePath = useLocalePath()
 const userStore = useUserStore()
-const { $publicKV } = useNuxtApp()
+const { $publicKV, $bffApi } = useNuxtApp()
 
 use([CanvasRenderer, BarChart, TitleComponent, TooltipComponent, GridComponent, DataZoomComponent])
 
@@ -103,9 +103,13 @@ const option = computed(() => {
 	}
 })
 
+const BFF_DAYS = new Set([7, 30])
+
 const fetchData = async (days: number): Promise<chartData[]> => {
 	try {
-		const res = await $publicKV.getMomentumByRange(days)
+		const res = BFF_DAYS.has(days)
+			? await $bffApi.getMomentumByRange(days)
+			: await $publicKV.getMomentumByRange(days)
 		return res.data
 	} catch (error) {
 		console.error(`Failed to fetch ${days}-day momentum data:`, error)
