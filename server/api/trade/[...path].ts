@@ -14,11 +14,12 @@
 import { proxyRequest } from 'h3'
 
 export default defineEventHandler(async (event) => {
+    const config = useRuntimeConfig()
     const method = event.method as 'GET' | 'POST' | 'PUT' | 'DELETE'
     const subPath = event.context.params?.path ?? ''
     const upstreamPath = subPath ? `/trade/${subPath}` : '/trade'
     const rawQuery = getRequestURL(event).search
-    const upstreamUrl = `${process.env.VITE_API_URL}${upstreamPath}${rawQuery}`
+    const upstreamUrl = `${config.apiBaseUrl}${upstreamPath}${rawQuery}`
 
     const token = getCookie(event, 'user_token')
     const contentType = getHeader(event, 'content-type') ?? ''

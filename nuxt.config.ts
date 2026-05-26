@@ -2,6 +2,8 @@ const GOOGLE_CLIENT_ID = process.env.VITE_GOOGLE_CLIENT_ID
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
+const API_BASE_URL = process.env.VITE_API_URL
+const KV_URL = process.env.VITE_KV_HOST
 
 const generateBlogPostsPlugin = (lang: string) => {
 	return {
@@ -137,4 +139,11 @@ export default defineNuxtConfig({
 		'/change-password': { ssr: false },
 		'/m7': { ssr: false },
 	},
+	runtimeConfig: {
+		kvUrl: KV_URL,
+		apiBaseUrl: API_BASE_URL,
+		public: {
+			isProduction: !import.meta.dev
+		}
+	}
 })

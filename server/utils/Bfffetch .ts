@@ -2,7 +2,7 @@
  * Server-side BFF fetch 工具。
  *
  * 職責：從 httpOnly cookie 取出 user_token Authorization header，
- * 再轉發到上游後端 VITE_API_URL
+ * 再轉發到上游後端 API_BASE_URL
  *
  * Token 不會外露到 client JS，整個注入動作只發生在 server 端。
  */
@@ -20,10 +20,11 @@ export async function apiFetch(
     body?: any
 ) {
     const token = getCookie(event, 'user_token')
+    const config = useRuntimeConfig()
 
     // 把 client 帶來的 query string 一起轉發
     const rawQuery = getRequestURL(event).search // e.g. "?page=1&size=10"
-    const upstreamUrl = `${process.env.VITE_API_URL}${path}${rawQuery}`
+    const upstreamUrl = `${config.apiBaseUrl}${path}${rawQuery}`
 
     return $fetch(upstreamUrl, {
         method: method as HttpMethod,

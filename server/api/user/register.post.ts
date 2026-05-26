@@ -1,12 +1,13 @@
 export default defineEventHandler(async (event) => {
     const body = await readBody(event)
+    const config = useRuntimeConfig()
 
     const res = await $fetch<{
         code: number
         success: boolean
         data: { token: string }
         message: string
-    }>(`${process.env.VITE_API_URL}/user/register`, {
+    }>(`${config.apiBaseUrl}/user/register`, {
         method: 'POST' as const,
         body,
     })
@@ -21,7 +22,7 @@ export default defineEventHandler(async (event) => {
 
     setCookie(event, 'user_token', res.data.token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: config.public.isProduction,
         sameSite: 'lax',
         maxAge: 60 * 60 * 24 * 7,
         path: '/',
