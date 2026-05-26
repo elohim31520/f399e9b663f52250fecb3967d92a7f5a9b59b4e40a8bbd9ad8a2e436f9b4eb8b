@@ -125,7 +125,7 @@ const ASSETS = computed<AssetConfig[]>(() => [
         currency: t('asset_price_chart.assets.dxy.currency'),
         description: t('asset_price_chart.assets.dxy.description'),
         tvSymbol: 'DXY',
-        tvPrefix: 'FXOpen',
+        tvPrefix: 'CAPITALCOM',
     },
 ])
 
