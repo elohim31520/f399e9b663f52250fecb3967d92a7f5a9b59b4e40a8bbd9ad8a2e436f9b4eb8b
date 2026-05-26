@@ -134,8 +134,8 @@ const handleSubmit = async () => {
         }
 
         const formData = new FormData()
-        formData.append('file', file)
-        const response = await $bffApi.analyzeScreenshot(file)
+        formData.append('image', file) //後端 multer 期待的欄位名是 image
+        const response = await $bffApi.analyzeScreenshot(formData)
 
         closeToast()
 
