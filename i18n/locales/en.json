@@ -259,7 +259,8 @@
 	},
 	"com": {
 		"expand": "Expand",
-		"collapse": "Collapse"
+		"collapse": "Collapse",
+		"read_more": "Read More"
 	},
 	"news": {
 		"title": "News Info",

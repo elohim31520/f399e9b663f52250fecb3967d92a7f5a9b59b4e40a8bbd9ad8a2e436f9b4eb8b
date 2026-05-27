@@ -259,7 +259,8 @@
 	},
 	"com": {
 		"expand": "展開",
-		"collapse": "收起"
+		"collapse": "收起",
+		"read_more": "閱讀更多"
 	},
 	"news": {
 		"title": "最新資訊",
