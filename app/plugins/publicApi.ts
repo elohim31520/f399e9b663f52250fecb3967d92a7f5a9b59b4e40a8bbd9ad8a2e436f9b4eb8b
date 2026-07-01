@@ -7,7 +7,8 @@
 
 import { showNotify } from 'vant'
 import type { ResponseData, NewsPagination } from '~/types/api'
-
+import type { MarketSummaryContent } from '~/types/marketSummary'
+import type { News } from '~/types/news'
 
 function createPublicApiClient() {
     return $fetch.create({
@@ -53,11 +54,11 @@ export default defineNuxtPlugin(() => {
             publicApi: {
                 // market（公開，無需 auth）
                 getMarketSummary: () =>
-                    client<ResponseData<any>>('/market/summary'),
+                    client<ResponseData<MarketSummaryContent>>('/market/summary'),
 
                 // news（size ≤ 10 免登入）
                 getNews: (params: NewsPagination) =>
-                    client<ResponseData<any>>('/news', { query: params }),
+                    client<ResponseData<News[]>>('/news', { query: params }),
             },
         },
     }

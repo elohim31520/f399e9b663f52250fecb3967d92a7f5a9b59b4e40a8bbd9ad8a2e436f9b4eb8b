@@ -6,7 +6,10 @@
  */
 
 import type { ResponseData } from '~/types/api'
+import type { BalanceInfo } from '~/types/balance'
 import { createFetchHandlers } from '~/utils/fetchHandlers'
+import type { MomentumResult } from '~/types/marketSnapshots'
+
 
 // baseURL 指向 Nuxt server routes（/api/...），走同源請求，cookie 自動帶入。
 
@@ -28,20 +31,20 @@ export default defineNuxtPlugin(() => {
             bffApi: {
                 // ── balance ──────────────────────────────────────────────
                 getMyBalances: () =>
-                    client<ResponseData<any>>('/balance'),
-                createMyBalances: (params: any) =>
-                    client<ResponseData<any>>('/balance', { method: 'POST', body: params }),
-                updateMyBalances: (params: any) =>
-                    client<ResponseData<any>>('/balance', { method: 'PUT', body: params }),
+                    client<ResponseData<BalanceInfo>>('/balance'),
+                createMyBalances: (params: BalanceInfo) =>
+                    client<ResponseData<BalanceInfo>>('/balance', { method: 'POST', body: params }),
+                updateMyBalances: (params: BalanceInfo) =>
+                    client<ResponseData<BalanceInfo>>('/balance', { method: 'PUT', body: params }),
 
                 // ── market（需 auth）─────────────────────────────────────
                 getMomentum: () =>
-                    client<ResponseData<any[]>>('/market/momentum'),
+                    client<ResponseData<MomentumResult[]>>('/market/momentum'),
                 getMarketWeights: () =>
                     client<ResponseData<any[]>>('/market/weights'),
                 /** days 非 1 / 3 時需要 auth，走 BFF；1 / 3 天請走 publicKv */
                 getMomentumByRange: (days: number) =>
-                    client<ResponseData<any[]>>(`/market/momentum/range/${days}`),
+                    client<ResponseData<MomentumResult[]>>(`/market/momentum/range/${days}`),
 
                 // ── portfolio ─────────────────────────────────────────────
                 getPortfolios: () =>

@@ -1,13 +1,9 @@
 import { defineStore } from 'pinia'
-
-type UsdInfo = {
-	balance: number
-	[key: string]: any
-} | null
+import type { BalanceInfo } from '@/types/balance'
 
 export const useBalanceStore = defineStore('balance', {
 	state: () => ({
-		usdInfo: null as UsdInfo,
+		usdInfo: null as BalanceInfo | null,
 	}),
 	getters: {
 		usdBalance: (state) => state.usdInfo?.balance ?? 0,
