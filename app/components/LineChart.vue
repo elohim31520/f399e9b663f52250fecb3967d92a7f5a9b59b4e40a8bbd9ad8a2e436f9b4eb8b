@@ -10,6 +10,7 @@ import { LineChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import type { EChartsOption } from 'echarts'
+import type { StockMetrics } from '~/types/stockMetrics'
 
 use([CanvasRenderer, LineChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
 
@@ -26,7 +27,7 @@ const {
 } = defineProps<{
 	title: string
 	lineColor?: string
-	chartData: any[]
+	chartData: StockMetrics[]
 	height?: string
 	smooth?: boolean | number
 	xAxisKey?: string
@@ -38,7 +39,7 @@ const xAxisData = computed(() => {
 })
 
 const seriesData = computed(() => {
-	return chartData.map((item) => parseFloat(item[seriesKey as keyof typeof item]))
+	return chartData.map((item) => parseFloat(item[seriesKey as keyof typeof item] as keyof StockMetrics))
 })
 
 const option = computed<EChartsOption>(() => ({
