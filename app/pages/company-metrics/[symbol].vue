@@ -56,6 +56,7 @@ import { useUIStore } from '@/stores/ui'
 import { HOT_COMPANIES } from '@/constants/hotCompanies'
 import { useUserStore } from '@/stores/user'
 import { toUpper as _toUpper, reverse as _reverse, get as _get } from 'lodash-es'
+import type { StockMetrics } from '@/types/stockMetrics'
 
 const uiStore = useUIStore()
 const localePath = useLocalePath()
@@ -73,7 +74,7 @@ const bigSymbol = computed(() => {
 
 const showNotice = ref(true)
 
-const metrics = ref<any[]>([])
+const metrics = ref<StockMetrics[]>([])
 
 const getMetrics = async (symbol: string, days: number = 60) => {
 	// 只有熱門股票的資料可以不做認證就可以看

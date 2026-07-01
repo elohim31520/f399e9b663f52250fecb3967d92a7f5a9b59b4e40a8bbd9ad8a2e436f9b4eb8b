@@ -90,11 +90,10 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const email = ref('')
 const password = ref('')
-const storedUsername = useStorage('username', '')
 const userStore = useUserStore()
 const { isAuthenticated } = useAuth()
 
-const onSubmit = async (values: any) => {
+const onSubmit = async (values: { email: string; password: string }) => {
 	try {
 		const res = await $fetch('/api/user/login', {
 			method: 'POST',
@@ -117,7 +116,7 @@ const onSubmit = async (values: any) => {
 	}
 }
 
-const handleGoogleLogin = async (response: any) => {
+const handleGoogleLogin = async (response: { credential: string }) => {
 	const { credential } = response
 	if (!credential) return handleGoogleLoginError()
 

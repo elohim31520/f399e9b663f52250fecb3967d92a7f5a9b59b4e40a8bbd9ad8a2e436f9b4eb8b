@@ -52,7 +52,7 @@ const passwordValidator = (val: string) => {
 	return val === newPassword.value
 }
 
-const onSubmit = async (values: any) => {
+const onSubmit = async (values: { oldPassword: string; newPassword: string }) => {
 	const res = await $bffApi.changePassword({
 		oldPassword: values.oldPassword,
 		newPassword: values.newPassword
