@@ -30,16 +30,8 @@
 <script setup lang="ts">
 const { $publicKV } = useNuxtApp()
 const { locale } = useI18n()
+import type { News } from '@/types/news'
 
-interface News {
-	id?: string
-	content: string
-	contentEn: string | null
-	status: 'draft' | 'published' | 'archived'
-	publishedAt?: Date
-	viewCount?: number
-	isTop?: boolean
-}
 
 interface NewsResponse {
 	rows: News[]
@@ -56,7 +48,7 @@ const fetchKV = async (): Promise<NewsResponse> => {
 	}
 }
 
-const getDisplayContent = (vo: any) => {
+const getDisplayContent = (vo: News) => {
 	if (locale.value === 'en' && vo.contentEn) {
 		return vo.contentEn
 	}

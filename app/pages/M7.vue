@@ -16,17 +16,18 @@ import { onMounted, reactive, ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import LineChart from '@/components/LineChart.vue'
 import HotCompanies from '@/components/HotCompanies.vue'
+import type { StockMetrics } from '@/types/stockMetrics'
 
 const { $publicKV } = useNuxtApp()
 
 const metrics = reactive({
-	TSLA: [] as any[],
-	NVDA: [] as any[],
-	MSFT: [] as any[],
-	GOOG: [] as any[],
-	AMZN: [] as any[],
-	AAPL: [] as any[],
-	META: [] as any[],
+	TSLA: [] as StockMetrics[],
+	NVDA: [] as StockMetrics[],
+	MSFT: [] as StockMetrics[],
+	GOOG: [] as StockMetrics[],
+	AMZN: [] as StockMetrics[],
+	AAPL: [] as StockMetrics[],
+	META: [] as StockMetrics[],
 })
 
 const allSymbols = Object.keys(metrics) as (keyof typeof metrics)[]

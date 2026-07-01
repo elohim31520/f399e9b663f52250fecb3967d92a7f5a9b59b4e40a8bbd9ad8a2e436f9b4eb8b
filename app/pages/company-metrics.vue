@@ -52,6 +52,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUIStore } from '@/stores/ui'
 import { NYSE } from '../constants/symbolPrefix'
+import type { StockMetrics } from '@/types/stockMetrics'
 
 const uiStore = useUIStore()
 const route = useRoute()
@@ -72,7 +73,7 @@ const bigSymbol = computed(() => {
 
 const showNotice = ref(true)
 
-const metrics = ref<any[]>([])
+const metrics = ref<StockMetrics[]>([])
 
 const getMetrics = async (days: number = 60) => {
 	// 只有熱門股票的資料可以不做認證就可以看
