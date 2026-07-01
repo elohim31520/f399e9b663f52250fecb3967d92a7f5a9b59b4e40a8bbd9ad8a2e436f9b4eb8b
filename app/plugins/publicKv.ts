@@ -7,7 +7,11 @@
 
 import { showNotify } from 'vant'
 import type { ResponseData, Company } from '~/types/api'
-
+import type { MarketQuotes } from '~/types/market'
+import type { MomentumResult } from '~/types/marketSnapshots'
+import type { TodayStockPrice } from '~/types/stock'
+import type { StockMetrics } from '~/types/stockMetrics'
+import type { News } from '~/types/news'
 
 function createPublicKvClient() {
     return $fetch.create({
@@ -59,9 +63,9 @@ export default defineNuxtPlugin(() => {
                 // market
                 /** days 僅支援 1（1 小時快取）與 3（每日快取），其他 days 請走 bff.getMomentumByRange */
                 getMomentumByRange: (days: number) =>
-                    client<ResponseData<any[]>>(`/market/momentum/range/${days}`),
+                    client<ResponseData<MomentumResult[]>>(`/market/momentum/range/${days}`),
                 getQuotes: () =>
-                    client<ResponseData<any[]>>('/market/quotes'),
+                    client<ResponseData<MarketQuotes[]>>('/market/quotes'),
 
                 // stock
                 getCompanySymbols: () =>
@@ -69,15 +73,15 @@ export default defineNuxtPlugin(() => {
                 getMarketBreadth: () =>
                     client<ResponseData<number>>('/stock/breadth'),
                 getTodayStocks: () =>
-                    client<ResponseData<any[]>>('/stock/today'),
+                    client<ResponseData<TodayStockPrice[]>>('/stock/today'),
 
                 // metrics
                 getStatementBySymbol: (symbol: string, days: number) =>
-                    client<ResponseData<any>>(`/company-metrics/${symbol}`, { query: { days } }),
+                    client<ResponseData<StockMetrics>>(`/company-metrics/${symbol}`, { query: { days } }),
 
                 // news
                 getNews: () =>
-                    client<ResponseData<any[]>>('/news', { query: { page: 1, size: 10 } }),
+                    client<ResponseData<News[]>>('/news', { query: { page: 1, size: 10 } }),
             },
         },
     }
