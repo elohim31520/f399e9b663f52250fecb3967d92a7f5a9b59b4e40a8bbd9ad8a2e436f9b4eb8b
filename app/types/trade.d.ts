@@ -39,3 +39,8 @@ export interface PaginatedTrades {
   size: number;
   totalPages: number;
 }
+
+export interface AnalyzeScreenshotRes {
+  jobId: string;
+  message: string;
+}

@@ -9,7 +9,8 @@ import type { ResponseData } from '~/types/api'
 import type { BalanceInfo } from '~/types/balance'
 import { createFetchHandlers } from '~/utils/fetchHandlers'
 import type { MomentumResult } from '~/types/marketSnapshots'
-
+import type { PortfolioItem, NewPortfolio } from '~/types/portfolio'
+import type { AnalyzeScreenshotRes } from '~/types/trade'
 
 // baseURL 指向 Nuxt server routes（/api/...），走同源請求，cookie 自動帶入。
 
@@ -41,20 +42,20 @@ export default defineNuxtPlugin(() => {
                 getMomentum: () =>
                     client<ResponseData<MomentumResult[]>>('/market/momentum'),
                 getMarketWeights: () =>
-                    client<ResponseData<any[]>>('/market/weights'),
+                    client<ResponseData<Record<string, number>[]>>('/market/weights'),
                 /** days 非 1 / 3 時需要 auth，走 BFF；1 / 3 天請走 publicKv */
                 getMomentumByRange: (days: number) =>
                     client<ResponseData<MomentumResult[]>>(`/market/momentum/range/${days}`),
 
                 // ── portfolio ─────────────────────────────────────────────
                 getPortfolios: () =>
-                    client<ResponseData<any[]>>('/portfolio'),
-                createPortfolio: (params: any) =>
-                    client<ResponseData<any>>('/portfolio', { method: 'POST', body: params }),
-                updatePortfolio: (params: any) =>
-                    client<ResponseData<any>>('/portfolio', { method: 'PUT', body: params }),
+                    client<ResponseData<PortfolioItem[]>>('/portfolio'),
+                createPortfolio: (params: NewPortfolio) =>
+                    client<ResponseData<null>>('/portfolio', { method: 'POST', body: params }),
+                updatePortfolio: (params: NewPortfolio) =>
+                    client<ResponseData<null>>('/portfolio', { method: 'PUT', body: params }),
                 deletePortfolio: (id: string | number) =>
-                    client<ResponseData<any>>(`/portfolio/${id}`, { method: 'DELETE' }),
+                    client<ResponseData<null>>(`/portfolio/${id}`, { method: 'DELETE' }),
 
                 // ── trade ─────────────────────────────────────────────────
                 getTrades: (params?: Record<string, any>) =>
@@ -71,7 +72,7 @@ export default defineNuxtPlugin(() => {
                     client<ResponseData<any>>(`/trade/${id}`, { method: 'DELETE' }),
                 /** 截圖辨識：傳 FormData，由 server route 轉 multipart 轉發 */
                 analyzeScreenshot: (formData: FormData) =>
-                    client<ResponseData<any>>('/trade/analyze-screenshot', {
+                    client<ResponseData<AnalyzeScreenshotRes>>('/trade/analyze-screenshot', {
                         method: 'POST',
                         body: formData,
                     }),

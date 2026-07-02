@@ -18,7 +18,7 @@ export interface FailResponseData extends Omit<ResponseData<null>, 'code'> {
 	code: number | null
 }
 
-export interface RequestParams<T = any> {
+export interface RequestParams<T> {
 	method: string
 	endpoint: string
 	params?: T
