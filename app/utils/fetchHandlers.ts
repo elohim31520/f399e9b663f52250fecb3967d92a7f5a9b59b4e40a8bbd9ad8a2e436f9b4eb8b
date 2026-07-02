@@ -9,13 +9,16 @@ import { showNotify } from 'vant'
 
 interface CreateHandlersOptions {
     /** 啟用後：401 response 自動清 token / redirect */
-    handle401?: boolean
+    handle401?: boolean;
     /** 錯誤訊息 fallback，用於區分來源（debug 用） */
-    errorFallback?: string
+    errorFallback?: string;
+    nuxtApp?: {
+        runWithContext: <T>(fn: () => T) => T | Promise<T>
+    }
 }
 
 export function createFetchHandlers(options: CreateHandlersOptions = {}) {
-    const { handle401 = false, errorFallback = '請求失敗' } = options
+    const { handle401 = false, errorFallback = '請求失敗', nuxtApp } = options
 
     return {
         onResponse({ response }: any) {
@@ -46,13 +49,21 @@ export function createFetchHandlers(options: CreateHandlersOptions = {}) {
             if (import.meta.client) {
                 showNotify({ message, background: '#ef4444', color: '#fff' })
             }
+            console.log('onResponseError 這裡發生錯誤', response);
 
             if (handle401 && response.status === 401) {
-                if (import.meta.client) {
-                    const { logout } = useAuth()
-                    logout()
+                const redirect = () => {
+                    if (import.meta.client) {
+                        const { logout } = useAuth()
+                        logout()
+                    } else {
+                        navigateTo('/login')
+                    }
+                }
+                if (nuxtApp) {
+                    nuxtApp.runWithContext(redirect)
                 } else {
-                    navigateTo('/login')
+                    redirect() // fallback，理論上不該走到這裡
                 }
             }
         },

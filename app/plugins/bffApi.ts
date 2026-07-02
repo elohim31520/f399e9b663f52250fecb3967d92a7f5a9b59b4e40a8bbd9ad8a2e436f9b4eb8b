@@ -14,18 +14,13 @@ import type { AnalyzeScreenshotRes } from '~/types/trade'
 
 // baseURL 指向 Nuxt server routes（/api/...），走同源請求，cookie 自動帶入。
 
-function createBffClient() {
-    return $fetch.create({
+export default defineNuxtPlugin((nuxtApp) => {
+    const client = $fetch.create({
         baseURL: '/api',
         timeout: 30000,
         credentials: 'include', // 確保 cookie 帶出去
-        ...createFetchHandlers({ handle401: true }),
+        ...createFetchHandlers({ handle401: true, nuxtApp }),
     })
-}
-
-
-export default defineNuxtPlugin(() => {
-    const client = createBffClient()
 
     return {
         provide: {

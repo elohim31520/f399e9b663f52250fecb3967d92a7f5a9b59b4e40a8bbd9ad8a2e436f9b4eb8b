@@ -136,7 +136,9 @@ const fetchData = () => {
 	}
 }
 
-fetchData()
+onMounted(() => {
+	fetchData()
+})
 
 onActivated(() => {
 	if (userStore.isLogin && !isDataRefreshed.value) {
