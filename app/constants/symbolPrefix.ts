@@ -25,7 +25,7 @@ export const NYSE = [
 	'XOM', 'CVX', 'COP', 'SLB', 'SHEL', 'BP', 'SU', 'NEM', 'VALE', 'AA', 'TECK', 'LIN',
 
 	// --- Utilities & Real Estate ---
-	'NEE', 'PCG', 'AMT', 'CCI', 'O', 'WELL', 'EQR', 'SPG', 'WM',
+	'NEE', 'PCG', 'AMT', 'CCI', 'O', 'WELL', 'EQR', 'SPG', 'WM', 'VST',
 
 	// --- Others / Special ---
 	'BRK.B', 'QS', 'MP', 'CHPT', 'TOL', 'LEN', 'CCL', 'DDD', 'T', 'VZ', 'XYZ', 'GRMN'
