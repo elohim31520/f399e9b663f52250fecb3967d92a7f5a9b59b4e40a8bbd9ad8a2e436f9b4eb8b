@@ -138,6 +138,9 @@ export default defineNuxtConfig({
 		'/add-transaction': { ssr: false },
 		'/change-password': { ssr: false },
 		'/m7': { ssr: false },
+		'/my': { ssr: false },
+		'/portfolio': { ssr: false },
+		'/records': { ssr: false },
 	},
 	runtimeConfig: {
 		kvUrl: KV_URL,
