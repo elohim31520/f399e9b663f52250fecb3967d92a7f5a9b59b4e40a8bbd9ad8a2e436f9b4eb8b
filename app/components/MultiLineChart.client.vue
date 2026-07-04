@@ -12,6 +12,7 @@ import { LineChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import type { EChartsOption, LineSeriesOption } from 'echarts'
+import type { StockMetrics } from '~/types/stockMetrics'
 
 use([CanvasRenderer, LineChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
 
@@ -25,7 +26,7 @@ interface Series {
 
 const props = defineProps<{
 	title: string
-	chartData: any[]
+	chartData: StockMetrics[]
 	height?: string
 	smooth?: boolean | number
 	xAxisKey: string

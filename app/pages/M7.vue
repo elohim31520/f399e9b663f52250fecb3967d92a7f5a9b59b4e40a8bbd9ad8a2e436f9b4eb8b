@@ -14,7 +14,6 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
-import LineChart from '@/components/LineChart.vue'
 import HotCompanies from '@/components/HotCompanies.vue'
 import type { StockMetrics } from '@/types/stockMetrics'
 
