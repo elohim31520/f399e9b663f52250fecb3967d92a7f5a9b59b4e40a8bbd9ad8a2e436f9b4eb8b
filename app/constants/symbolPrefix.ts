@@ -5,7 +5,7 @@ export const NYSE = [
 	'S', 'DOCS', 'PINS', 'SPOT', 'UBER', 'RBLX', 'FVRR', 'BBAI', 'FI',
 
 	// --- Semiconductors & Hardware (Non-Nasdaq) ---
-	'TSM', 'ANET', 'VRT', 'HPE', 'IBM', 'SQNS', 'TDY',
+	'TSM', 'ANET', 'VRT', 'HPE', 'IBM', 'SQNS', 'TDY', 'COHR',
 
 	// --- Financials (Banks & Payments) ---
 	'V', 'MA', 'JPM', 'BAC', 'GS', 'MS', 'WFC', 'C', 'AXP', 'BLK', 'SCHW',
