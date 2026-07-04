@@ -28,11 +28,13 @@ const localePath = useLocalePath()
 
 const companies = ref([
 	// --- 熱門建議標的 ---
+	{ id: 'spcx', useLogoPath: true },
+	{ id: 'sndk', useLogoPath: true },
+	{ id: 'mu', useLogoPath: true },
 	{ id: 'cohr', useLogoPath: true },
 	{ id: 'lite', useLogoPath: true },
 	{ id: 'tsm', useLogoPath: true },
 	{ id: 'amd', useLogoPath: true },
-	{ id: 'mu', useLogoPath: true },
 	{ id: 'mstr', useLogoPath: true },
 	{ id: 'hood', useLogoPath: true },
 	{ id: 'vst', useLogoPath: true },
