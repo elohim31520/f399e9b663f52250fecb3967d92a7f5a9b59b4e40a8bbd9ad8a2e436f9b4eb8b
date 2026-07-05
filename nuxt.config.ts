@@ -143,6 +143,7 @@ export default defineNuxtConfig({
 		'/records': { ssr: false },
 		'/posts/**': { prerender: true },
 		'/zh/posts/**': { prerender: true },
+		'/market-summary': { swr: 3600 }
 	},
 	runtimeConfig: {
 		kvUrl: KV_URL,
