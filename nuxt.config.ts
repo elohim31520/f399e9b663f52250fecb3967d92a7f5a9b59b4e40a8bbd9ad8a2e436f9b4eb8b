@@ -141,6 +141,8 @@ export default defineNuxtConfig({
 		'/my': { ssr: false },
 		'/portfolio': { ssr: false },
 		'/records': { ssr: false },
+		'/posts/**': { prerender: true },
+		'/zh/posts/**': { prerender: true },
 	},
 	runtimeConfig: {
 		kvUrl: KV_URL,
