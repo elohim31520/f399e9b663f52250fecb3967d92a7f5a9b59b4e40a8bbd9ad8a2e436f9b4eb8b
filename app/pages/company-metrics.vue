@@ -10,8 +10,8 @@
 		</van-notice-bar>
 
 		<template v-if="metrics.length">
-			<MultiLineChart :title="`${bigSymbol} PE Ratios`" :chart-data="formattedMetrics" x-axis-key="ct"
-				v-if="formattedMetrics.length > 0" :series="[
+			<LazyMultiLineChart v-if="formattedMetrics.length > 0" :title="`${bigSymbol} PE Ratios`"
+				:chart-data="formattedMetrics" x-axis-key="ct" :series="[
 					{
 						name: $t('company_metrics.pe_forwards_title'),
 						key: 'fpe',
@@ -29,14 +29,14 @@
 				{{ $t('company_metrics.eps_notice') }}
 			</van-notice-bar>
 
-			<DualAxisBarChart :title="`${bigSymbol} ${$t('company_metrics.eps_comparison')}`" :chart-data="metrics"
-				x-axis-key="ct" first-series-key="feps" second-series-key="eps"
+			<LazyDualAxisBarChart v-if="metrics.length" :title="`${bigSymbol} ${$t('company_metrics.eps_comparison')}`"
+				:chart-data="metrics" x-axis-key="ct" first-series-key="feps" second-series-key="eps"
 				:first-series-name="$t('company_metrics.feps_title')"
 				:second-series-name="$t('company_metrics.eps_history_title')" firstSeriesColor="#ED6A0C"
 				secondSeriesColor="#00CED1" />
 
-			<BarChart :title="`${bigSymbol} ${$t('company_metrics.volume_title')}`" :chart-data="metrics"
-				x-axis-key="ct" series-key="v" />
+			<LazyBarChart v-if="metrics.length" :title="`${bigSymbol} ${$t('company_metrics.volume_title')}`"
+				:chart-data="metrics" x-axis-key="ct" series-key="v" />
 		</template>
 
 		<div v-else>

@@ -2,7 +2,8 @@
 	<div class="p-2">
 		<div v-for="symbol in allSymbols" :key="symbol">
 			<div :ref="(el) => setChartRef(el, symbol)" class="min-h-[420px]">
-				<LineChart v-if="metrics[symbol].length" :title="`${symbol} ${$t('company_metrics.pe_forwards_title')}`"
+				<LazyLineChart v-if="metrics[symbol].length"
+					:title="`${symbol} ${$t('company_metrics.pe_forwards_title')}`"
 					:chart-data="metrics[symbol]" x-axis-key="ct" series-key="fpe" />
 				<div v-else class="flex-y-center justify-center h-420">Loading {{ symbol }}...</div>
 			</div>
