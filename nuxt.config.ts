@@ -143,7 +143,8 @@ export default defineNuxtConfig({
 		'/records': { ssr: false },
 		'/posts/**': { prerender: true },
 		'/zh/posts/**': { prerender: true },
-		'/market-summary': { swr: 3600 }
+		'/market-summary': { swr: 3600 },
+		'/': { swr: 300 } // 首頁快取 5 分鐘
 	},
 	runtimeConfig: {
 		kvUrl: KV_URL,
