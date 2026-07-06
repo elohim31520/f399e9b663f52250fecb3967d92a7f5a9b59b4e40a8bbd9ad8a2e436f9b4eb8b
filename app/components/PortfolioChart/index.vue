@@ -7,18 +7,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { PieChart } from 'echarts/charts'
-import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
 import VChart from 'vue-echarts'
 import type { EChartsOption } from 'echarts'
 import { usePortfolioStore } from '@/stores/portfolio'
 import { formatNumber } from '~/utils/util'
 
 const portfolioStore = usePortfolioStore()
-
-use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent])
 
 defineOptions({
 	name: 'PortfolioChart',
