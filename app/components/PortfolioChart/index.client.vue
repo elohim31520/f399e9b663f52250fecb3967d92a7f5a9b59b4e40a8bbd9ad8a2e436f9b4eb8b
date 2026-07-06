@@ -7,7 +7,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import VChart from 'vue-echarts'
 import type { EChartsOption } from 'echarts'
 import { usePortfolioStore } from '@/stores/portfolio'
 import { formatNumber } from '~/utils/util'

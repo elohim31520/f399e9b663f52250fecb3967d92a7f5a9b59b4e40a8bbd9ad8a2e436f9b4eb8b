@@ -63,7 +63,6 @@ export default defineNuxtConfig({
 		'@nuxtjs/tailwindcss',
 		'@pinia/nuxt',
 		'@vant/nuxt',
-		'nuxt-echarts',
 		'@vueuse/nuxt',
 		'./modules/nuxt4-lodash',
 		[
