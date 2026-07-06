@@ -10,16 +10,10 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { PieChart } from 'echarts/charts'
-import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
-import VChart from 'vue-echarts'
 import { formatNumber } from '~/utils/util'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
-use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent])
 
 const marketBreadth = ref<number>(0)
 const { $publicKV } = useNuxtApp()

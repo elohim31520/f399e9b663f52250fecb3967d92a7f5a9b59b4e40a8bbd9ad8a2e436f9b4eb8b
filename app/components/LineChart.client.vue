@@ -3,18 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide } from 'vue'
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { LineChart } from 'echarts/charts'
-import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
-import VChart, { THEME_KEY } from 'vue-echarts'
+import { computed } from 'vue'
 import type { EChartsOption } from 'echarts'
 import type { StockMetrics } from '~/types/stockMetrics'
-
-use([CanvasRenderer, LineChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
-
-provide(THEME_KEY, '#fff')
 
 const {
 	title,

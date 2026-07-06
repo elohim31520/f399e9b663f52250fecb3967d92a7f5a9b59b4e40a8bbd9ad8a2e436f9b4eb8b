@@ -5,22 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, nextTick, onMounted } from 'vue'
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { LineChart } from 'echarts/charts'
-import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
-import VChart, { THEME_KEY } from 'vue-echarts'
+import { computed } from 'vue'
 import type { EChartsOption, LineSeriesOption } from 'echarts'
 import type { StockMetrics } from '~/types/stockMetrics'
 
-use([CanvasRenderer, LineChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
-
-provide(THEME_KEY, '#fff')
-
 interface Series {
 	name: string
-	key: string
+	key: keyof StockMetrics
 	color?: string
 }
 
@@ -29,12 +20,12 @@ const props = defineProps<{
 	chartData: StockMetrics[]
 	height?: string
 	smooth?: boolean | number
-	xAxisKey: string
+	xAxisKey: keyof StockMetrics
 	series: Series[]
 }>()
 
-const xAxisData = computed(() => {
-	return props.chartData.map((item) => new Date(item[props.xAxisKey]).toLocaleDateString())
+const xAxisData = computed<string[]>(() => {
+	return props.chartData.map((item) => new Date(item[props.xAxisKey] as string | number | Date).toLocaleDateString())
 })
 
 const seriesData = computed<LineSeriesOption[]>(() => {
@@ -42,7 +33,7 @@ const seriesData = computed<LineSeriesOption[]>(() => {
 		name: series.name,
 		type: 'line',
 		smooth: props.smooth,
-		data: props.chartData.map((item) => parseFloat(item[series.key])),
+		data: props.chartData.map((item) => parseFloat(String(item[series.key]))),
 		itemStyle: {
 			color: series.color || '#F88379',
 		},

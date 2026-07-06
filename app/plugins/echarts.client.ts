@@ -1,7 +1,7 @@
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
-import { LineChart, BarChart } from 'echarts/charts'
-import { GridComponent, TooltipComponent, TitleComponent, LegendComponent, MarkLineComponent } from 'echarts/components'
+import { LineChart, BarChart, PieChart } from 'echarts/charts'
+import { GridComponent, TooltipComponent, TitleComponent, LegendComponent, MarkLineComponent, DataZoomComponent } from 'echarts/components'
 import VChart from 'vue-echarts'
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -15,6 +15,8 @@ export default defineNuxtPlugin((nuxtApp) => {
 		TitleComponent,
 		LegendComponent,
 		MarkLineComponent,
+		DataZoomComponent,
+		PieChart
 	])
 
 	nuxtApp.vueApp.component('v-chart', VChart)
