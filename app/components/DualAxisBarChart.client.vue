@@ -8,46 +8,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
-import * as echarts from 'echarts'
-import type { EChartsOption, BarSeriesOption } from 'echarts'
+import { ref, shallowRef, onMounted, onBeforeUnmount, watch } from 'vue'
+import * as echarts from 'echarts/core'
 import type { StockMetrics } from '~/types/stockMetrics'
 
 interface Props {
 	title: string
 	chartData: StockMetrics[]
-	xAxisKey: string
-	firstSeriesKey: string
-	secondSeriesKey: string
+	// 2. 優化：直接限制 Key 必須屬於 StockMetrics，後面就不用一直寫 as keyof
+	xAxisKey: keyof StockMetrics
+	firstSeriesKey: keyof StockMetrics
+	secondSeriesKey: keyof StockMetrics
 	firstSeriesName?: string
 	secondSeriesName?: string
 	firstSeriesColor?: string
 	secondSeriesColor?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	firstSeriesName: '',
-	secondSeriesName: '',
-	firstSeriesColor: '#5470c6',
-	secondSeriesColor: '#91cc75',
-})
+const {
+	title,
+	chartData,
+	xAxisKey,
+	firstSeriesKey,
+	secondSeriesKey,
+	firstSeriesName = '',
+	secondSeriesName = '',
+	firstSeriesColor = '#5470c6',
+	secondSeriesColor = '#91cc75',
+} = defineProps<Props>()
 
-const chartRef = ref<HTMLElement>()
-let chart: echarts.ECharts | null = null
+const chartRef = ref<HTMLElement | null>(null)
+const chartInstance = shallowRef<echarts.ECharts | null>(null)
 
 const initChart = () => {
 	if (!chartRef.value) return
 
-	chart = echarts.init(chartRef.value)
+	chartInstance.value = echarts.init(chartRef.value)
 	updateChart()
 }
 
 const updateChart = () => {
-	if (!chart) return
+	if (!chartInstance.value) return
 
-	const xAxisData = props.chartData.map((item) => item[props.xAxisKey as keyof StockMetrics])
-	const firstSeriesData = props.chartData.map((item) => item[props.firstSeriesKey as keyof StockMetrics])
-	const secondSeriesData = props.chartData.map((item) => item[props.secondSeriesKey as keyof StockMetrics])
+	const xAxisData = chartData.map((item) => item[xAxisKey as keyof StockMetrics])
+	const firstSeriesData = chartData.map((item) => item[firstSeriesKey as keyof StockMetrics])
+	const secondSeriesData = chartData.map((item) => item[secondSeriesKey as keyof StockMetrics])
 
 	const option = {
 		tooltip: {
@@ -60,7 +65,7 @@ const updateChart = () => {
 			right: '20%',
 		},
 		legend: {
-			data: [props.firstSeriesName || props.firstSeriesKey, props.secondSeriesName || props.secondSeriesKey],
+			data: [firstSeriesName || firstSeriesKey, secondSeriesName || secondSeriesKey],
 		},
 		xAxis: [
 			{
@@ -74,41 +79,45 @@ const updateChart = () => {
 		yAxis: [
 			{
 				type: 'value',
-				name: props.firstSeriesName || props.firstSeriesKey,
+				name: firstSeriesName || firstSeriesKey,
 				position: 'left',
 			},
 			{
 				type: 'value',
-				name: props.secondSeriesName || props.secondSeriesKey,
+				name: secondSeriesName || secondSeriesKey,
 				position: 'right',
 			},
 		],
 		series: [
 			{
-				name: props.firstSeriesName || props.firstSeriesKey,
+				name: firstSeriesName || firstSeriesKey,
 				type: 'bar',
 				data: firstSeriesData,
 				itemStyle: {
-					color: props.firstSeriesColor,
+					color: firstSeriesColor,
 				},
 			},
 			{
-				name: props.secondSeriesName || props.secondSeriesKey,
+				name: secondSeriesName || secondSeriesKey,
 				type: 'bar',
 				yAxisIndex: 1,
 				data: secondSeriesData,
 				itemStyle: {
-					color: props.secondSeriesColor,
+					color: secondSeriesColor,
 				},
 			},
 		],
 	}
 
-	chart.setOption(option)
+	chartInstance.value.setOption(option)
+}
+
+const handleResize = () => {
+	chartInstance.value?.resize()
 }
 
 watch(
-	() => props.chartData,
+	() => chartData,
 	() => {
 		updateChart()
 	},
@@ -117,19 +126,22 @@ watch(
 
 onMounted(() => {
 	initChart()
+	window.addEventListener('resize', handleResize)
 })
 
 // 處理組件銷毀時的清理
 onBeforeUnmount(() => {
-	if (chart) {
-		chart.dispose()
-		chart = null
+	if (chartInstance.value) {
+		chartInstance.value.dispose()
+		chartInstance.value = null
 	}
 })
-
-// 處理視窗大小變化
-window.addEventListener('resize', () => {
-	chart?.resize()
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', handleResize)
+	if (chartInstance.value) {
+		chartInstance.value.dispose()
+		chartInstance.value = null
+	}
 })
 </script>
 
