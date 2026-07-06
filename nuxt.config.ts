@@ -130,21 +130,48 @@ export default defineNuxtConfig({
 	},
 	css: ['./app/assets/main.css'],
 	ssr: true,
-	routeRules: {
-		//客戶端渲染 (CSR / SPA)
-		'/login': { ssr: false },
-		'/register': { ssr: false },
-		'/add-transaction': { ssr: false },
-		'/change-password': { ssr: false },
-		'/m7': { ssr: false },
-		'/my': { ssr: false },
-		'/portfolio': { ssr: false },
-		'/records': { ssr: false },
-		'/posts/**': { prerender: true },
-		'/zh/posts/**': { prerender: true },
-		'/market-summary': { swr: 3600 },
-		'/': { swr: 300 } // 首頁快取 5 分鐘
-	},
+	routeRules: (() => {
+		// 純 CSR 路由(不需要 SEO,登入態相關頁面)
+		const csrRoutes = [
+			'/login',
+			'/register',
+			'/add-transaction',
+			'/change-password',
+			'/m7',
+			'/my',
+			'/portfolio',
+			'/records',
+			'/market-metrics',
+		]
+
+		// 有 swr 快取的路由
+		const swrRoutes: Record<string, number | boolean> = {
+			'/market-summary': 3600,
+			'/companies': 3600,
+			'/volatile-stock': true,
+		}
+
+		const rules: Record<string, any> = {
+			'/posts/**': { prerender: true },
+			'/zh/posts/**': { prerender: true },
+			'/': { swr: 300 },
+			'/zh': { swr: 300 },
+		}
+
+		// 補齊 CSR 路由(en 無前綴 + zh 加 /zh 前綴)
+		for (const route of csrRoutes) {
+			rules[route] = { ssr: false }
+			rules[`/zh${route}`] = { ssr: false }
+		}
+
+		// 補齊 swr 路由
+		for (const [route, value] of Object.entries(swrRoutes)) {
+			rules[route] = { swr: value }
+			rules[`/zh${route}`] = { swr: value }
+		}
+
+		return rules
+	})(),
 	runtimeConfig: {
 		kvUrl: KV_URL,
 		apiBaseUrl: API_BASE_URL,
