@@ -59,6 +59,8 @@
 import { ref } from 'vue'
 import type { TodayStockPrice } from '@/types/stock'
 
+const localePath = useLocalePath()
+
 const activeTab = ref(0)
 const { $publicKV } = useNuxtApp()
 
@@ -77,7 +79,7 @@ const losers = computed(() => {
 
 const handleRoute = (stock: TodayStockPrice) => {
 	if (stock.symbol) {
-		navigateTo(`/company-metrics/${stock.symbol}`)
+		navigateTo(localePath(`/company-metrics/${stock.symbol}`))
 	}
 }
 </script>
