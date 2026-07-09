@@ -79,6 +79,13 @@ const { data: fetchedPost } = await useAsyncData<BlogPost[]>(`blog-posts-${local
 		query: { lang: locale.value }, // ← 傳遞語系參數
 	})
 )
+
+const { t } = useI18n()
+
+usePageSeo(computed(() => ({
+	title: t('posts.meta_title'),
+	description: t('posts.meta_description'),
+})))
 </script>
 
 <style scoped>

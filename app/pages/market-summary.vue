@@ -151,6 +151,15 @@ const formattedDate = computed(() => {
     const d = new Date(summary.value.date)
     return d.toLocaleDateString(locale.value, { year: 'numeric', month: 'long', day: 'numeric' })
 })
+
+const { t } = useI18n()
+
+usePageSeo(computed(() => ({
+    title: summary.value?.headline
+        ? `${summary.value.headline} - UrTrade`
+        : t('market.meta_title'),
+    description: summary.value?.summary?.slice(0, 160) ?? t('market.meta_description'),
+})))
 </script>
 
 <style scoped>

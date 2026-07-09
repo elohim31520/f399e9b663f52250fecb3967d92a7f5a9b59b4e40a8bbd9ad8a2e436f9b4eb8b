@@ -45,4 +45,9 @@ const { data: fetchedData } = await useAsyncData(
 )
 
 const firstPageList = computed(() => fetchedData.value?.data?.rows ?? [])
+
+usePageSeo(computed(() => ({
+    title: t('news.meta_title'),
+    description: t('news.meta_description'),
+})))
 </script>

@@ -155,6 +155,13 @@ const getOption = (data: SimulationResult) => {
 		})),
 	}
 }
+
+const { t } = useI18n()
+
+usePageSeo(computed(() => ({
+	title: t('monte-sim.meta_title'),
+	description: t('monte-sim.meta_description'),
+})))
 </script>
 
 <style scoped>

@@ -17,7 +17,9 @@
 		"feps_title": "前瞻每股盈餘 Forward EPS",
 		"eps_history_title": "歷史每股盈餘 EPS",
 		"volume_title": "成交量",
-		"eps_comparison": "EPS 獲利比較"
+		"eps_comparison": "EPS 獲利比較",
+		"meta_title": "{symbol} 股票財務指標 - UrTrade",
+		"meta_description": "查看 {symbol} 的前瞻與歷史本益比、EPS 趨勢及成交量圖表。"
 	},
 	"my": {
 		"cash": "現金",
@@ -46,7 +48,13 @@
 		"login_to_continue": "登入您的帳號以繼續"
 	},
 	"companies": {
-		"title": "公司列表"
+		"title": "公司列表",
+		"meta_title": "美股公司列表 - UrTrade",
+		"meta_description": "瀏覽完整的美股上市公司目錄，依代號搜尋並查看各股票的財務指標。"
+	},
+	"posts": {
+		"meta_title": "投資文章與市場洞察 - UrTrade",
+		"meta_description": "閱讀美股投資、市場分析與投資組合策略相關的專業文章。"
 	},
 	"portfolio": {
 		"my_portfolio": "我的投資組合",
@@ -264,6 +272,8 @@
 	},
 	"news": {
 		"title": "最新資訊",
+		"meta_title": "美股市場新聞 - UrTrade",
+		"meta_description": "掌握最新美股市場新聞、公司公告與財經頭條。",
 		"searchPlaceholder": "搜尋新聞",
 		"searchHint": "輸入關鍵字搜尋新聞",
 		"noResult": "找不到相關新聞"
@@ -280,7 +290,9 @@
 		"meanFinalPrice": "預期平均最終股價",
 		"profitProbability": "獲利機率",
 		"expectedReturn": "預期報酬率",
-		"h3": "跑{ times }次模擬結果:"
+		"h3": "跑{ times }次模擬結果:",
+		"meta_title": "蒙地卡羅股價模擬 - UrTrade",
+		"meta_description": "使用蒙地卡羅模擬預測股價區間與獲利機率，依波動率分析投資風險。"
 	},
 	"upload": {
 		"click_to_upload": "點擊上傳截圖",
@@ -308,12 +320,18 @@
 		"highlights": "重點摘要",
 		"analysis": "市場分析",
 		"sectors": "板塊表現",
-		"updatedAt": "資料更新時間："
+		"updatedAt": "資料更新時間：",
+		"meta_title": "每日美股市場摘要 - UrTrade",
+		"meta_description": "取得 AI 生成的每日美股市場報告，包含市場情緒、重點摘要、類股表現與市場展望。"
 	},
 	"error": {
-		"loadFailed": "載入失敗，請稍後再試"
+		"loadFailed": "載入失敗，請稍後再試",
+		"not_found_title": "找不到頁面 - UrTrade",
+		"not_found_description": "您所訪問的頁面不存在。"
 	},
 	"volatile_stock": {
+		"meta_title": "今日波動最大美股 - UrTrade",
+		"meta_description": "追蹤今日波動最大的美股，即時查看漲跌幅百分比，篩選上漲與下跌股票。",
 		"sort": {
 			"asc": "↑ 正序",
 			"desc": "↓ 倒序"
@@ -324,6 +342,8 @@
 		}
 	},
 	"asset_price_chart": {
+		"meta_title": "{label} 即時走勢圖 - UrTrade",
+		"meta_description": "查看 {label} 即時價格走勢與市場數據。{description}",
 		"back": "返回",
 		"asset_label": "Asset",
 		"live": "Live",

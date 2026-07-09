@@ -87,4 +87,11 @@ const getMetrics = async (symbol: string, days: number = 60) => {
 onMounted(() => {
 	getMetrics(symbol.value)
 })
+
+const { t } = useI18n()
+
+usePageSeo(computed(() => ({
+	title: t('company_metrics.meta_title', { symbol: bigSymbol.value }),
+	description: t('company_metrics.meta_description', { symbol: bigSymbol.value }),
+})))
 </script>

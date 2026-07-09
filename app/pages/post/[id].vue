@@ -18,17 +18,27 @@
 		id: string
 		title: string
 		htmlContent: string
+		excerpt?: string
 		image?: string
 	}
 
 	const route = useRoute()
-	const { locale } = useI18n()
+	const { locale, t } = useI18n()
 	const { data: fetchedPost } = await useAsyncData(`blog-post-${route.params.id as string}`, async () => {
 		const allPosts = await $fetch<BlogPost[]>('/api/blog', {
 			query: { lang: locale.value }, // ← 傳遞語系參數
 		})
 		return allPosts.find((p) => p.id === (route.params.id as string)) || null
 	})
+
+	usePageSeo(computed(() => ({
+		title: fetchedPost.value
+			? `${fetchedPost.value.title} - UrTrade`
+			: t('posts.meta_title'),
+		description: fetchedPost.value?.excerpt ?? t('posts.meta_description'),
+		ogImage: fetchedPost.value?.image,
+		ogType: 'article',
+	})))
 </script>
 
 <style lang="scss">

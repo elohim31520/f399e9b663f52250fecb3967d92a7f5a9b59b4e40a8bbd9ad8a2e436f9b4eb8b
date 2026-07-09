@@ -100,4 +100,11 @@ const handleRoute = (stock: TodayStockPrice) => {
 		navigateTo(`/company-metrics/${stock.symbol}`)
 	}
 }
+
+const { t } = useI18n()
+
+usePageSeo(computed(() => ({
+	title: t('volatile_stock.meta_title'),
+	description: t('volatile_stock.meta_description'),
+})))
 </script>

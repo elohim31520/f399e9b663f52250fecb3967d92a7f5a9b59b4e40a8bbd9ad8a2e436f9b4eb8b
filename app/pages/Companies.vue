@@ -87,4 +87,11 @@ const indexList = computed(() => {
 const handleClick = (symbol: string) => {
 	navigateTo(localePath(`/company-metrics/${symbol}`))
 }
+
+const { t } = useI18n()
+
+usePageSeo(computed(() => ({
+	title: t('companies.meta_title'),
+	description: t('companies.meta_description'),
+})))
 </script>

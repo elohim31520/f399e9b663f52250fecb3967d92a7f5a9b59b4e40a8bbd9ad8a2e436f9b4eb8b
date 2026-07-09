@@ -17,4 +17,11 @@
 	</main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { t } = useI18n()
+
+usePageSeo(computed(() => ({
+	title: t('home.meta_title'),
+	description: t('home.meta_description'),
+})))
+</script>

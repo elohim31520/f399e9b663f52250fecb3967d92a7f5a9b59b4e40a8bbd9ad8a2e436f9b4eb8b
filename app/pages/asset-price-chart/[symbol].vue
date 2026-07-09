@@ -136,4 +136,19 @@ const asset = computed(() =>
 const otherAssets = computed(() =>
     ASSETS.value.filter((a) => a.symbol !== symbol.value.toLowerCase())
 )
+
+usePageSeo(computed(() => {
+    const current = asset.value
+    return {
+        title: current
+            ? t('asset_price_chart.meta_title', { label: current.label })
+            : t('meta.default_title'),
+        description: current
+            ? t('asset_price_chart.meta_description', {
+                label: current.label,
+                description: current.description,
+            })
+            : t('meta.default_description'),
+    }
+}))
 </script>

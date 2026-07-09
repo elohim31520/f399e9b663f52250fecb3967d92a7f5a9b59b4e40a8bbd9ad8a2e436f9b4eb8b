@@ -9,6 +9,13 @@
 </template>
 <script setup lang="ts">
 const localePath = useLocalePath()
+const { t } = useI18n()
+
+usePageSeo(computed(() => ({
+	title: t('error.not_found_title'),
+	description: t('error.not_found_description'),
+	robots: 'noindex, nofollow',
+})))
 
 function redirect(path: string) {
 	navigateTo(localePath(path))

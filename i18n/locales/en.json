@@ -17,7 +17,9 @@
 		"feps_title": "Forward EPS",
 		"eps_history_title": "Trailing EPS",
 		"volume_title": "Trading Volume",
-		"eps_comparison": "EPS Earnings Comparison"
+		"eps_comparison": "EPS Earnings Comparison",
+		"meta_title": "{symbol} Stock Metrics - UrTrade",
+		"meta_description": "View {symbol} forward and trailing P/E ratios, EPS trends, and trading volume charts on UrTrade."
 	},
 	"my": {
 		"cash": "Cash",
@@ -46,7 +48,13 @@
 		"login_to_continue": "Login To Continue"
 	},
 	"companies": {
-		"title": "Companies"
+		"title": "Companies",
+		"meta_title": "US Stock Company Directory - UrTrade",
+		"meta_description": "Browse the complete directory of US listed companies. Search by symbol and explore financial metrics for each stock."
+	},
+	"posts": {
+		"meta_title": "Investment Articles & Insights - UrTrade",
+		"meta_description": "Read expert articles on US stock investing, market analysis, and portfolio strategies."
 	},
 	"portfolio": {
 		"my_portfolio": "My Portfolio",
@@ -264,6 +272,8 @@
 	},
 	"news": {
 		"title": "News Info",
+		"meta_title": "US Stock Market News - UrTrade",
+		"meta_description": "Stay updated with the latest US stock market news, company announcements, and financial headlines.",
 		"searchPlaceholder": "Search News",
 		"searchHint": "Enter keywords to search news",
 		"noResult": "No related news found"
@@ -280,7 +290,9 @@
 		"meanFinalPrice": "Mean Final Price",
 		"profitProbability": "Profit Probability",
 		"expectedReturn": "Expected Return",
-		"h3": "Results for {times} simulations:"
+		"h3": "Results for {times} simulations:",
+		"meta_title": "Monte Carlo Stock Simulation - UrTrade",
+		"meta_description": "Run Monte Carlo simulations to predict stock price ranges and probability of profit based on volatility."
 	},
 	"upload": {
 		"click_to_upload": "Click to upload screenshot",
@@ -308,12 +320,18 @@
 		"highlights": "Key Highlights",
 		"analysis": "Market Analysis",
 		"sectors": "Sector Performance",
-		"updatedAt": "Last updated:"
+		"updatedAt": "Last updated:",
+		"meta_title": "Daily US Market Summary - UrTrade",
+		"meta_description": "Get AI-generated daily US stock market reports with sentiment analysis, key highlights, sector performance, and market outlook."
 	},
 	"error": {
-		"loadFailed": "Failed to load data, please try again later"
+		"loadFailed": "Failed to load data, please try again later",
+		"not_found_title": "Page Not Found - UrTrade",
+		"not_found_description": "The page you are looking for does not exist."
 	},
 	"volatile_stock": {
+		"meta_title": "Top Volatile US Stocks Today - UrTrade",
+		"meta_description": "Track today's most volatile US stocks with real-time daily change percentages. Filter gainers and losers.",
 		"sort": {
 			"asc": "↑ ASC",
 			"desc": "↓ DESC"
@@ -324,6 +342,8 @@
 		}
 	},
 	"asset_price_chart": {
+		"meta_title": "{label} Live Price Chart - UrTrade",
+		"meta_description": "View live {label} price chart and market data. {description}",
 		"back": "Back",
 		"asset_label": "Asset",
 		"live": "Live",
