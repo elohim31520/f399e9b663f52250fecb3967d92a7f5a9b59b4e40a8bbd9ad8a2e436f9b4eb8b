@@ -9,14 +9,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { formatNumber } from '~/utils/util'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
-const marketBreadth = ref<number>(0)
 const { $publicKV } = useNuxtApp()
+
+const { data: fetchedData } = await useAsyncData(
+	'market-breadth',
+	async () => {
+		const res = await $publicKV.getMarketBreadth()
+		if (_isNumber(res.data)) {
+			return formatNumber(res.data * 100)
+		}
+		return 0
+	},
+	{ server: false },
+)
+
+const marketBreadth = computed(() => fetchedData.value ?? 0)
 
 const chartOption = computed(() => {
 	return {
@@ -57,13 +70,4 @@ const chartOption = computed(() => {
 		],
 	}
 })
-
-const { data: fetchedData } = await useAsyncData('market-breadth', async () => {
-	const res = await $publicKV.getMarketBreadth()
-	if (_isNumber(res.data)) {
-		return formatNumber(res.data * 100)
-	}
-})
-
-marketBreadth.value = fetchedData.value ?? 0
 </script>
