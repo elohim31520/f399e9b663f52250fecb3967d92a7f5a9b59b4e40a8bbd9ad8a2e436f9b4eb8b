@@ -1,12 +1,12 @@
 <template>
 	<main class="p-4 space-y-4">
 		<header>
-			<h1 class="text-lg font-bold flex-center">{{ $t('home.title') }}</h1>
+			<h1 class="text-lg font-bold flex-center text-primary">{{ $t('home.title') }}</h1>
 		</header>
-		<MomentumChart />
-		<HeatMap class="h-[500px] my-2.5" />
 		<News />
 		<SeeMore :to="'/news'" class="my-2.5" />
+		<MomentumChart />
+		<HeatMap class="h-[500px] my-2.5" />
 		<MarketQuotes />
 		<MarketBreadth />
 		<VolatileAsset />
