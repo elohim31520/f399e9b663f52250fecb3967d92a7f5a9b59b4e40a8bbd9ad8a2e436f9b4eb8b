@@ -1,5 +1,5 @@
 <template>
-	<div class="tradingview-widget-container" :class="{ 'pointer-events-none': props.disabled }">
+	<div class="h-[calc(100vh*2/3)] w-[100%]" :class="{ 'pointer-events-none': props.disabled }">
 		<div id="tradingview_12345" class="w-full h-full"></div>
 		<div class="tradingview-widget-copyright">
 			<a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
@@ -11,6 +11,9 @@
 
 <script lang="ts" setup>
 import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { locale } = useI18n()
 
 const props = defineProps<{
 	symbol: string
@@ -30,7 +33,7 @@ onMounted(() => {
 			timezone: 'Etc/UTC',
 			theme: 'light',
 			style: '1',
-			locale: 'en',
+			locale: locale.value === 'zh' ? 'zh_TW' : 'en',
 			enable_publishing: false,
 			allow_symbol_change: true,
 			container_id: 'tradingview_12345',
@@ -39,10 +42,3 @@ onMounted(() => {
 	document.body.appendChild(script)
 })
 </script>
-
-<style scoped>
-.tradingview-widget-container {
-	height: 500px;
-	width: 100%;
-}
-</style>
