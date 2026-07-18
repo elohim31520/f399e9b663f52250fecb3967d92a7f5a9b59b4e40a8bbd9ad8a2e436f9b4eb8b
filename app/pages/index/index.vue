@@ -6,7 +6,7 @@
 		<News />
 		<SeeMore :to="'/news'" class="my-2.5" />
 		<MomentumChart />
-		<HeatMap class="h-[500px] my-2.5" />
+		<HeatMap class="h-[425px] my-2.5" />
 		<MarketQuotes />
 		<MarketBreadth />
 		<VolatileAsset />
