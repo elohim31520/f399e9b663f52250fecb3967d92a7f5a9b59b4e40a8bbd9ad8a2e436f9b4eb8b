@@ -54,21 +54,12 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { formatDateDisplay } from '~/utils/date'
+import type { BlogPost } from '~/types/blog'
 
 const { locale } = useI18n()
 const localePath = useLocalePath()
 
-interface BlogPost {
-	id: string
-	title: string
-	htmlContent: string
-	excerpt?: string
-	image?: string
-	publishDate?: string
-	author?: string
-	categories?: string[]
-	tags?: string[]
-}
+
 
 const infoLink = computed(() => {
 	return locale.value === 'zh' ? 'https://lazypod.org/info' : 'https://lazypod.org/info-en/'

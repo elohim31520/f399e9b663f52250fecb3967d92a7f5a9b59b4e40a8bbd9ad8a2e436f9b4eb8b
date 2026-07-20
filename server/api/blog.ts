@@ -2,21 +2,10 @@ import { marked } from 'marked'
 import { defineEventHandler, getQuery } from 'h3'
 import blogPostsZh from '../data/blog-posts-zh.json'
 import blogPostsEn from '../data/blog-posts-en.json'
+import type { BlogPost } from '~/types/blog'
 
 const convertMarkdownToHtml = async (fileContent: string) => {
 	return await marked(fileContent)
-}
-
-interface BlogPost {
-	id: string
-	title: string
-	htmlContent: string
-	excerpt?: string
-	image?: string
-	publishDate?: string
-	author?: string
-	categories?: string[]
-	tags?: string[]
 }
 
 const blogPostsMap: Record<string, BlogPost[]> = {
