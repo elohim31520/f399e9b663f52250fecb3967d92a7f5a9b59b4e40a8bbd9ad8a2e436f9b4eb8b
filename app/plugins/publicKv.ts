@@ -11,7 +11,7 @@ import type { MarketQuotes } from '~/types/market'
 import type { MomentumResult } from '~/types/marketSnapshots'
 import type { TodayStockPrice } from '~/types/stock'
 import type { StockMetrics } from '~/types/stockMetrics'
-import type { News } from '~/types/news'
+import type { NewsResponse } from '~/types/news'
 
 function createPublicKvClient() {
     return $fetch.create({
@@ -81,7 +81,7 @@ export default defineNuxtPlugin(() => {
 
                 // news
                 getNews: () =>
-                    client<ResponseData<News[]>>('/news', { query: { page: 1, size: 10 } }),
+                    client<ResponseData<NewsResponse>>('/news', { query: { page: 1, size: 10 } }),
             },
         },
     }

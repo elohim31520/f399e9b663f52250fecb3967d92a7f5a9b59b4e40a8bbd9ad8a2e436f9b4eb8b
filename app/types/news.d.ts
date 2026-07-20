@@ -10,3 +10,8 @@ export interface News {
     updatedAt: string;
     viewCount: number;
 }
+
+export interface NewsResponse {
+    rows?: News[]
+    count?: number
+}

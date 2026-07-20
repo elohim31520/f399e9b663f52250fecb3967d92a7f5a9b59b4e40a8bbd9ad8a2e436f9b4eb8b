@@ -28,25 +28,10 @@
 </template>
 
 <script setup lang="ts">
+import type { News, NewsResponse } from '~/types/news'
+
 const { $publicKV } = useNuxtApp()
 const { locale } = useI18n()
-import type { News } from '@/types/news'
-
-
-interface NewsResponse {
-	rows: News[]
-	count: number
-}
-
-const fetchKV = async (): Promise<NewsResponse> => {
-	try {
-		const res = await $publicKV.getNews()
-		return res.data as unknown as NewsResponse
-	} catch (error) {
-		console.error(`Failed to fetch News:`, error)
-		return { rows: [], count: 0 }
-	}
-}
 
 const getDisplayContent = (vo: News) => {
 	if (locale.value === 'en' && vo.contentEn) {
@@ -60,14 +45,16 @@ const {
 	data: fetchedData,
 	pending,
 	error,
-} = await useAsyncData(
+} = await useAsyncData<NewsResponse>(
 	'news-data',
-	() => {
-		return fetchKV()
-	},
-	{
-		lazy: true,
-		default: () => ({ rows: [], count: 0 } as NewsResponse),
+	async () => {
+		try {
+			const res = await $publicKV.getNews()
+			return res.data
+		} catch (error) {
+			console.error(`Failed to fetch News:`, error)
+			throw error
+		}
 	}
 )
 </script>
