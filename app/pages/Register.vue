@@ -40,7 +40,13 @@ const passwordValidator = (val: string) => {
 	return val === password.value
 }
 
-const onSubmit = async (values: any) => {
+interface FormValues {
+	username: string
+	password: string
+	email: string
+}
+
+const onSubmit = async (values: FormValues) => {
 	const res = await $fetch('/api/user/register', {
 		method: 'POST',
 		body: {

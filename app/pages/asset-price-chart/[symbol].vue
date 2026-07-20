@@ -23,7 +23,7 @@
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                     <span class="text-xs tracking-widest text-gray-400 uppercase">{{ $t('asset_price_chart.live')
-                        }}</span>
+                    }}</span>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
         <!-- Asset Switcher -->
         <div class="px-6 pb-10 max-w-7xl mx-auto">
             <div class="text-xs tracking-[0.3em] text-gray-400 uppercase mb-4">{{ $t('asset_price_chart.other_assets')
-                }}</div>
+            }}</div>
             <div class="flex flex-wrap gap-3">
                 <NuxtLink v-for="a in otherAssets" :key="a.symbol" :to="localePath(`/asset-price-chart/${a.symbol}`)"
                     class="px-4 py-2 rounded-xl border border-gray-200 text-gray-500 hover:text-primary hover:border-primary transition-all text-sm tracking-wider">
@@ -67,6 +67,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { AssetConfig } from '~/types/market'
+
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -76,15 +78,6 @@ const localePath = useLocalePath()
 const { t } = useI18n()
 
 const symbol = computed(() => route.params.symbol as string)
-
-interface AssetConfig {
-    symbol: string
-    label: string
-    currency: string
-    description: string
-    tvSymbol: string
-    tvPrefix?: string
-}
 
 const ASSETS = computed<AssetConfig[]>(() => [
     {

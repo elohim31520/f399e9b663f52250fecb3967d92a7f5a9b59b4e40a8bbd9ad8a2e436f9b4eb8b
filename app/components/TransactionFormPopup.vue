@@ -61,6 +61,8 @@
 </template>
 
 <script setup lang="ts">
+import type { TradeParams } from '~/types/trade'
+
 import { ref, watch, computed } from 'vue'
 import type { FormInstance } from 'vant'
 import type { PortfolioItem } from '@/types/portfolio'
@@ -69,18 +71,10 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
-interface TransactionForm {
-	stockSymbol: string
-	tradeType: 'buy' | 'sell'
-	quantity: string
-	price: string
-	tradeDate: string
-}
-
 const props = defineProps<{
 	modelValue: boolean
 	item: PortfolioItem | TradeWithCompany | null
-	apiFunction: (payload: any) => Promise<any>
+	apiFunction: (payload: TradeParams) => Promise<any>
 }>()
 
 const emit = defineEmits(['update:modelValue', 'submitSuccess'])
@@ -93,7 +87,7 @@ const show = computed({
 const getTodayStr = () => new Date().toISOString().split('T')[0] as string
 
 const formRef = ref<FormInstance>()
-const form = ref<TransactionForm>({
+const form = ref<TradeParams>({
 	stockSymbol: '',
 	tradeType: 'buy',
 	quantity: '',
@@ -135,8 +129,8 @@ const onSubmit = async () => {
 		const payload = {
 			stockSymbol: form.value.stockSymbol,
 			tradeType: form.value.tradeType,
-			quantity: Number(form.value.quantity),
-			price: Number(form.value.price),
+			quantity: String(form.value.quantity),
+			price: String(form.value.price),
 			tradeDate: form.value.tradeDate,
 		}
 		await props.apiFunction(payload)
